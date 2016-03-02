@@ -1,0 +1,112 @@
+#import("/org/tinygroup/zTree/components/zTree.component")
+
+<script>
+	var initAuthArray = new Array();//页面载入时选中的角色id
+	var allAuthIdArray = new Array();
+</script>
+
+#macro dealData()
+		var roleId = "${roleId}";
+		$.ajax({
+			url:'getRoleFunctions.servicejson',
+			data:{roleId:roleId
+			},
+			type:'post',
+			dataType: 'json',
+			async:false,
+			success:function(datas){
+				if(datas){
+					var authidArray = new Array();
+					//遍历已有角色权限关系
+					$.each(datas,function(i,item){
+						authidArray.push(""+item["functionId"]);
+					});
+					//遍历所有权限并初始化checked
+					$.each(jsonData,function(i,item){
+						var authId = String(item["functionId"]);
+						allAuthIdArray.push(""+authId);//所有authid
+						var authindex = $.inArray(authId,authidArray);//权限是否已经被分配到角色
+						if(authindex>=0){
+							item["checked"]=true;
+							initAuthArray.push(""+authId);//存放已经被分配给角色的权限
+						}
+					});
+				
+				} 
+			},
+			error:function(){
+				alert('权限获取异常');
+			}
+		});
+
+#end
+
+#set(url=call("link","/updateAuthorizeRoleFunctions.do"))
+#@tinyForm("roleAuthSaveform" "" "" {"class":"form-horizontal"})
+	<input name="parentId" class="input-lg " type="hidden">
+	<input name="currentUserId" value="0" class="input-lg " type="hidden">
+	#@treeCollg4()
+		#checkedSearchZtreeWithInit("authTree" "height:322px;width:413px;overflow:auto" "getAllFunctions.servicejson"  "functionName" {"idKey":"functionId","pIdKey":"parentId"})
+	#end
+#end
+
+<script>
+$(function () {
+	$("form[name=roleAuthSaveform]").attr("action", '${url}');
+	$("form[name=roleAuthSaveform]").Validform({
+            tiptype: 2,
+            ajaxPost: true,
+            beforeCheck: function (curform) {
+                //console.log("fdsfd");
+                //在表单提交执行验证之前执行的函数，curform参数是当前表单对象。
+                //这里明确return false的话将不会继续执行验证操作;
+            },
+            beforeSubmit: function (curform) {
+                //在验证成功后，表单提交前执行的函数，curform参数是当前表单对象。
+                //这里明确return false的话表单将不会提交;
+               	var url ='${url}';
+               	var roleId="${roleId}";
+               	var zTreeObj = $.fn.zTree.getZTreeObj("authTree");
+				var finalStr = getCheckedNodeId(zTreeObj);				
+				var ckid = finalStr;
+				var finalArray = finalStr.split(",");
+
+				var addArray = new Array();
+				var removeArray = new Array();
+				$.each(allAuthIdArray,function(n,value) { 
+					var isFinalArrayExit =  $.inArray(value, finalArray);
+					var isInitArrayExit = $.inArray(value, initAuthArray);
+					if(isFinalArrayExit>=0 && isInitArrayExit<0){
+					//最终数组中存在而最初的数组中不存在,说明是新增
+						addArray.push(value);
+					}else if(isFinalArrayExit<0 && isInitArrayExit>=0){
+						//最终数组中不存在而最初数组中存在,说明是删除
+						removeArray.push(value);
+					}
+				});
+				var addRoleIds = addArray.join(",");
+				var removeRoleIds = removeArray.join(",");
+				var options = {
+					url:url,
+					type:"post",
+					data:{
+						roleId:roleId,
+						addFunctionIds:addRoleIds,
+						removeFunctionIds:removeRoleIds
+					},
+					success:function(data){
+						if($(curform).parents(".modal")){
+							$(curform).parents(".modal").find("button[data-dismiss=modal]").eq(0).click();
+						}
+					},error:function(){
+						alert('操作失败!');
+					}
+				};
+				$(this).ajaxSubmit(options);
+				return false;
+            },
+            callback: function (data) {
+            }
+        });
+});
+</script>

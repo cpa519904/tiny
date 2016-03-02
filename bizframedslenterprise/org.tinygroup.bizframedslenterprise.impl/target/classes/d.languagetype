@@ -1,0 +1,29 @@
+<language-types>
+	<language-type id="java" name="java">
+	  <language-field id="String" name="String"></language-field>
+	  <language-field id="Date" name="Date"></language-field>
+	  <language-field id="Boolean" name="Boolean"></language-field>
+	  <language-field id="Short" name="Short"></language-field>
+	  <language-field id="Integer" name="Integer"></language-field>
+	  <language-field id="Long" name="Long"></language-field>
+	  <language-field id="Float" name="Float"></language-field>
+	  <language-field id="Double1" name="Double"></language-field>
+	  <language-field id="Character" name="Character"></language-field>
+	  <language-field id="Byte1" name="Byte12345678910111213"></language-field>
+	  <language-field id="BigDecimal" name="BigDecimal"></language-field>
+	  <language-field id="BigInteger" name="BigInteger"></language-field>
+	</language-type>
+	<language-type id="mysql" name="mysql">
+	  <language-field id="String" name="varchar"></language-field>
+	  <language-field id="Date" name="datetime"></language-field>
+	  <language-field id="Boolean" name="char"></language-field>
+	  <language-field id="Integer" name="int"></language-field>
+	  <language-field id="Long" name="Long"></language-field>
+	  <language-field id="Float" name="Float"></language-field>
+	  <language-field id="Double1" name="Double"></language-field>
+	  <language-field id="Character" name="Character"></language-field>
+	  <language-field id="Byte1" name="Byte12345678910111213"></language-field>
+	  <language-field id="BigDecimal" name="BigDecimal"></language-field>
+	  <language-field id="BigInteger" name="BigInteger"></language-field>
+	</language-type>
+</language-types>

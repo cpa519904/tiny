@@ -1,0 +1,24 @@
+<script>
+	function loadUnassignRole(){
+		$(".assCol").load("getUnassignedUserRoles.servicepagelet",{userId:${userId}});
+	}
+	function loadassignRole(){
+		$(".unassCol").load("getUserRoles.servicepagelet",{userId:${userId}});
+	}
+$(function(){
+	loadUnassignRole();
+	loadassignRole();
+});
+</script>
+#@tabWithInit("tab_demo")
+#@tabHead()
+		#@tabHeadCol("assign")未分配#end
+		#@tabHeadCol("cancelAssign")已分配#end
+	#end
+	#@tabBodyCol("ptop-5 height-auto assCol")
+		
+	#end
+	#@tabBodyCol("ptop-5 height-auto unassCol")
+		
+	#end
+#end

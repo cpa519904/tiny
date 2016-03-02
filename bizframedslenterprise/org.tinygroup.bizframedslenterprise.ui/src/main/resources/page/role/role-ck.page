@@ -1,0 +1,18 @@
+#@formGroup()
+		#@middleGridCol12()
+			#if(getRolesResult)
+				#for(role:getRolesResult)
+					#@spanMin("distributionStyle")
+						#if(role?.isDefault && role?.isDefault==1)
+							#checkboxFieldDisabled(name="roleId" value=role?.roleId checked="checked")
+						#else
+							#checkboxField(name="roleId" value=role?.roleId)
+						#end
+						${role.roleName}
+					#end
+				#end
+			#else
+				#@formFieldLabel()暂无角色#end
+			#end
+		#end
+	#end

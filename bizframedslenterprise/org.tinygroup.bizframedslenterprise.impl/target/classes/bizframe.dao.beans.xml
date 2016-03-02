@@ -1,0 +1,53 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans  
+    http://www.springframework.org/schema/beans/spring-beans-2.5.xsd  
+    http://www.springframework.org/schema/context  
+    http://www.springframework.org/schema/context/spring-context-2.5.xsd"
+	default-autowire="byName" default-lazy-init="true">
+
+	<bean id="dslSession" name="dslSession"
+		class="org.tinygroup.jdbctemplatedslsession.SimpleDslSession">
+		<constructor-arg index="0" ref="dataSource" />
+	</bean>
+	<bean id="tSysparamDao" name="tSysparamDao"
+		class="org.tinygroup.bizframedslenterprise.impl.dao.TSysparamDao">
+		<property name="dslSession" ref="dslSession"></property>
+	</bean>
+	<bean id="tDictDao" name="tDictDao"
+		class="org.tinygroup.bizframedslenterprise.impl.dao.TDictDao">
+		<property name="dslSession" ref="dslSession"></property>
+	</bean>
+	<bean id="tDictitemDao" name="tDictitemDao"
+		class="org.tinygroup.bizframedslenterprise.impl.dao.TDictitemDao">
+		<property name="dslSession" ref="dslSession"></property>
+	</bean>
+	<bean id="tFunctionDao" name="tFunctionDao"
+		class="org.tinygroup.bizframedslenterprise.impl.dao.TFunctionDao">
+		<property name="dslSession" ref="dslSession"></property>
+	</bean>
+	<bean id="tOperationLogDao" name="tOperationLogDao"
+		class="org.tinygroup.bizframedslenterprise.impl.dao.TOperationLogDao">
+		<property name="dslSession" ref="dslSession"></property>
+	</bean>
+	<bean id="tUserDao" name="tUserDao"
+		class="org.tinygroup.bizframedslenterprise.impl.dao.TUserDao">
+		<property name="dslSession" ref="dslSession"></property>
+	</bean>
+	<bean id="tRoleDao" name="tRoleDao"
+		class="org.tinygroup.bizframedslenterprise.impl.dao.TRoleDao">
+		<property name="dslSession" ref="dslSession"></property>
+	</bean>
+	<bean id="tUserTRoleDao" name="tUserTRoleDao"
+		class="org.tinygroup.bizframedslenterprise.impl.dao.TUserTRoleDao">
+		<property name="dslSession" ref="dslSession"></property>
+	</bean>
+	<bean id="tRoleTFunctionDao" name="tRoleTFunctionDao"
+		class="org.tinygroup.bizframedslenterprise.impl.dao.TRoleTFunctionDao">
+		<property name="dslSession" ref="dslSession"></property>
+	</bean>
+	<bean id="tOrganizationDao" name="tOrganizationDao"
+		class="org.tinygroup.bizframedslenterprise.impl.dao.TOrganizationDao">
+		<property name="dslSession" ref="dslSession"></property>
+	</bean>
+</beans>

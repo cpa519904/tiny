@@ -1,0 +1,45 @@
+<standard-types>
+  <standard-type id="f4477b832e904c4a99d4fc3ba3e1b701" name="string" title="字符串" data-type="12">
+    <description></description>
+    <placeholder-list>
+      <placeholder id="f6c3876119764b389340b81fad2d7279" name="length" title="长度"/>
+    </placeholder-list>
+    <dialect-type-list>
+      <dialect-type language="java" base-type="String"/>
+      <dialect-type language="mysql"/>
+    </dialect-type-list>
+  </standard-type>
+  <standard-type id="e0a75f048d4d4e71b85ced4c67b6c800" name="int" title="整型" data-type="4">
+    <placeholder-list>
+      <placeholder id="95ddf00218a64879ac9290614ef5891d" name="length" title="长度"/>
+    </placeholder-list>
+    <dialect-type-list>
+      <dialect-type language="java" base-type="Integer"/>
+      <dialect-type language="mysql"/>
+    </dialect-type-list>
+  </standard-type>
+  <standard-type id="27fc633dc4b94befbbc4dd9a4611dda4" name="float" title="浮点" data-type="6">
+    <placeholder-list>
+      <placeholder id="53f0fc5afafe44498bbc9998178b9d1f" name="length" title="长度"/>
+      <placeholder id="e5559968aa5f42debd259297289d7007" name="decimalLen" title="小数位长度"/>
+    </placeholder-list>
+    <dialect-type-list>
+      <dialect-type language="java" base-type="Float"/>
+      <dialect-type language="mysql"/>
+    </dialect-type-list>
+  </standard-type>
+  <standard-type id="10187b1fe9bc4a23aaaba781998ce9d9" name="time" title="时间" data-type="92">
+    <placeholder-list/>
+    <dialect-type-list>
+      <dialect-type language="java" base-type="Date"/>
+      <dialect-type language="mysql"/>
+    </dialect-type-list>
+  </standard-type>
+  <standard-type id="2e2f43f65c4a437899dec135feac4876" name="datetime" title="日期" data-type="91">
+    <placeholder-list/>
+    <dialect-type-list>
+      <dialect-type language="java" base-type="Date"/>
+      <dialect-type language="mysql"/>
+    </dialect-type-list>
+  </standard-type>
+</standard-types>

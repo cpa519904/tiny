@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<!--[if IE 7 ]>		 <html class="no-js ie ie7 lte7 lte8 lte9" lang="zh-cmn-Hans-CN"> <![endif]-->
+<!--[if IE 8 ]>		 <html class="no-js ie ie8 lte8 lte9" lang="zh-cmn-Hans-CN"> <![endif]-->
+<!--[if IE 9 ]>		 <html class="no-js ie ie9 lte9" lang="zh-cmn-Hans-CN"> <![endif]-->
+<!--[if (gt IE 9)|!(IE)]><!--><html class="no-js" lang="zh-cmn-Hans-CN"> <!--<![endif]-->
+<html lang="zh-cmn-Hans-CN">
+<head>
+    <meta charset="utf-8"/>
+	<meta name="renderer" content="webkit|ie-comp|ie-stand">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+	<meta http-equiv="Cache-Control" content="no-siteapp" />
+	<!--<meta name="apple-mobile-web-app-capable" content="yes" />--><!-- home screen app 全屏 -->
+	<!--<meta name="apple-mobile-web-app-status-bar-style" content="black" />--><!-- 状态栏 -->
+    <title>
+    用户权限-#if(activeTitle)-${activeTitle}#end
+    </title>
+	<meta name="keywords" content="TinyUi 是基于bootscrap的前端UI组件框架。">
+	<meta name="description" content="java,j2ee,j2ee.top, tinygroup,tinygroup.org,eclipse,插件,idea,TinyFramework,悠然,悠悠然然,Tiny,Framework,CEP,通用事件处理,ui引擎,ui engine,模块化,业务单元,文档生成,xml parser,html parser,xml,html,parser,spider,网络爬虫,flow,流程,业务流,页面流,Java,SOA,框架,组件,分层,水平扩展,分区,分表,db router,db cluster,framework,框架,分布式计算,VFS,Web">
+    <script>
+        var contextPath = "${TINY_CONTEXT_PATH}";
+        var CKEDITOR_BASEPATH = contextPath+'/';
+        var pathname = location.pathname;
+        var relativeurl = pathname.substring(CKEDITOR_BASEPATH.length);
+        /*
+        jQuery.fn.outerHTML = function(s) {
+            return (s) ? this.before(s).remove() : jQuery("p").append(this.eq(0).clone()).html();
+        }
+        */
+    </script>
+    <link rel="shortcut icon" href="${TINY_CONTEXT_PATH}/img/tiny32.png">
+
+	 #if(DEBUG_MODE && DEBUG_MODE=="true")
+		#foreach(component in uiengine.getHealthUiComponents())
+		<!--UI component $component.name start -->
+		#if(component.cssResource)
+		#set(resources=component.cssResource.split(","))
+		#foreach(path in resources)
+		#set(path=path.trim())
+		#set(newPath=path.replaceAll("[$][{]TINY_THEME[}]","${TINY_THEME}"))
+		<link href="${TINY_CONTEXT_PATH}${newPath}" rel="stylesheet" />
+		#end
+		#end
+		#if(component.jsResource)
+		#set(resources=component.jsResource.split(","))
+		#foreach(path in resources)
+		#set(path=path.trim())
+		<script src="${TINY_CONTEXT_PATH}${path}"></script>
+		#end
+		#end
+		#if(component.jsCodelet)
+		<script>
+		$!{component.jsCodelet}
+		</script>
+		#end
+		#if(component.cssCodelet)
+		<style>
+		$!{component.cssCodelet}
+		</style>
+		#end
+		#end
+	 #else
+	  <link href="${TINY_CONTEXT_PATH}/uiengine.uicss" rel="stylesheet" />
+	  <script src="${TINY_CONTEXT_PATH}/uiengine.uijs"></script>
+	 #end
+
+	 #foreach(component in uiengine.getHealthUiComponents())
+	   #if(component.compatibilityResources)
+	     #set(resources=component.compatibilityResources.getCompatibilityResources())
+	     #foreach(compatibilityResource in resources)
+	       #if(compatibilityResource.condition)
+	         <!--[if ${compatibilityResource.condition}]>
+	         #if(compatibilityResource.cssResource)
+	           #set(csslist=compatibilityResource.cssResource.split(","))
+	           #foreach(path in csslist)
+		          #set(path=path.trim())
+		          #set(newPath=path.replaceAll("[$][{]TINY_THEME[}]","${TINY_THEME}"))
+		          <link href="${TINY_CONTEXT_PATH}${newPath}" rel="stylesheet" />
+		         #end
+	         #end
+	         #if(compatibilityResource.jsResource)
+	           #set(jslist=compatibilityResource.jsResource.split(","))
+	           #foreach(path in jslist)
+		           #set(path=path.trim())
+		           <script src="${TINY_CONTEXT_PATH}${path}"></script>
+		         #end
+	         #end
+	         <![endif]-->
+	       #end
+	     #end
+	   #end
+	 #end
+
+	 <style>.dataTables_wrapper .DT-lf-right .DT-per-page{display:none}.ajax-loading-animation{font-size:20px;margin-left:10px;}.navbar-nav .tinySelect{margin-top:8px;}.table.dataTable thead tr >th:first-child{background:none}</style>
+
+</head>
+<body class="theme-default main-menu-animated">
+
+<script>var init = [];var tinywebroot='${TINY_CONTEXT_PATH}'</script>
+<!-- Demo script --> <script src="${TINY_CONTEXT_PATH}/demo/demo.js"></script> <!-- / Demo script -->
+#@mainWrapper()
+	#@mainNavbar("/img/main-navbar-logo.png" "Tinyframework")
+					#@navbarNav()
+						#navbarNavItem("新增" "javascript:void(0);")
+#*						#@navbarDropdownMenu("下拉菜单")
+								#navbarNavItem("第一项" "#")
+								#navbarNavItem("第二项" "#")
+								#divider()##分割线
+								#navbarNavItem("第三项" "#")
+						#end*#
+						#@tinySelectAndAdd("additems")
+							{ label: "字典类型", value: "#link("/page/system/dict/dict_edit.pagelet")",modal:true},
+							{ label: "字典项", value: "#link("/page/system/dict/dictitem_edit.pagelet")",modal:true},
+							{ label: "系统参数", value: "#link("/page/system/sysParam/sysParam_edit.pagelet")",modal:true},
+							{ label: "功能", value: "#link("/page/system/function/function_edit.pagelet")",modal:true},
+							{ label: "角色", value: "#link("/page/system/role/role_edit.pagelet")",modal:true},
+							{ label: "逻辑行政区划", value: "#link("/page/region/logic_region_edit.pagelet")",modal:true},
+							{ label: "元数据-字典类型", value: "#link("/page/system/dict/dict_edit.pagelet")",modal:true},
+							{ label: "元数据-字典项", value: "#link("/page/system/dict/dictitem_edit.pagelet")",modal:true},
+							{ label: "岗位", value: "#link("/page/job/job_edit.pagelet")",modal:true},
+							{ label: "岗位任职规则", value: "#link("/page/job/job_rule_edit.pagelet")",modal:true,width:"800"},
+							{ label: "岗位职责规则", value: "#link("/page/job/job_resp_edit.pagelet")",modal:true,width:"800"},
+							{ label: "标准属性分组", value: "#link("/page/tag/tag_category_edit.pagelet")",modal:true},
+							{ label: "标准属性", value: "#link("/page/tag/tag_edit.pagelet")",modal:true},
+							{ label: "标准属性规则", value: "#link("/page/tag/tag_rule_edit.pagelet")",modal:true},
+							{ label: "事务模板类型", value: "#link("/page/affairs/affair_template_edit.pagelet")",modal:true},
+							{ label: "事务类型", value: "#link("/page/affairs/affair_type_edit.pagelet")",modal:true},
+							{ label: "人员属性分组", value: "#link("/page/member/member_cate_edit.pagelet")",modal:true},
+							{ label: "人员属性", value: "#link("/page/member/member_ext_edit.pagelet")",modal:true},
+							{ label: "人员属性规则", value: "#link("/page/member/ext_rule_edit.pagelet")",modal:true},
+							{ label: "家庭属性分组", value: "#link("/page/member/member_cate_edit.pagelet")",modal:true},
+							{ label: "家庭属性", value: "#link("/page/home/home_ext_edit.pagelet")",modal:true},
+							{ label: "家庭属性规则", value: "#link("/page/home/ext_rule_edit.pagelet")",modal:true},
+							{ label: "单位属性分组", value: "#link("/page/workunit/cate_edit.pagelet")",modal:true},
+							{ label: "单位属性", value: "#link("/page/workunit/workunit_ext_edit.pagelet")",modal:true},
+							{ label: "单位属性规则", value: "#link("/page/workunit/ext_rule_edit.pagelet")",modal:true},
+							{ label: "福利对象-人员", value: "#link("/page/member/member_tag_tab.pagelet")",modal:true},
+							{ label: "福利对象-家庭", value: "#link("/page/home/home_tag_tab.pagelet")",modal:true},
+							{ label: "福利对象-单位", value: "#link("/page/workunit/workunit_tag_tab.pagelet")",modal:true},
+							{ label: "事务", value: "#link("/page/affairs/affair_tab.pagelet")",modal:true}
+						#end
+					#end
+					#@rightNavBar()
+						<li class="nav-icon-btn nav-icon-btn-danger dropdown">
+							#@notifyDropdown(5 "fa-bullhorn" "通知" "更多的通知")
+								#include("/page/index/notify.page")
+							#end
+						</li>
+						<li class="nav-icon-btn nav-icon-btn-success dropdown">
+							#@messagesDropdown(12 "fa-envelope" "所得的消息" "更多的信息")
+									#include("/page/index/messages.page")
+							#end
+						</li>
+							<li>
+								<form class="navbar-form pull-left">
+									<input type="text" class="form-control" placeholder="查找更多...">
+									<span style="left:-27px;top:3px; position:relative;"><i class="fa fa-search"></i></span>
+								</form>
+							</li>
+
+							<li class="dropdown">
+								<a href="javascript:void(0);" class="dropdown-toggle user-menu" data-toggle="dropdown">
+									<img src="${TINY_CONTEXT_PATH}/demo/avatars/1.jpg" alt="">
+									<span>密缘之友</span>
+								</a>
+								<ul class="dropdown-menu">
+#*									<li><a href="javascript:void(0);"><span class="label label-warning pull-right">新的</span>资料文件</a></li>*#
+									<li><a href="${TINY_CONTEXT_PATH}/page/user/personal_center.page"><span class="badge badge-primary pull-right">新的</span>个人中心</a></li>
+#*									<li><a href="javascript:void(0);"><i class="dropdown-icon fa fa-cog"></i>&nbsp;&nbsp;设置</a></li>*#
+									<li class="divider"></li>
+									<li><a href="javascript:void(0);" id="login_out_btn"><i class="dropdown-icon fa fa-power-off"></i>&nbsp;&nbsp;退出</a></li>
+								</ul>
+							</li>
+					#end
+	#end
+	#@mainMenu()
+			#@menuHead("欢迎您," "Liyl" "menu-content-demo" "/demo/avatars/1.jpg")
+						<a href="javascript:void(0);" class="btn btn-xs btn-primary btn-outline dark"><i class="fa fa-envelope"></i></a>
+						<a href="${TINY_CONTEXT_PATH}/page/tabledemo/personalData.page" class="btn btn-xs btn-primary btn-outline dark"><i class="fa fa-user"></i></a>
+						<a href="${TINY_CONTEXT_PATH}/page/tabledemo/personalData.page" class="btn btn-xs btn-primary btn-outline dark"><i class="fa icon-pencil"></i></a>
+						<a href="javascript:void(0);" class="btn btn-xs btn-danger btn-outline dark"><i class="fa fa-power-off"></i></a>
+			#end
+			#@navigationMenu()
+				#@navDropDownMenu("1" "系统管理" "icon-desktop" )
+					#@navItem("1.1" "/page/system/dict/dict.page" "icon-list")字典类型管理#end
+					#@navItem("1.2" "/page/system/dict/dictitem.page" "icon-list")字典项管理#end
+					#@navItem("1.3" "/getSysparamPager.shtm?start=0&limit=10" "icon-list")系统参数管理#end
+				#end
+				#@navDropDownMenu("2" "用户权限" "icon-user" )
+					#@navItem("2.1" "/page/system/org/org.page" "icon-list-ul")组织机构#end
+					#@navItem("2.2" "/page/system/user/user.page" "icon-list-ul")用户管理#end
+					#@navItem("2.3" "/page/system/function/module.page" "icon-list-ul")功能管理#end
+##					#@navItem("2.4" "/page/system/function/function.page" "fa-th-list")功能管理#end
+					#@navItem("2.5" "/page/system/role/role.page" "icon-list-ul")角色管理#end
+				#end
+				#@navDropDownMenu("3" "元数据管理" "icon-sitemap" )
+					#@navDropDownMenu("3.1" "基础信息管理" "icon-bullhorn" )
+						#@navItem("3.1.1" "/page/region/region.page" "fa-th-list")行政区划管理#end
+						#@navItem("3.1.2" "/page/region/logic_region.page" "fa-th-list")逻辑行政区划管理#end
+						#@navItem("3.1.3" "/page/region/region_setting.page" "fa-th-list")逻辑行政区划范围管理#end
+##					    #@navItem("3.1.4" "/page/dict/dictitem_list.page" "fa-th-list")字典条目管理#end
+					    #@navItem("3.1.4" "/page/dict/dict_list.page" "fa-th-list")字典类型管理#end
+						#@navItem("3.1.5" "/page/dict/dictitem.page" "fa-th-list")字典项管理#end
+					#end
+					#@navDropDownMenu("3.8.1" "岗位管理" "icon-user-md" )
+					    #@navItem("3.8.1.1" "/page/job/job.page" "fa-th-list")岗位管理#end
+					    #@navItem("3.8.1.2" "/page/job/job_rule.page" "fa-th-list")岗位任职规则管理#end
+					    #@navDropDownMenu("3.8.1.3" "岗位职责规则管理")
+					    	#@navItem("3.8.1.3.1" "/page/job/rule/org.page" "fa-th-list")机构(包括用户)#end
+					    	#@navItem("3.8.1.3.2" "/page/job/rule/affair.page" "fa-th-list")事务#end
+					    #end
+					    #@navItem("3.8.1.4" "/page/job/job_user.page" "fa-th-list")岗位人员管理#end
+					#end
+					#@navDropDownMenu("3.2" "标准属性管理" "icon-flag" )
+						#@navItem("3.2.1" "/page/tag/tag_group.page" "fa-th-list")属性分组管理#end
+##						#@navItem("3.2.1" "/page/tag/tag_category.page" "fa-th-list")标准属性分类管理#end
+						#@navItem("3.2.2" "/page/tag/tag.page" "fa-th-list")标准属性管理#end
+						#@navItem("3.2.3" "/page/tag/tag_rule.page" "fa-th-list")标准属性校验规则管理#end
+					#end
+					#@navDropDownMenu("3.3" "事务管理" "icon-globe" )
+						#@navItem("3.3.1" "/page/affairs/affair_group.page" "fa-dashboard")事务分类管理#end
+#*                        #@navDropDownMenu("3.3.2" "事务模板类型管理" "fa-dashboard" )
+                            #@navItem("3.3.2.1" "/page/affairs/affair_template.page" "fa-th-list")模板管理#end
+                            #@navItem("3.3.2.2" "/page/affairs/template_tag_cate.page" "fa-th-list")属性分组管理#end
+                            #@navItem("3.3.2.3" "/page/affairs/affair_template_tag.page" "fa-th-list")属性管理#end
+                            #@navItem("3.3.2.4" "/page/affairs/template_rule.page" "fa-th-list")属性校验规则管理#end
+                        #end*#
+                        #@navDropDownMenu("3.3.3" "事务类型管理" "fa-dashboard" )
+                        	#@navItem("3.3.3.5" "/page/affairs/affair_template.page" "fa-th-list")模板管理#end
+                            #@navItem("3.3.3.1" "/page/affairs/affair_type.page" "fa-th-list")类型管理#end
+                            #@navItem("3.3.3.2" "/page/affairs/affair_tag_category.page" "fa-th-list")属性分组管理#end
+                            #@navItem("3.3.3.3" "/page/affairs/affair_tag.page" "fa-th-list")属性管理#end
+                            #@navItem("3.3.3.4" "/page/affairs/affair_rule.page" "fa-th-list")属性校验规则管理#end
+                        #end
+					#end
+
+					#@navDropDownMenu("3.4" "福利对象扩展属性管理" "icon-gift" )
+						#@navDropDownMenu("3.4.1" "人员扩展属性管理" "fa-dashboard" )
+							#@navItem("3.4.1.1" "/page/member/member_ext_cate.page" "fa-th-list")属性分组管理#end
+							#@navItem("3.4.1.2" "/page/member/member_ext.page" "fa-th-list")属性管理#end
+							#@navItem("3.4.1.3" "/page/member/member_ext_rule.page" "fa-th-list")属性校验规则管理#end
+						#end
+						#@navDropDownMenu("3.4.2" "家庭扩展属性管理" "fa-dashboard" )
+							#@navItem("3.4.2.1" "/page/home/home_ext_cate.page" "fa-th-list")属性分组管理#end
+							#@navItem("3.4.2.2" "/page/home/home_ext.page" "fa-th-list")属性管理#end
+							#@navItem("3.4.2.3" "/page/home/home_ext_rule.page" "fa-th-list")属性校验规则管理#end
+						#end
+						#@navDropDownMenu("3.4.3" "单位扩展属性管理" "fa-dashboard" )
+							#@navItem("3.4.3.1" "/page/workunit/workunit_ext_cate.page" "fa-th-list")属性分组管理#end
+							#@navItem("3.4.3.2" "/page/workunit/workunit_ext.page" "fa-th-list")属性管理#end
+							#@navItem("3.4.3.3" "/page/workunit/workunit_ext_rule.page" "fa-th-list")属性校验规则管理#end
+						#end
+					#end
+
+				#end
+				#@navDropDownMenu("7" "业务管理" "icon-list-alt" )
+					#@navDropDownMenu("7.1" "福利对象管理" "icon-trophy" )
+						#@navItem("7.1.1" "/page/member/member.page" "icon-user-md")人员管理#end
+						#@navItem("7.1.2" "/page/home/home_list.page" "icon-group")家庭管理#end
+						#@navItem("7.1.3" "/page/workunit/workunit.page" "icon-inbox")单位管理#end
+					#end
+					#@navDropDownMenu("7.3" "福利对象审核" "icon-gift" )
+						#@navDropDownMenu("7.3.1" "人员" "icon-user-md" )
+							#@navItem("7.3.1.1" "/page/member/processor/draft_list.page" "icon-copy")草稿#end
+							#@navItem("7.3.1.2" "/page/member/processor/pending_list.page" "icon-legal")待审核#end
+							#@navItem("7.3.1.3" "/page/member/processor/published_list.page" "icon-external-link")已发布#end
+						#end
+						#@navDropDownMenu("7.3.2" "家庭" "icon-group" )
+							#@navItem("7.3.2.1" "/page/home/processor/draft_list.page" "icon-copy")草稿#end
+							#@navItem("7.3.2.2" "/page/home/processor/pending_list.page" "icon-legal")待审核#end
+							#@navItem("7.3.2.3" "/page/home/processor/published_list.page" "icon-external-link")已发布#end
+						#end
+						#@navDropDownMenu("7.3.3" "单位" " icon-inbox" )
+							#@navItem("7.3.3.1" "/page/workunit/processor/draft.page" "icon-copy")草稿#end
+							#@navItem("7.3.3.2" "/page/workunit/processor/pending.page" "icon-legal")待审核#end
+							#@navItem("7.3.3.3" "/page/workunit/processor/published.page" "icon-external-link")已发布#end
+						#end
+					#end
+					#@navDropDownMenu("7.2" "事务管理" "icon-plane" )
+						#@navItem("7.2.1" "/page/affairs/affair.page" "icon-book")事务管理#end
+						#@navDropDownMenu("7.2.2" "事务审核" "icon-user-md" )
+							#@navItem("7.2.2.1" "/page/affairs/processor/draft_list.page" "icon-copy")草稿#end
+							#@navItem("7.2.2.2" "/page/affairs/processor/pending_list.page" "icon-legal")待审核#end
+							#@navItem("7.2.2.3" "/page/affairs/processor/published_list.page" "icon-external-link")已发布#end
+							#@navItem("7.2.2.4" "/page/affairs/processor/disable_review_list.page" "icon-spinner")待停用#end
+							#@navItem("7.2.2.5" "/page/affairs/processor/disabled_list.page" "icon-ban-circle")已停用#end
+							#@navItem("7.2.2.10" "/page/affairs/processor_list.page" "icon-search")查询#end
+							#@navItem("7.2.2.6" "/page/affairs/processor/log_list.page" "icon-list-alt")日志#end
+						#end
+						#@navItem("7.2.3" "/page/affairs/rule/enjoy_rule.page" "icon-book")事务享受规则管理#end	
+						#@navItem("7.2.4" "/page/affairs/welfare/forecast.page" "icon-heart")福利预测#end	
+						#@navDropDownMenu("7.2.5" "福利匹配" "icon-check")
+							#@navItem("7.2.5.1" "/page/affairs/welfare/match_member.page" "icon-user")人员#end
+							#@navItem("7.2.5.2" "/page/affairs/welfare/match_home.page" "icon-group")家庭#end
+							#@navItem("7.2.5.3" "/page/affairs/welfare/match_work.page" "icon-inbox")单位#end
+						#end	
+					#end
+				#end
+				#if(DEBUG_MODE && DEBUG_MODE=="true")
+					#@navDropDownMenu("9" "demo" "icon-paste" )
+						#@navItem("9.1" "/page/treedemo/tree.page")tree格#end
+						#@navItem("9.11" "/page/treedemo/async_tree.page")异步树#end
+						#@navItem("9.2" "/page/tabledemo/table_list.page")表格#end
+						#@navItem("9.3" "/page/tabledemo/lefttree.page")左侧树#end
+						#@navItem("9.4" "/page/tabledemo/tab.page")tab选项卡#end
+						#@navItem("9.5" "/page/tabledemo/demoNew2.page")属性管理#end
+						#@navItem("9.6" "/page/tabledemo/addes.page")添加内容#end
+						#@navItem("9.7" "/page/tabledemo/mulselect.page")新增select#end
+						#@navItem("9.8" "/page/tabledemo/personalData.page")个人资料#end
+						#@navItem("9.9" "/page/tabledemo/editorData.page")修改资料#end
+						#@navItem("9.10" "/page/tabledemo/tinytables.page")新增tinytable#end
+						#@navItem("9.12" "/page/tabledemo/tinytblspecial.page")table全html方式#end
+					#end
+				#end
+			#end <!-- navigation end -->
+			
+			###@navCenterItem()创建页面#end
+	#end
+	<div class="content-wrapper-bg"></div>
+	#@div("content-wrapper")
+		#@contentWrapper()
+				#if(activeTitle)<li class="active">${activeTitle}</li>#end
+		#end
+		<!-- 主体 start -->
+		#@rowFrame()
+			#pageContent
+		#end
+		<div id="tinyfooter">
+			<div class="tinyfooterrap">
+			<span class="right">
+					浙ICP备14043110号-1
+			</span>
+			TinyGroup官方网站 &copy; 2013-2015
+			</div>
+		</div>
+	#end
+#end
+
+<script type="text/javascript">
+	init.push(function () {
+		$("#login_out_btn").click(function(){
+			var options = {
+				 type:"POST",
+	            //提交的网址
+	            url:"loginout.do",
+	            //成功返回之后调用的函数             
+	            success:function(data){
+	           		location.href="#link("/loginSignup/login.page")";        
+	            },
+	            //调用出错执行的函数
+	            error: function(){
+	                //请求出错处理
+	            }         
+			};
+			$.ajax(options);
+		});
+		//setPostiionNav();
+	})
+	//window.TinyAdmin.start(init);
+	function setPostiionNav(){
+		var currenttxt=$(".navigation ul>li.active>a:first>span:first").html();
+		 $(document).attr("title",currenttxt+"--"+"TinyUiEnterprise展示");
+		if(currenttxt==undefined){
+			$('.postion-nav .active').css("display","inline")
+		 	return;
+		 }
+		var reg=/[0-9]|\./g;
+		currenttxt=currenttxt.replace(reg,"");
+		//$('.postion-nav .active').html(currenttxt);
+
+		$('.postion-nav .active').css("display","inline")
+	}
+</script>
+</body>
+</html>

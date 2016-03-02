@@ -1,0 +1,161 @@
+#!set(activeTitle="篮子",activeMenuId="9.7")
+#include("/page/event/common.page")
+
+#import("/org/tinygroup/table/components/table.component")
+#import("/org/tinygroup/zTree/components/zTree.component")
+#macro ztreeClick()
+	loadLink('#link("/page/tabledemo/righttablesNew.pagelet")', $("#tBox"));
+#end
+
+#@tabWithInit("tab_demo")
+	#@tabHead()
+		#@tabHeadCol()选择列表#end
+		#@tabHeadCol()搜索列表#end
+	#end
+	#@tabBodyCol("ptop-5 height-auto")
+		#@divDataTablebox()
+		#@leftTreeCol()
+			#@searchZtreeWithInit("treeDemo" "height:454px;" "/data/tree/region.js")
+			#end
+		#end
+    	#@tableBox("tBox")
+    	#end
+	#end
+	#end
+	#@tabBodyCol("ptop-5 height-auto")
+		#include("/page/tabledemo/dataTableNew.page")
+	#end
+  #end
+  <div class="table-border">
+  	#@tableBox("dataBox")
+		#@datatable("exampleTable4")
+				#@thead()
+					#@tr("text-c")
+						#@thW("45")序号#end
+						#@thW("96")用户名#end
+						#@thW("50")性别#end
+						#@thW("135")手机#end
+						#@thW("180")邮箱#end
+						#@thW("140")地址#end
+						#@thW("115")加入时间#end
+						#@thW("120")操作#end
+					#end
+				#end
+				#@tbody()
+					#@tr("text-c")
+						#@td()1#end
+						#@td()张三#end
+						#@td()男#end
+						#@td()18258812768#end
+						#@td()admin@mail.com#end
+						#@td()北京市 海淀区#end
+						#@td()2015-07-10#end
+						#@td()<a title="删除" href="javascript:;" style="text-decoration:none" class="ml-5 delBtn"><i class="icon-trash"></i></a>#end
+					#end
+				#end
+			#end
+	#end
+  </div>
+  <style>
+  .height-auto{height:188px; overflow-y:auto;position:relative;}
+  .table-border{height:248px; overflow-y:auto;position:relative;}
+  table.dataTable thead th, table.dataTable thead td{padding:9px 10px}
+  .dataTable thead .text-c th,.dataTable .text-c td{text-align:left}
+  #dataBox .dataTables_wrapper .DT-lf-right .DT-per-page{display:block}
+  .modal-body{padding:4px 5px 0}
+  .table-border .tablebox{margin-bottom: -37px;}
+  .table-border .table-footer{display:none}
+  </style>
+  <script>
+  	$(function(){
+  		$('#exampleTable4').dataTable({
+		"bPaginate":false,//是否使用分页 
+		"bFilter":false,//是否使用过滤 
+		"bInfo":false,//是否使用条目 
+		"bSort":false//是否使用排序 
+		});
+  	}); 
+  </script>
+  <script>
+	$(document).ready(function() {
+    var t = $('#exampleTable4').DataTable();
+    var counter = 1;
+ 	var exampledataSel="#exampledataes";
+ 	$(".tabBar cl span").click(function(){
+ 		
+ 	});
+    $('#addRow').on( 'click', function () {
+    	var currentRowNum=new Array();
+	 	var i=0;
+	 	
+		$(exampledataSel+" tbody input[type=checkbox]").each(function(index){
+			if(this.checked){
+				currentRowNum[i]=index;
+				i++;
+				//return false;
+			}
+		});
+		//console.log(currentRowNum);
+        /*t.row.add( [
+            counter +'.1',
+            counter +'.2',
+            counter +'.3',
+            counter +'.4',
+            counter +'.5',
+            counter +'.6',
+            counter +'.7',
+            counter +'.8',
+        ] ).draw();
+ 
+        counter++;*/
+        var tempstr=""
+        var thisrow;
+       	var manageVar='<a title="删除" href="javascript:;" style="text-decoration:none" class="ml-5 delBtn"><i class="icon-trash"></i></a>';
+        //console.log(tempRow);
+        for(i=0;i<currentRowNum.length;i++){        	
+        	var countRow=$('#exampleTable4 tbody tr').size()+1;
+        	//tempRow.toggleClass("odd even");
+        	thisrow=$(exampledataSel+" tbody tr").eq(currentRowNum[i]);
+        	//console.log(currentRowNum[i]);
+        	
+        	//tempRow.find("td:eq(0)").html(parseInt(tempRow.find("td:eq(0)").html())+1);
+        	//tempRow.find("td:eq(1)").html(thisrow.find("td:eq(2)").html());
+        	//tempRow.find("td:eq(2)").html(thisrow.find("td:eq(3)").html());
+        	//tempRow.find("td:eq(3)").html(thisrow.find("td:eq(2)").html());
+        	//tempRow.find("td:eq(4)").html(thisrow.find("td:eq(3)").html());
+        	//tempstr="<tr><td>"+thisrow.find("td:eq(1)").html()+"</td><td>"+thisrow.find("td:eq(2)").html()+"</td><td>"+thisrow.find("td:eq(4)").html()+"</td><td>"+thisrow.find("td:eq(3)").html()+"</td></tr>"
+			//$('#exampleTable4 tbody').append(tempRow.get(0));//DataTable().row().index(currentRowNum);
+			
+			t.row.add( [
+	            countRow,
+	            thisrow.find("td:eq(2)").html(),
+	            thisrow.find("td:eq(3)").html(),
+	            thisrow.find("td:eq(4)").html(),
+	            thisrow.find("td:eq(5)").html(),
+	            thisrow.find("td:eq(6)").html(),
+	            thisrow.find("td:eq(7)").html(),
+	           	manageVar
+        	] ).draw();
+        	$('#exampleTable4 tbody tr').addClass("text-c");
+		}
+		$(".delBtn").click(function(){
+			user_del(this,'1');
+		});
+    } );
+ 
+    // Automatically add a first row of data
+    $('#addRow').click();
+} );
+</script>
+<script>
+	$(function(){
+		$("#addRow").click(function(){
+			if($("input[name='idCheck']:checked").size()<=0){
+				layer.alert('至少要选择一条！');
+			}
+			else{
+				return false;
+			}
+		});
+	}); 
+</script>

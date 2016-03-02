@@ -1,0 +1,188 @@
+#import("/org/tinygroup/zTree/components/zTree.component")
+#macro searchZtreeInit(searchZtreeInitId searchZtreeInitUrl searchZtreeInitSearchSelector) 
+	<script type="text/javascript">
+        var setting = {
+            check: {
+                enable: true
+                ##chkStyle: "radio",
+##                radioType: "all"
+            },
+            view: {
+                dblClickExpand: false
+            },
+            data: {
+                simpleData: {
+                    enable: true
+                }
+            },
+            callback: {
+                onClick: onClick,
+                onCheck: onCheck
+            }
+        };
+
+        function onClick(e, treeId, treeNode) {
+
+            var zTree = $.fn.zTree.getZTreeObj("$!{searchZtreeInitId}");
+            zTree.checkNode(treeNode, !treeNode.checked, null, true);
+            #ztreeClick()
+            return false;
+        }
+
+        function onCheck(e, treeId, treeNode) {
+            var zTree = $.fn.zTree.getZTreeObj("$!{searchZtreeInitId}"),
+			nodes = zTree.getCheckedNodes(true),
+			v = "";
+            for (var i = 0, l = nodes.length; i < l; i++) {
+                v += nodes[i].name + ",";
+            }
+            if (v.length > 0) v = v.substring(0, v.length - 1);
+            var cityObj = $("#citySel");
+            cityObj.attr("value", v);
+        }
+
+        function showMenu() {
+            var cityObj = $("#citySel");
+            var cityOffset = $("#citySel").offset();
+            $("#menuContent").css({ left: cityOffset.left + "px", top: cityOffset.top + cityObj.outerHeight() + "px" }).slideDown("fast");
+
+            $("body").bind("mousedown", onBodyDown);
+        }
+        function hideMenu() {
+            $("#menuContent").fadeOut("fast");
+            $("body").unbind("mousedown", onBodyDown);
+        }
+        function onBodyDown(event) {
+            if (!(event.target.id == "menuBtn" || event.target.id == "citySel" || event.target.id == "menuContent" || $(event.target).parents("#menuContent").length > 0)) {
+                hideMenu();
+            }
+        }
+
+        $(document).ready(function () {
+        	 $.ajax({ 
+				url: "#link(searchZtreeInitUrl)",
+				dataType:"text", 
+				success:function(data){
+					var zTree =$.fn.zTree.init($("#$!{searchZtreeInitId}"), setting, eval(data));
+					var tnodes = zTree.getNodes();
+					if(tnodes.length>0){
+						zTree.selectNode(tnodes[0]);
+						zTree.setting.callback.onClick(null, zTree.setting.treeId, tnodes[0]);//调用事件件
+					}
+	      		},
+	      		error: function(XMLHttpRequest, textStatus, errorThrown) {
+                        alert(XMLHttpRequest.status);
+                        alert(XMLHttpRequest.readyState);
+                        alert(textStatus);
+                        alert(errorThrown);
+                    }
+	      	});
+	      	#if(searchZtreeInitSearchSelector)
+            $("$!{searchZtreeInitSearchSelector}").keyup(function () {
+                ///显示需要的
+                var tt = document.getElementById("test").value.trim();
+                $("#treeDemo").find("span").attr("style", "");
+                var dx = $("#treeDemo").find("span");
+                var zts = 0;
+                $.each(dx, function (name, obj) {
+                    if (obj.textContent.trim().indexOf(tt) >= 0 && obj.textContent != "" && tt != "") {
+                        obj.style.backgroundColor = "#f6d7b1";
+                        zts = 1;
+                    }
+                })
+                ///显示所有的
+                var zTree = $.fn.zTree.getZTreeObj("$!{searchZtreeInitId}");
+                var nodes = zTree.getNodes();
+
+                $.each(nodes, function (m, n) {
+                    xsall(zTree, n);
+
+                })
+                
+                ///为空清空
+                if (tt != "" && zts == 0)
+                { document.getElementById("ts").innerHTML = "没发现有用信息"; }
+                else {
+                    document.getElementById("ts").innerHTML = "";
+                }
+                if (tt == "")
+                    return;
+                $.each(nodes, function (x, y) {
+                    ycall(zTree, y);
+                })
+                //zTree.hideNode(nodes[4].children[1]);
+                //alert(nodes[4].children[1].name);
+                //return;
+                ///显示有的隐藏没有的
+                $.each(nodes, function (aa, bb) {
+                    bfxs(zTree, bb, tt);
+                })
+
+            })
+            #end
+        });
+        ///显示有的
+
+        function bfxs(zTree, nodes, tt) {
+            if (nodes.children == null) {//无子节点
+
+                if (nodes.name.indexOf(tt) >= 0) {//无子节点，但是包含tt  
+                    fjdxs(zTree, nodes);
+                }
+            }
+            else {//有子节点
+                if (nodes.name.indexOf(tt) >= 0)//有而且包含
+                {
+                    fjdxs(zTree, nodes);
+                    xsall(zTree, nodes);
+                }
+                else {//有但不包含
+                    $.each(nodes.children, function (aa, bb) {
+
+                        bfxs(zTree, bb, tt);
+                    })
+                }
+            }
+
+        }
+        ///显示所有父节点
+        function fjdxs(zTree, nodes) {
+            if (nodes.getParentNode() == null) {
+                zTree.showNode(nodes);
+            }
+            else {
+                zTree.showNode(nodes);
+                fjdxs(zTree, nodes.getParentNode());
+            }
+        }
+        ///全显
+        function xsall(ztree, nodes) {
+            ztree.showNode(nodes);
+            if (nodes.children != null) {
+                $.each(nodes.children, function (x, y) {
+                    xsall(ztree, y);
+                })
+
+            }
+        }
+        ///么有子节点的直接隐藏
+        function ycall(ztree, nodes) {
+            ztree.hideNode(nodes);
+            if (nodes.children != null) {
+                $.each(nodes.children, function (x, y) {
+                    ycall(ztree, y);
+                })
+
+            }
+            
+        }
+    </script>
+#end
+
+#searchZtreeInit("授权角色" "/page/role/module_check.js")
+#@formHorizoontalValidate("" "role_auth_form")
+		<div class="col-lg-4" style="width:100%">
+			#@zTree("授权角色")
+			#end
+		</div>
+#end

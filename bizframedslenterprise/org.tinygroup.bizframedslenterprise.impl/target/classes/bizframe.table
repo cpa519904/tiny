@@ -1,0 +1,78 @@
+<tables>
+  <table id="6f43b40cc6074226a08ce8a4206cc147" name="incrementer" title="自增表" schema="authority_management" packageName="org.tinygroup.bizframeimpl.dao">
+    <description></description>
+    <table-field standard-field-id="66ebc5a1f3054dc1922c8b5879bb0a04" primary="true" unique="true" not-null="true" id="sequence_id" auto-increase="true"/>
+  </table>
+  <table id="06fe347e86214372a96ad2eff9337dd8" name="t_dict" title="数据字典表" schema="authority_management" packageName="org.tinygroup.bizframeimpl.dao">
+    <table-field standard-field-id="db34c5d489f74ef39fd5cc704552c353" primary="true" unique="true" not-null="true" id="dict_id" auto-increase="true"/>
+    <table-field standard-field-id="7b3d7b1d21b444069688fa80fc00b769" primary="false" unique="false" not-null="false" id="dict_name" auto-increase="false"/>
+    <table-field standard-field-id="66507a97c3c64585b09cfce789b10cea" primary="false" unique="false" not-null="false" id="dict_value" auto-increase="false"/>
+    <table-field standard-field-id="6e6137cd4a0746208534fd3735491e19" primary="false" unique="false" not-null="false" id="dict_type" auto-increase="false"/>
+    <table-field standard-field-id="e60c0ab5d59d4629afc0d650c7beaa06" primary="false" unique="false" not-null="false" id="sort_num" auto-increase="false"/>
+  </table>
+  <table id="8aa96d7d2ee4492d87efd67cf563176a" name="t_dictitem" title="数据字典项表" schema="authority_management" packageName="org.tinygroup.bizframeimpl.dao">
+    <table-field standard-field-id="4239ed89d09f4203930d95d235c2c702" primary="true" unique="true" not-null="true" id="dictitem_id" auto-increase="true"/>
+    <table-field standard-field-id="db34c5d489f74ef39fd5cc704552c353" primary="false" unique="false" not-null="false" id="dict_id" auto-increase="false"/>
+    <table-field standard-field-id="2131aaea713844db8526e01f7348592a" primary="false" unique="false" not-null="false" id="dictitem_name" auto-increase="false"/>
+    <table-field standard-field-id="0742022d61b842f8ae00d23b8d341555" primary="false" unique="false" not-null="false" id="dictitem_value" auto-increase="false"/>
+    <table-field standard-field-id="e60c0ab5d59d4629afc0d650c7beaa06" primary="false" unique="false" not-null="false" id="sort_num" auto-increase="false"/>
+  </table>
+  <table id="be26dac5fa674657b3b1b1f4a9fb641e" name="t_function" title="T_FUNCTION" schema="authority_management" packageName="org.tinygroup.bizframeimpl.dao">
+    <table-field standard-field-id="e065bcab4e3b4d8d84c9c11b27423041" primary="true" unique="true" not-null="true" id="function_id" auto-increase="true"/>
+    <table-field standard-field-id="01320cc4202e48139760fd1817affba3" primary="false" unique="false" not-null="false" id="parent_id" auto-increase="false"/>
+    <table-field standard-field-id="9cf968a91c8e48e4ae4f8fa576476125" primary="false" unique="false" not-null="false" id="function_name" auto-increase="false"/>
+    <table-field standard-field-id="68c4f1379d8347b7a6fce4df1af45acf" primary="false" unique="false" not-null="false" id="function_type" auto-increase="false"/>
+    <table-field standard-field-id="9aa2efb2b5ae4771969fac35132868a6" primary="false" unique="false" not-null="false" id="function_url" auto-increase="false"/>
+    <table-field standard-field-id="e60c0ab5d59d4629afc0d650c7beaa06" primary="false" unique="false" not-null="false" id="sort_num" auto-increase="false"/>
+    <table-field standard-field-id="160f63656aa541bcb683ca57f8acac9a" primary="false" unique="false" not-null="false" id="function_code" auto-increase="false"/>
+  </table>
+  <table id="27b95221a9d047cf9c35edbc280013be" name="t_operation_log" title="T_OPERATION_LOG" schema="authority_management" packageName="org.tinygroup.bizframeimpl.dao">
+    <table-field standard-field-id="a004132a4f9649bdad5eb6f34591838b" primary="true" unique="true" not-null="true" id="operator_log_id" auto-increase="true"/>
+    <table-field standard-field-id="8257d9d9cbb64f7daef9cd4dbe46606b" primary="false" unique="false" not-null="false" id="operation_content" auto-increase="false"/>
+    <table-field standard-field-id="65decde29d7f421683b3c1bb67c10370" primary="false" unique="false" not-null="false" id="user_id" auto-increase="false"/>
+    <table-field standard-field-id="a0c66683d43341f29b9cbb4a324bdbfe" primary="false" unique="false" not-null="false" id="operation_ip" auto-increase="false"/>
+    <table-field standard-field-id="9588c65fdd1840c3a2ebe6c054bab49a" primary="false" unique="false" not-null="false" id="operation_type" auto-increase="false"/>
+    <table-field standard-field-id="097403cde2054d35853a803a36457900" primary="false" unique="false" not-null="false" id="create_time" auto-increase="false"/>
+  </table>
+  <table id="cebf9cb650934f5fb75aa8604488642a" name="t_organization" title="T_ORGANIZATION" schema="authority_management" packageName="org.tinygroup.bizframeimpl.dao">
+    <table-field standard-field-id="b98cac165add451585dedbfbf19a0116" primary="true" unique="true" not-null="true" id="organization_id" auto-increase="true"/>
+    <table-field standard-field-id="be8a35f0c76540029e51fa4be3c20197" primary="false" unique="false" not-null="false" id="organization_name" auto-increase="false"/>
+    <table-field standard-field-id="01320cc4202e48139760fd1817affba3" primary="false" unique="false" not-null="false" id="parent_id" auto-increase="false"/>
+    <table-field standard-field-id="e60c0ab5d59d4629afc0d650c7beaa06" primary="false" unique="false" not-null="false" id="sort_num" auto-increase="false"/>
+  </table>
+  <table id="87d8a8038a09428481f5952c9f148b07" name="t_role" title="T_ROLE" schema="authority_management" packageName="org.tinygroup.bizframeimpl.dao">
+    <table-field standard-field-id="0fe76b01444c4b8bb67ebab94fcfed74" primary="true" unique="true" not-null="true" id="role_id" auto-increase="true"/>
+    <table-field standard-field-id="537a92f291b642ba873ca57b4742318d" primary="false" unique="false" not-null="false" id="role_name" auto-increase="false"/>
+    <table-field standard-field-id="62a9f5813488419297bfcf95b81d5db4" primary="false" unique="false" not-null="false" id="role_type" auto-increase="false"/>
+    <table-field standard-field-id="e60c0ab5d59d4629afc0d650c7beaa06" primary="false" unique="false" not-null="false" id="sort_num" auto-increase="false"/>
+    <table-field standard-field-id="b592129bd28642d8abdafe148d04a7ee" primary="false" unique="false" not-null="false" id="role_code" auto-increase="false"/>
+    <table-field standard-field-id="6256a28fa0a942589490bf2248882dce" primary="false" unique="false" not-null="false" id="is_default" auto-increase="false"/>
+  </table>
+  <table id="7ccab4712fed4b0caa598c550d536174" name="t_role_t_function" title="T_ROLE_T_FUNCTION" schema="authority_management" packageName="org.tinygroup.bizframeimpl.dao">
+    <table-field standard-field-id="b5008e495bcf4c00b1ce9fad2a78cdf6" primary="true" unique="true" not-null="true" id="id" auto-increase="true"/>
+    <table-field standard-field-id="e065bcab4e3b4d8d84c9c11b27423041" primary="false" unique="false" not-null="false" id="function_id" auto-increase="false"/>
+    <table-field standard-field-id="0fe76b01444c4b8bb67ebab94fcfed74" primary="false" unique="false" not-null="false" id="role_id" auto-increase="false"/>
+  </table>
+  <table id="4e9837fd32264cf29844d2bf01b9f21b" name="t_sysparam" title="T_SYSPARAM" schema="authority_management" packageName="org.tinygroup.bizframeimpl.dao">
+    <table-field standard-field-id="39bf19d29e1b4082aa1eb99788e80450" primary="true" unique="true" not-null="true" id="sysparam_id" auto-increase="true"/>
+    <table-field standard-field-id="a69a210895d64aada4debd56018f2e6f" primary="false" unique="false" not-null="false" id="sysparam_type" auto-increase="false"/>
+    <table-field standard-field-id="e2400b20342d45dc988ff073b33a5670" primary="false" unique="false" not-null="false" id="sysparam_name" auto-increase="false"/>
+    <table-field standard-field-id="abcf375575694c5c897ec383c723e6e6" primary="false" unique="false" not-null="false" id="sysparam_value" auto-increase="false"/>
+  </table>
+  <table id="9b6ab32da3654a7d8afef75b866347b7" name="t_user" title="T_USER" schema="authority_management" packageName="org.tinygroup.bizframeimpl.dao">
+    <table-field standard-field-id="65decde29d7f421683b3c1bb67c10370" primary="true" unique="true" not-null="true" id="user_id" auto-increase="true"/>
+    <table-field standard-field-id="b98cac165add451585dedbfbf19a0116" primary="false" unique="false" not-null="false" id="organization_id" auto-increase="false"/>
+    <table-field standard-field-id="07e908d4602a48db871be723e6c31b93" primary="false" unique="false" not-null="false" id="user_name" auto-increase="false"/>
+    <table-field standard-field-id="f3664d3827384ef8922cb21b45905c1c" primary="false" unique="false" not-null="false" id="user_password" auto-increase="false"/>
+    <table-field standard-field-id="15de41d3f0b943d6925bbb4de83f4e83" primary="false" unique="false" not-null="false" id="user_type" auto-increase="false"/>
+    <table-field standard-field-id="4739b1baffe648a9b2bee8e71736c812" primary="false" unique="false" not-null="false" id="user_status" auto-increase="false"/>
+    <table-field standard-field-id="e60c0ab5d59d4629afc0d650c7beaa06" primary="false" unique="false" not-null="false" id="sort_num" auto-increase="false"/>
+    <table-field standard-field-id="b965330c142a4d1fae42f3479b3589e6" primary="false" unique="false" not-null="false" id="login_name" auto-increase="false"/>
+    <table-field standard-field-id="6256a28fa0a942589490bf2248882dce" primary="false" unique="false" not-null="false" id="is_default" auto-increase="false"/>
+  </table>
+  <table id="eccc0f5e45cc4435a928a39e1b2af5d5" name="t_user_t_role" title="T_USER_T_ROLE" schema="authority_management" packageName="org.tinygroup.bizframeimpl.dao">
+    <table-field standard-field-id="b5008e495bcf4c00b1ce9fad2a78cdf6" primary="true" unique="true" not-null="true" id="id" auto-increase="true"/>
+    <table-field standard-field-id="0fe76b01444c4b8bb67ebab94fcfed74" primary="false" unique="false" not-null="false" id="role_id" auto-increase="false"/>
+    <table-field standard-field-id="65decde29d7f421683b3c1bb67c10370" primary="false" unique="false" not-null="false" id="user_id" auto-increase="false"/>
+  </table>
+</tables>

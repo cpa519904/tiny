@@ -1,0 +1,3 @@
+<dict-loaders>
+	<dict-loader groupName="simple" beanName="dictDataLoader"></dict-loader>
+</dict-loaders>

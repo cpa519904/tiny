@@ -1,0 +1,59 @@
+<script>
+	$(function(){
+		$("form[name=userRoleRemoveForm]").submit(function() {
+			if($(this).find("input[name=roleId]:checked").size()==0){
+				layer.alert('至少要选择一条！');
+				return false;
+			}
+			var options = {
+				url:this.action,
+				type:"post",
+				success:function(data){
+					loadUnassignRole();
+					loadassignRole();
+				},
+				error:function(){
+					alert('操作失败!');
+				}
+			};
+			$(this).ajaxSubmit(options);
+			return false;
+		});
+		$("input[name=roleRemoveAll]").click(function(){
+			if(this.checked){
+				$(".userRoleDiv :checkbox").prop("checked","checked");
+				
+			}else{
+				$(".userRoleDiv :checkbox").removeAttr("checked");
+			}
+		})
+		$(".authRoleDiv :checkbox").click(function(){
+			if($("input[name=roleRemoveAll]").get(0).checked && !this.checked){
+				$("input[name=roleRemoveAll]").removeAttr("checked");
+			}
+		});
+	})
+</script>
+#@tinyForm("userRoleRemoveForm" call("link","/removeUserRoles.do") "" {"class":"form-horizontal"})
+	<input name="userId" type="hidden" value="${userId}"/>
+	<input name="currentUserId" value="0" class="input-lg " type="hidden">
+    <div class="userRoleDiv">
+			#for(role:getUserRolesResult)
+				<span class="distributionStyle">
+					#if(role?.isDefault ==1)
+						<input name="roleId" value="${role?.roleId}" type="checkbox" disabled="true">
+					#else
+						<input name="roleId" value="${role?.roleId}" type="checkbox" >
+					#end
+						${role?.roleName}
+				</span>
+			#else
+				没有需要取消分配的角色
+			#end
+	</div>
+	<div style="padding-top:10px;padding-left:20px;clear:both">
+		<input name="roleRemoveAll" value="${role?.roleId}" type="checkbox" >全选
+		<input type="submit" class="btn radius btn-primary" value="取消分配">
+	</div>
+#end
+

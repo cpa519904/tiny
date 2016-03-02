@@ -1,0 +1,109 @@
+<service-components>
+  <service-component type="org.tinygroup.bizframedslenterprise.impl.function.FunctionServiceImpl" bean="functionService">
+    <service-method local-name="addFunction" service-id="addFunction" method-name="addFunction" cacheable="false" category="org.tinygroup.bizframedslenterprise.impl.function">
+      <service-parameters>
+        <service-parameter name="tFunction" type="org.tinygroup.bizframedslenterprise.inter.pojo.TFunction" required="false" is-array="false"/>
+      </service-parameters>
+      <service-result name="addFunctionResult" required="false" is-array="false" type="org.tinygroup.bizframedslenterprise.inter.pojo.TFunction"/>
+    </service-method>
+    <service-method local-name="updateFunciton" service-id="updateFunciton" method-name="updateFunciton" cacheable="false" category="org.tinygroup.bizframedslenterprise.impl.function">
+      <service-parameters>
+        <service-parameter name="tFunction" type="org.tinygroup.bizframedslenterprise.inter.pojo.TFunction" required="false" is-array="false"/>
+      </service-parameters>
+      <service-result name="updateFuncitonResult" required="false" is-array="false" type="void"/>
+    </service-method>
+    <service-method local-name="deleteFunction" service-id="deleteFunction" method-name="deleteFunction" cacheable="false" category="org.tinygroup.bizframedslenterprise.impl.function">
+      <service-parameters>
+        <service-parameter name="functionId" type="java.lang.String" required="false" is-array="false"/>
+      </service-parameters>
+      <service-result name="deleteFunctionResult" required="false" is-array="false" type="void"/>
+    </service-method>
+    <service-method local-name="deleteFunctions" service-id="deleteFunctions" method-name="deleteFunctions" cacheable="false" category="org.tinygroup.bizframedslenterprise.impl.function">
+      <service-parameters>
+        <service-parameter name="functionIds" type="java.lang.String" required="false" is-array="false"/>
+      </service-parameters>
+      <service-result name="deleteFunctionsResult" required="false" is-array="false" type="void"/>
+    </service-method>
+    <service-method local-name="getFunction" service-id="getFunction" method-name="getFunction" cacheable="false" category="org.tinygroup.bizframedslenterprise.impl.function">
+      <service-parameters>
+        <service-parameter name="functionId" type="java.lang.String" required="false" is-array="false"/>
+      </service-parameters>
+      <service-result name="getFunctionResult" required="false" is-array="false" type="org.tinygroup.bizframedslenterprise.inter.pojo.TFunction"/>
+    </service-method>
+    <service-method local-name="getAllFunctions" service-id="getAllFunctions" method-name="getAllFunctions" cacheable="false" category="org.tinygroup.bizframedslenterprise.impl.function">
+      <service-parameters>
+        <service-parameter name="tFunction" type="org.tinygroup.bizframedslenterprise.inter.pojo.TFunction" required="false" is-array="false"/>
+      </service-parameters>
+      <service-result name="getAllFunctionsResult" required="false" is-array="false" collection-type="java.util.List" type="org.tinygroup.bizframedslenterprise.inter.pojo.TFunction"/>
+    </service-method>
+    <service-method local-name="getAllFunctionPager" service-id="getAllFunctionPager" method-name="getAllFunctionPager" cacheable="false" category="org.tinygroup.bizframedslenterprise.impl.function">
+      <service-parameters>
+        <service-parameter name="tFunction" type="org.tinygroup.bizframedslenterprise.inter.pojo.TFunction" required="false" is-array="false"/>
+        <service-parameter name="start" type="int" required="false" is-array="false"/>
+        <service-parameter name="limit" type="int" required="false" is-array="false"/>
+      </service-parameters>
+      <service-result name="getAllFunctionPagerResult" required="false" is-array="false" type="org.tinygroup.bizframedslenterprise.inter.util.Pager"/>
+    </service-method>
+    <service-method local-name="getFunctions" service-id="getFunctions" method-name="getFunctions" cacheable="false" category="org.tinygroup.bizframedslenterprise.impl.function">
+      <service-parameters>
+        <service-parameter name="tFunction" type="org.tinygroup.bizframedslenterprise.inter.pojo.TFunction" required="false" is-array="false"/>
+      </service-parameters>
+      <service-result name="getFunctionsResult" required="false" is-array="false" collection-type="java.util.List" type="org.tinygroup.bizframedslenterprise.inter.pojo.TFunction"/>
+    </service-method>
+    <service-method local-name="getSubFunctions" service-id="getSubFunctions" method-name="getSubFunctions" cacheable="false" category="org.tinygroup.bizframedslenterprise.impl.function">
+      <service-parameters>
+        <service-parameter name="tFunction" type="org.tinygroup.bizframedslenterprise.inter.pojo.TFunction" required="false" is-array="false"/>
+      </service-parameters>
+      <service-result name="getSubFunctionsResult" required="false" is-array="false" collection-type="java.util.List" type="org.tinygroup.bizframedslenterprise.inter.pojo.TFunction"/>
+    </service-method>
+    <service-method local-name="getRolesByFunctionId" service-id="getRolesByFunctionId" method-name="getRolesByFunctionId" cacheable="false" category="org.tinygroup.bizframedslenterprise.impl.function">
+      <service-parameters>
+        <service-parameter name="functionId" type="int" required="false" is-array="false"/>
+      </service-parameters>
+      <service-result name="getRolesByFunctionIdResult" required="false" is-array="false" collection-type="java.util.List" type="org.tinygroup.bizframedslenterprise.inter.pojo.TRole"/>
+    </service-method>
+    <service-method local-name="getRootFunctions" service-id="getRootFunctions" method-name="getRootFunctions" cacheable="false" category="org.tinygroup.bizframedslenterprise.impl.function">
+      <service-parameters/>
+      <service-result name="getRootFunctionsResult" required="false" is-array="false" collection-type="java.util.List" type="org.tinygroup.bizframedslenterprise.inter.pojo.TFunction"/>
+    </service-method>
+    <service-method local-name="getRootFunctionsPager" service-id="getRootFunctionsPager" method-name="getRootFunctionsPager" cacheable="false" category="org.tinygroup.bizframedslenterprise.impl.function">
+      <service-parameters>
+        <service-parameter name="start" type="int" required="false" is-array="false"/>
+        <service-parameter name="limit" type="int" required="false" is-array="false"/>
+      </service-parameters>
+      <service-result name="getRootFunctionsPagerResult" required="false" is-array="false" type="org.tinygroup.bizframedslenterprise.inter.util.Pager"/>
+    </service-method>
+    <service-method local-name="getFunctionRoles" service-id="getFunctionRoles" method-name="getFunctionRoles" cacheable="false" category="org.tinygroup.bizframedslenterprise.impl.function">
+      <service-parameters>
+        <service-parameter name="functionId" type="int" required="false" is-array="false"/>
+      </service-parameters>
+      <service-result name="getFunctionRolesResult" required="false" is-array="false" collection-type="java.util.List" type="org.tinygroup.bizframedslenterprise.inter.pojo.TRole"/>
+    </service-method>
+    <service-method local-name="getUnssignFunctionRoles" service-id="getUnssignFunctionRoles" method-name="getUnssignFunctionRoles" cacheable="false" category="org.tinygroup.bizframedslenterprise.impl.function">
+      <service-parameters>
+        <service-parameter name="functionId" type="int" required="false" is-array="false"/>
+      </service-parameters>
+      <service-result name="getUnssignFunctionRolesResult" required="false" is-array="false" collection-type="java.util.List" type="org.tinygroup.bizframedslenterprise.inter.pojo.TRole"/>
+    </service-method>
+    <service-method local-name="addFunctionRoles" service-id="addFunctionRoles" method-name="addFunctionRoles" cacheable="false" category="org.tinygroup.bizframedslenterprise.impl.function">
+      <service-parameters>
+        <service-parameter name="functionId" type="int" required="false" is-array="false"/>
+        <service-parameter name="roleId" type="java.lang.Integer" required="false" is-array="true"/>
+      </service-parameters>
+      <service-result name="addFunctionRolesResult" required="false" is-array="false" type="void"/>
+    </service-method>
+    <service-method local-name="removeFunctionRoles" service-id="removeFunctionRoles" method-name="removeFunctionRoles" cacheable="false" category="org.tinygroup.bizframedslenterprise.impl.function">
+      <service-parameters>
+        <service-parameter name="functionId" type="int" required="false" is-array="false"/>
+        <service-parameter name="roleId" type="java.lang.Integer" required="false" is-array="true"/>
+      </service-parameters>
+      <service-result name="removeFunctionRolesResult" required="false" is-array="false" type="void"/>
+    </service-method>
+    <service-method local-name="checkFunction" service-id="checkFunction" method-name="checkFunction" cacheable="false" category="org.tinygroup.bizframedslenterprise.impl.function">
+      <service-parameters>
+        <service-parameter name="tFunction" type="org.tinygroup.bizframedslenterprise.inter.pojo.TFunction" required="false" is-array="false"/>
+      </service-parameters>
+      <service-result name="checkFunctionResult" required="false" is-array="false" type="boolean"/>
+    </service-method>
+  </service-component>
+</service-components>

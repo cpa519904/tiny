@@ -1,0 +1,24 @@
+#!set(activeTitle="select新增",activeMenuId="9.7")
+
+#import("/org/tinygroup/modal/components/selectAndModal.component")
+
+
+
+#@tinySelectOrAdd("tinyusername" "tinyusername" "zh" "中国" "/tinyselectdata.pagelet" "/muselect.pagelet" 800 100)#end
+
+<div>
+新增内容
+
+#@tinySelectAndAdd("additem")
+	{ label: "Chinese", value: "/tinyuiweb/tinyselectdata.pagelet",modal:true,width:"800",height:"500"},
+	{ label: "English", value: "/tinyuiweb/tinyselectdata.pagelet"},
+	{ label: "Spanish", value: "/tinyuiweb/tinyselectdata.pagelet",modal:false},
+	{ label: "Russian", value: "/tinyuiweb/tinyselectdata.pagelet",modal:false},
+	{ label: "French", value: "/tinyuiweb/tinyselectdata.pagelet",modal:false},
+	{ label: "Japanese", value: "/tinyuiweb/tinyselectdata.pagelet",modal:false}
+#end
+</span>
+</div>
+<div style="height:400px">
+
+</div>

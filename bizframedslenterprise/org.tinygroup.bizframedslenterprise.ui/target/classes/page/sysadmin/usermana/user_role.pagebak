@@ -1,0 +1,40 @@
+#import("/org/tinygroup/table/components/table.component")
+#import("/org/tinygroup/zTree/components/zTree.component")
+#include("/page/event/common.page")
+<script>
+		function cancelBtnClk(obj){
+			$(obj).parent().html('<a href="javascript:void(0);" onClick="delRec(this)" class="btn btn-success radius btn-small">已分配</a>');
+		}
+		function delRec(obj){
+			$(obj).parent().html('<a href="javascript:void(0);" onClick="cancelBtnClk(this)" class="btn btn-danger radius btn-small">已标记删除</a>');
+		}
+</script>
+#@formHorizoontalValidate("" "user_role_form")
+<div class="height-auto">
+	#include("/page/sysadmin/usermana/role_list.page")
+</div>
+  <div class="table-border">
+  	#@tinyTable("todata")
+	#@thead()
+				#@tr("text-c")
+					#@thW("96")名称#end
+					#@thW("50")类型#end
+					#@thW("50")操作#end
+				#end
+	#end
+    #@tbody()
+    		#@tr("text-c")
+					#@td()名称#end
+					#@td()类型#end
+					#@td()<a href="javascript:void(0);" onClick="delRec(this)" class="btn btn-success radius btn-small">已分配</a>#end
+				#end
+			#@tr("text-c")
+					#@td()名称#end
+					#@td()类型#end
+					#@td()<a href="javascript:void(0);" onClick="delRec(this)" class="btn btn-success radius btn-small">已分配</a>#end
+				#end
+    #end
+	#end
+</div>
+#end
+#basketStyle()

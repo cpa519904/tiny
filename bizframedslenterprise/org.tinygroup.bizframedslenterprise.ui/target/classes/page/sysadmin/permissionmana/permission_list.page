@@ -1,0 +1,39 @@
+#!set(activeTitle="权限列表",activeMenuId=currentPageId)
+#if(parentId=="-1")
+	#!set(url="getAllFunctionPager.servicepage")
+#else
+	#!set(url="getAllFunctionPager.servicepage?parentId="+parentId)
+#end
+
+##import("/org/tinygroup/table/components/tinytable.component")
+#include("/page/event/common.page")
+
+#set(permissionAssignPath="/page/sysadmin/permissionmana/permission_assign.pagelet",permissionAssignModalId="permissionAssignModal",permissionAssignModal="#"+permissionAssignModalId)
+#set(addpagePath="/page/sysadmin/permissionmana/permission_edit.pagelet?parentId="+parentId,addpageModalId="permissionAddModal",addpageModal="#"+addpageModalId)
+#set(editpagePath="getFunction.servicepage",editpageModalId="permissionEditModal",editpageModalId="permissionEditModal",editpageModal="#"+editpageModalId)
+#@tinyTable("permissionById") ##ID为空则系统自动生成 带入参数则取该参数为ID
+	#@div(divBaseClass="tinyheaderTools form-inline")
+		#setTinyTablePageSize([10,20,50,100,200])
+		#@radiusBtn("btn-danger btn-sm" "icon-trash" "javascript:vlid(0)" "deleteFunction" "") 批量删除#end
+		#@aModal(addpageModal "新增" "" "" "btn radius btn-primary btn-sm" addpagePath)
+			#simpleI("icon-plus")新增
+		#end
+	#end
+	#@tinyTableContent(url) ##取数据地址 总数据
+		#@thead()
+			#@tr()###th  class 为sorting 表票可排序 为sorting_desc 为当前倒序
+				#@tinyTh({"width":"6"})<input type="checkbox" name="allck" value="">#end
+				#@tinyTh({"class":"","rel":"permissionId"})序号#end
+				#@tinyTh({"class":"","rel":"name"})名称#end
+				#@tinyTh({"class":"","rel":"name"})代码#end
+				#@tinyTh({"class":"","rel":"type"})类型#end
+				#@tinyTh({"class":"","rel":"url"})url#end
+				#@tinyTh({"class":"","rel":""})操作#end
+			#end
+		#end
+	#end
+#end
+
+#@simpleModal("permissionAddModal" "添加权限")#end
+#@simpleModal("permissionEditModal" "添加权限")#end
+#@simpleViewModal("permissionAssignModal" "分配角色")#end

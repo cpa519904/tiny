@@ -1,0 +1,22 @@
+#macro dealData()
+	$.each(jsonData,function(i,item){
+			item["checked"]=true;
+					});
+#end
+#macro ztreeLoadSuccess()
+	var tnodes = zTree.getNodes();
+	if(tnodes.length>0 && !zTree.setting.check.enable){
+			zTree.selectNode(tnodes[0]);
+			zTree.setting.callback.onClick(null, zTree.setting.treeId, tnodes[0]);//调用事件
+	}
+#end
+#@treeCollg4()
+	#checkedSearchZtreeWithInit("treeDemo4" "height:454px;" "/data/test99.js" "functionName" {"idKey":"functionId","pIdKey":"parentId"})
+#end
+<input onclick="getSelectedBoxId()" type='button' value='获取id3'/>
+<script>	
+	function getSelectedBoxId(){
+		var zTree = $.fn.zTree.getZTreeObj("treeDemo4");
+		alert(getCheckedNodeId(zTree));
+	}
+</script>

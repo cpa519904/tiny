@@ -1,0 +1,9 @@
+#@tinyForm("thisform" "url" "post" {"class":"xxxxxxxxx"})
+	#@elementItem()
+		#@colLabel()上传图片：#end
+		#@formControlDiv("col-8")
+			#tinyUploadInput("inputName" "" {"placeholder":"可直接输入地址，也可点击下图标进行上传"})
+		#end
+		#@validateDiv("col-2")#end
+	#end
+#end

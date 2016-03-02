@@ -1,0 +1,12 @@
+#@messageItem("/demo/avatars/2.jpg" "xxx" "#" "2小时前")
+	有一位新成员加入Tiny框架... 
+#end
+#@messageItem("/demo/avatars/3.jpg" "xxx" "#" "2小时前")
+	有一位Tiny粉丝评论了博文...
+#end
+#@messageItem("/demo/avatars/4.jpg" "xxx" "#" "2小时前")
+	myeclipse安装tiny报错，请教各位高手。
+#end
+#@messageItem("/demo/avatars/5.jpg" "xxx" "#" "2小时前")
+	page中获取session的值为什么是旧的...
+#end

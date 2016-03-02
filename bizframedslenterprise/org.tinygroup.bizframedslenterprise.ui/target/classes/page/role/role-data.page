@@ -1,0 +1,18 @@
+#set(paramDictItemMap = getDictItem("role_type")?["map"])
+#setTinyItemCount(getRolePagerResult?.totalCount)
+#foreach(role:getRolePagerResult?.currentList)
+    #@tr()
+        #@td()<input type="checkbox" value="${role.roleId}" name="idCheck">#end
+        #@td()${roleFor.index}#end     
+		#@td()${role.roleName}#end
+		#@td()${paramDictItemMap?[role.roleType]}#end
+		#@td("f-14 user-manage")
+			#@iconOperations("#editModal" "icon-edit" "修改角色" "" "" "/getRole.servicepagelet?roleId="+role.roleId())&nbsp;修改#end
+			#@iconOperations("#powerModal" "icon-file" "权限分配" "448px" "380px" "/page/role/role-auth-edit-new.pagelet?roleId="+role.roleId() "ml-5")&nbsp;权限分配#end
+        	#@iconOperations("#powerModal" "icon-share" "分配用户" "940px" "600px" "/page/role/role-user-edit-new.pagelet?roleId="+role.roleId() "ml-5")&nbsp;分配用户#end
+         <a title="删除" href="javascript:;" onclick="deleteAction({'roleIds':'${role.roleId}' },'#link('/removeRole.do')','roleById')" class="ml-5" style="text-decoration:none"><i
+         class="icon-trash"></i>&nbsp;删除</a>
+		#end
+    #end
+#end
+

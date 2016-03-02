@@ -1,0 +1,111 @@
+<business-types>
+  <business-type id="2add72deb84a4a7ba81794beb8598797" name="id" title="通用id" standard-type-id="e0a75f048d4d4e71b85ced4c67b6c800">
+    <description></description>
+    <placeholder-value-list>
+      <placeholder-value name="length" value="11"/>
+    </placeholder-value-list>
+  </business-type>
+  <business-type id="5255153f8b6e4b32b695f4a392ddb95f" name="dict_name" title="DICT_NAME" standard-type-id="f4477b832e904c4a99d4fc3ba3e1b701">
+    <placeholder-value-list>
+      <placeholder-value name="length" value="200"/>
+    </placeholder-value-list>
+  </business-type>
+  <business-type id="9f44c59bffce40f092c085eb1dd49c38" name="dict_value" title="DICT_VALUE" standard-type-id="f4477b832e904c4a99d4fc3ba3e1b701">
+    <placeholder-value-list>
+      <placeholder-value name="length" value="200"/>
+    </placeholder-value-list>
+  </business-type>
+  <business-type id="531fa667c3184b7aaaf180a397349b5d" name="type" title="通用类型" standard-type-id="e0a75f048d4d4e71b85ced4c67b6c800">
+    <placeholder-value-list>
+      <placeholder-value name="length" value="11"/>
+    </placeholder-value-list>
+  </business-type>
+  <business-type id="462a37520ea642acb3e59928ec6b5504" name="sort_num" title="排序号" standard-type-id="e0a75f048d4d4e71b85ced4c67b6c800">
+    <placeholder-value-list>
+      <placeholder-value name="length" value="11"/>
+    </placeholder-value-list>
+  </business-type>
+  <business-type id="26f2d51354cc421182329be95cac77b0" name="function_name" title="功能名称" standard-type-id="f4477b832e904c4a99d4fc3ba3e1b701">
+    <placeholder-value-list>
+      <placeholder-value name="length" value="32"/>
+    </placeholder-value-list>
+  </business-type>
+  <business-type id="31472fc6ed504d8790c5baaf0963c415" name="function_url" title="功能URL" standard-type-id="f4477b832e904c4a99d4fc3ba3e1b701">
+    <placeholder-value-list>
+      <placeholder-value name="length" value="256"/>
+    </placeholder-value-list>
+  </business-type>
+  <business-type id="42c77d9e334f4f11a221ce575ac866f7" name="function_code" title="FUNCTION_CODE" standard-type-id="f4477b832e904c4a99d4fc3ba3e1b701">
+    <placeholder-value-list>
+      <placeholder-value name="length" value="200"/>
+    </placeholder-value-list>
+  </business-type>
+  <business-type id="c2d5b57dd59f4d7d9c56c2cc70dca90b" name="content1000" title="长度为1000的文本" standard-type-id="f4477b832e904c4a99d4fc3ba3e1b701">
+    <placeholder-value-list>
+      <placeholder-value name="length" value="1000"/>
+    </placeholder-value-list>
+  </business-type>
+  <business-type id="1b182e10013d477fa3fbac5926930b24" name="ip" title="IP地址" standard-type-id="f4477b832e904c4a99d4fc3ba3e1b701">
+    <placeholder-value-list>
+      <placeholder-value name="length" value="100"/>
+    </placeholder-value-list>
+  </business-type>
+  <business-type id="ff638ffe76e94a1491558cc2ab38aea7" name="datetime" title="日期时间" standard-type-id="2e2f43f65c4a437899dec135feac4876">
+    <placeholder-value-list/>
+  </business-type>
+  <business-type id="f7f6229a1f8f4dc785f1cacad78aa22e" name="organization_name" title="ORGANIZATION_NAME" standard-type-id="f4477b832e904c4a99d4fc3ba3e1b701">
+    <placeholder-value-list>
+      <placeholder-value name="length" value="32"/>
+    </placeholder-value-list>
+  </business-type>
+  <business-type id="837cee23b3684017a499803c499065e4" name="company_num" title="公司号" standard-type-id="f4477b832e904c4a99d4fc3ba3e1b701">
+    <placeholder-value-list>
+      <placeholder-value name="length" value="32"/>
+    </placeholder-value-list>
+  </business-type>
+  <business-type id="e8f8c914d1704d92a4c991bfc950f733" name="role_name" title="角色名称" standard-type-id="f4477b832e904c4a99d4fc3ba3e1b701">
+    <placeholder-value-list>
+      <placeholder-value name="length" value="32"/>
+    </placeholder-value-list>
+  </business-type>
+  <business-type id="902ad4ebda7f465f867b921d016a4c62" name="role_code" title="角色码" standard-type-id="f4477b832e904c4a99d4fc3ba3e1b701">
+    <placeholder-value-list>
+      <placeholder-value name="length" value="200"/>
+    </placeholder-value-list>
+  </business-type>
+  <business-type id="2a92e0a231394e1fb758aa77f9a05435" name="is_default" title="是否默认" standard-type-id="e0a75f048d4d4e71b85ced4c67b6c800">
+    <placeholder-value-list>
+      <placeholder-value name="length" value="11"/>
+    </placeholder-value-list>
+  </business-type>
+  <business-type id="60d6ee042c4840beb97dd4efb595fdb4" name="sysparam_name" title="参数名称" standard-type-id="f4477b832e904c4a99d4fc3ba3e1b701">
+    <placeholder-value-list>
+      <placeholder-value name="length" value="32"/>
+    </placeholder-value-list>
+  </business-type>
+  <business-type id="105cadd70f8140dcb2e4f77a9d7513bf" name="sysparam_value" title="参数值" standard-type-id="f4477b832e904c4a99d4fc3ba3e1b701">
+    <placeholder-value-list>
+      <placeholder-value name="length" value="32"/>
+    </placeholder-value-list>
+  </business-type>
+  <business-type id="a04ad7736bf94eba976aabcb852a15b5" name="user_name" title="用户名称" standard-type-id="f4477b832e904c4a99d4fc3ba3e1b701">
+    <placeholder-value-list>
+      <placeholder-value name="length" value="32"/>
+    </placeholder-value-list>
+  </business-type>
+  <business-type id="ac8a977a03e745cf8dcd9eef5ad2ab6c" name="password" title="密码" standard-type-id="f4477b832e904c4a99d4fc3ba3e1b701">
+    <placeholder-value-list>
+      <placeholder-value name="length" value="50"/>
+    </placeholder-value-list>
+  </business-type>
+  <business-type id="bbe4c5f2cbd94e2a817adb8701d671ca" name="status" title="状态" standard-type-id="f4477b832e904c4a99d4fc3ba3e1b701">
+    <placeholder-value-list>
+      <placeholder-value name="length" value="255"/>
+    </placeholder-value-list>
+  </business-type>
+  <business-type id="5bec4adc7f6c43378be1c7479dded3d5" name="login_name" title="登录名" standard-type-id="f4477b832e904c4a99d4fc3ba3e1b701">
+    <placeholder-value-list>
+      <placeholder-value name="length" value="200"/>
+    </placeholder-value-list>
+  </business-type>
+</business-types>

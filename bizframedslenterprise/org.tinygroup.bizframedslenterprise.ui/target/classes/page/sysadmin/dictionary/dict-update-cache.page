@@ -1,0 +1,6 @@
+#set(updateResult = loadDictItemCache())
+#if(updateResult)
+	已更新
+#else	
+	更新失败
+#end

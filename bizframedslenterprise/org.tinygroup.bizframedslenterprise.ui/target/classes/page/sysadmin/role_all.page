@@ -1,0 +1,12 @@
+#if(getRolesResult)
+	#for(role:getRolesResult)
+		<span class="distributionStyle">
+			#if(role?.isDefault ==1)
+				<input name="roleId" value="${role.roleId}" type="checkbox" disabled="true">
+			#else
+				<input name="roleId" value="${role.roleId}" type="checkbox" >
+			#end
+				${role.roleName}
+		</span>
+	#end
+#end

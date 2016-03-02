@@ -1,0 +1,17 @@
+#import("/org/tinygroup/zTree/components/zTree.component")
+
+#import("components/org/tinygroup/bizframedslenterprise/ui/form.component")
+#macro ztreeClick()
+var id = treeNode.organizationId;
+loadURL('#link("/getUsersByRoleAndOrganizationId.servicepage?organizationId=")'+id , $("#tableInfo"));
+#end
+###searchZtreeInit("treeDemo" "/data/tree/region.js" "#test")
+#@divDataTablebox()
+	<input type="hidden" name="roleId" value="${roleId}" />
+	#@leftTreeCol()
+		#@searchZtreeWithInit("treeDemo" "height:454px;"  "/getOrganizations.servicejson" "organizationName" {"idKey":"organizationId","pIdKey":"parentId"})
+		#end
+	#end
+	#@tableBox("tableInfo")
+	#end
+#end

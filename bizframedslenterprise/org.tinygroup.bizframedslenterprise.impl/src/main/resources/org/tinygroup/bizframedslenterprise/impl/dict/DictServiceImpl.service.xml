@@ -1,0 +1,92 @@
+<service-components>
+  <service-component type="org.tinygroup.bizframedslenterprise.impl.dict.DictServiceImpl" bean="dictService">
+    <service-method local-name="addDict" service-id="addDict" method-name="addDict" cacheable="false" category="org.tinygroup.bizframedslenterprise.impl.dict">
+      <service-parameters>
+        <service-parameter name="tDict" type="org.tinygroup.bizframedslenterprise.inter.pojo.TDict" required="false" is-array="false"/>
+      </service-parameters>
+      <service-result name="addDictResult" required="false" is-array="false" type="org.tinygroup.bizframedslenterprise.inter.pojo.TDict"/>
+    </service-method>
+    <service-method local-name="getDict" service-id="getDict" method-name="getDict" cacheable="false" category="org.tinygroup.bizframedslenterprise.impl.dict">
+      <service-parameters>
+        <service-parameter name="dictId" type="java.lang.String" required="false" is-array="false"/>
+      </service-parameters>
+      <service-result name="getDictResult" required="false" is-array="false" type="org.tinygroup.bizframedslenterprise.inter.pojo.TDict"/>
+    </service-method>
+    <service-method local-name="deleteDict" service-id="deleteDict" method-name="deleteDict" cacheable="false" category="org.tinygroup.bizframedslenterprise.impl.dict">
+      <service-parameters>
+        <service-parameter name="dictId" type="java.lang.String" required="false" is-array="false"/>
+      </service-parameters>
+      <service-result name="deleteDictResult" required="false" is-array="false" type="void"/>
+    </service-method>
+    <service-method local-name="deleteDicts" service-id="deleteDicts" method-name="deleteDicts" cacheable="false" category="org.tinygroup.bizframedslenterprise.impl.dict">
+      <service-parameters>
+        <service-parameter name="dictIds" type="java.lang.String" required="false" is-array="false"/>
+      </service-parameters>
+      <service-result name="deleteDictsResult" required="false" is-array="false" type="void"/>
+    </service-method>
+    <service-method local-name="updateDict" service-id="updateDict" method-name="updateDict" cacheable="false" category="org.tinygroup.bizframedslenterprise.impl.dict">
+      <service-parameters>
+        <service-parameter name="tDict" type="org.tinygroup.bizframedslenterprise.inter.pojo.TDict" required="false" is-array="false"/>
+      </service-parameters>
+      <service-result name="updateDictResult" required="false" is-array="false" type="void"/>
+    </service-method>
+    <service-method local-name="getDictPager" service-id="getDictPager" method-name="getDictPager" cacheable="false" category="org.tinygroup.bizframedslenterprise.impl.dict">
+      <service-parameters>
+        <service-parameter name="tDict" type="org.tinygroup.bizframedslenterprise.inter.pojo.TDict" required="false" is-array="false"/>
+        <service-parameter name="start" type="int" required="false" is-array="false"/>
+        <service-parameter name="limit" type="int" required="false" is-array="false"/>
+      </service-parameters>
+      <service-result name="getDictPagerResult" required="false" is-array="false" type="org.tinygroup.bizframedslenterprise.inter.util.Pager"/>
+    </service-method>
+    <service-method local-name="deleteDictItems" service-id="deleteDictItems" method-name="deleteDictItems" cacheable="false" category="org.tinygroup.bizframedslenterprise.impl.dict">
+      <service-parameters>
+        <service-parameter name="dictId" type="int" required="false" is-array="false"/>
+      </service-parameters>
+      <service-result name="deleteDictItemsResult" required="false" is-array="false" type="void"/>
+    </service-method>
+    <service-method local-name="addDictItem" service-id="addDictItem" method-name="addDictItem" cacheable="false" category="org.tinygroup.bizframedslenterprise.impl.dict">
+      <service-parameters>
+        <service-parameter name="tDictItem" type="org.tinygroup.bizframedslenterprise.inter.pojo.TDictitem" required="false" is-array="false"/>
+      </service-parameters>
+      <service-result name="addDictItemResult" required="false" is-array="false" type="org.tinygroup.bizframedslenterprise.inter.pojo.TDictitem"/>
+    </service-method>
+    <service-method local-name="deleteDictItem" service-id="deleteDictItem" method-name="deleteDictItem" cacheable="false" category="org.tinygroup.bizframedslenterprise.impl.dict">
+      <service-parameters>
+        <service-parameter name="dictitemId" type="int" required="false" is-array="false"/>
+      </service-parameters>
+      <service-result name="deleteDictItemResult" required="false" is-array="false" type="void"/>
+    </service-method>
+    <service-method local-name="deleteDictItems" service-id="deleteDictItems_1" method-name="deleteDictItems" cacheable="false" category="org.tinygroup.bizframedslenterprise.impl.dict">
+      <service-parameters>
+        <service-parameter name="dictitemIds" type="java.lang.String" required="false" is-array="false"/>
+      </service-parameters>
+      <service-result name="deleteDictItemsResult" required="false" is-array="false" type="void"/>
+    </service-method>
+    <service-method local-name="updateDictItem" service-id="updateDictItem" method-name="updateDictItem" cacheable="false" category="org.tinygroup.bizframedslenterprise.impl.dict">
+      <service-parameters>
+        <service-parameter name="tDictitem" type="org.tinygroup.bizframedslenterprise.inter.pojo.TDictitem" required="false" is-array="false"/>
+      </service-parameters>
+      <service-result name="updateDictItemResult" required="false" is-array="false" type="void"/>
+    </service-method>
+    <service-method local-name="getDictItem" service-id="getDictItem" method-name="getDictItem" cacheable="false" category="org.tinygroup.bizframedslenterprise.impl.dict">
+      <service-parameters>
+        <service-parameter name="dictitemId" type="int" required="false" is-array="false"/>
+      </service-parameters>
+      <service-result name="getDictItemResult" required="false" is-array="false" type="org.tinygroup.bizframedslenterprise.inter.pojo.TDictitem"/>
+    </service-method>
+    <service-method local-name="getDictItems" service-id="getDictItems" method-name="getDictItems" cacheable="false" category="org.tinygroup.bizframedslenterprise.impl.dict">
+      <service-parameters>
+        <service-parameter name="dictId" type="int" required="false" is-array="false"/>
+      </service-parameters>
+      <service-result name="getDictItemsResult" required="false" is-array="false" collection-type="java.util.List" type="org.tinygroup.bizframedslenterprise.inter.pojo.TDictitem"/>
+    </service-method>
+    <service-method local-name="getDictItemPager" service-id="getDictItemPager" method-name="getDictItemPager" cacheable="false" category="org.tinygroup.bizframedslenterprise.impl.dict">
+      <service-parameters>
+        <service-parameter name="dictId" type="int" required="false" is-array="false"/>
+        <service-parameter name="start" type="int" required="false" is-array="false"/>
+        <service-parameter name="limit" type="int" required="false" is-array="false"/>
+      </service-parameters>
+      <service-result name="getDictItemPagerResult" required="false" is-array="false" type="org.tinygroup.bizframedslenterprise.inter.util.Pager"/>
+    </service-method>
+  </service-component>
+</service-components>

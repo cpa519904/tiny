@@ -1,0 +1,21 @@
+#!set(activeTitle="机构管理",activeMenuId=currentPageId)
+#import("/org/tinygroup/zTree/components/zTree.component")
+#import("/components/org/tinygroup/bizframedslenterprise/ui/form.component")
+#macro ztreeClick()
+var organizationId = treeNode.organizationId;
+var parentId = treeNode.parentId;
+
+loadURL('#link("/page/sysadmin/orgmana/org_list.pagelet?parentId=")'+organizationId, $("#tableInfo"));
+#end
+###searchZtreeInit("treeDemo" "/data/tree/region.js" "#test")
+#@divDataTablebox()
+    #@tableHeaderBar()${activeTitle}#end
+    #@leftTreeCol("200px")
+        #@searchZtreeWithInit(
+            "treeDemo" "height:454px;" "getOrganizations.servicejson" "organizationName" {"idKey":"organizationId",
+            "pIdKey":"parentId"})
+        #end
+    #end
+    #@tableBox("tableInfo")
+    #end
+#end

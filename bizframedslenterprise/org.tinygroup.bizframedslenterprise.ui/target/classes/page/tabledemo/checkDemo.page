@@ -1,0 +1,50 @@
+#!set(activeTitle="checkbox多选",activeMenuId="9.5")
+#import("/org/tinygroup/form/components/form.component")
+#import("/org/tinygroup/icon/components/icon.component")
+#@form(formId="demoform-1" formAction=""  formMethod="post")
+  #@elementItem()
+    #@colLabel("col-1")请选择：#end
+    #@colDiv("skin-minimal")
+      #@checkboxBox()
+        #checkbox("checkbox-5")
+        #@label("checkbox-5")博士#end
+      #end
+      #@checkboxBox()
+        #checkbox("checkbox-5")
+        #@label("checkbox-5")硕士#end
+      #end
+      #@checkboxBox()
+        #checkbox("checkbox-5")
+        #@label("checkbox-5")本科#end
+      #end
+    #end
+  #end
+ 
+  #@elementItem()
+    #@colLabel("col-1")显示选项：#end
+    	#@div(divClass="cheackBoxes")
+			#@bkGrayRadiusDiv("pd-10 mt-10")
+				<p><label class="check-item">博士</label></p>
+				<p><label class="check-item">硕士</label></p>
+				<p><label class="check-item">学士</label></p>
+			#end
+	    #end
+	  #end
+	#end
+<script type="text/javascript">
+	$(function(){
+		var $item = $('.form-horizontal .check-item'),
+			$checkboxs = $('.skin-minimal input[type=checkbox]');
+			$item.hide();//默认全部隐藏
+		$checkboxs.change(function(){
+			var type = $(this).prop('checked'),
+				index = $checkboxs.index($(this)),
+				$showObj = $item.eq(index);
+			type ? $showObj.show():$showObj.hide();
+		});
+	});
+</script>
+<style>
+.cheackBoxes{float:left;width:248px;margin-left:28px;}
+.cheackBoxes .bk-gray{ height:134px;max-height:400px; overflow:auto;}
+</style>

@@ -1,0 +1,48 @@
+<service-components>
+  <service-component type="org.tinygroup.bizframedslenterprise.impl.sysparam.SysParamServiceImpl" bean="sysParamService">
+    <service-method local-name="addSysParamService" service-id="addSysParamService" method-name="addSysParamService" cacheable="false" category="org.tinygroup.bizframedslenterprise.impl.sysparam">
+      <service-parameters>
+        <service-parameter name="tSysparam" type="org.tinygroup.bizframedslenterprise.inter.pojo.TSysparam" required="false" is-array="false"/>
+      </service-parameters>
+      <service-result name="addSysParamServiceResult" required="false" is-array="false" type="org.tinygroup.bizframedslenterprise.inter.pojo.TSysparam"/>
+    </service-method>
+    <service-method local-name="updateSysParamService" service-id="updateSysParamService" method-name="updateSysParamService" cacheable="false" category="org.tinygroup.bizframedslenterprise.impl.sysparam">
+      <service-parameters>
+        <service-parameter name="tSysparam" type="org.tinygroup.bizframedslenterprise.inter.pojo.TSysparam" required="false" is-array="false"/>
+      </service-parameters>
+      <service-result name="updateSysParamServiceResult" required="false" is-array="false" type="void"/>
+    </service-method>
+    <service-method local-name="deleteSysParam" service-id="deleteSysParam" method-name="deleteSysParam" cacheable="false" category="org.tinygroup.bizframedslenterprise.impl.sysparam">
+      <service-parameters>
+        <service-parameter name="sysParamId" type="java.lang.String" required="false" is-array="false"/>
+      </service-parameters>
+      <service-result name="deleteSysParamResult" required="false" is-array="false" type="void"/>
+    </service-method>
+    <service-method local-name="deleteSysParams" service-id="deleteSysParams" method-name="deleteSysParams" cacheable="false" category="org.tinygroup.bizframedslenterprise.impl.sysparam">
+      <service-parameters>
+        <service-parameter name="sysParamIds" type="java.lang.String" required="false" is-array="false"/>
+      </service-parameters>
+      <service-result name="deleteSysParamsResult" required="false" is-array="false" type="void"/>
+    </service-method>
+    <service-method local-name="getSysParam" service-id="getSysParam" method-name="getSysParam" cacheable="false" category="org.tinygroup.bizframedslenterprise.impl.sysparam">
+      <service-parameters>
+        <service-parameter name="sysParamId" type="java.lang.String" required="false" is-array="false"/>
+      </service-parameters>
+      <service-result name="getSysParamResult" required="false" is-array="false" type="org.tinygroup.bizframedslenterprise.inter.pojo.TSysparam"/>
+    </service-method>
+    <service-method local-name="getSysParams" service-id="getSysParams" method-name="getSysParams" cacheable="false" category="org.tinygroup.bizframedslenterprise.impl.sysparam">
+      <service-parameters>
+        <service-parameter name="tSysparam" type="org.tinygroup.bizframedslenterprise.inter.pojo.TSysparam" required="false" is-array="false"/>
+      </service-parameters>
+      <service-result name="getSysParamsResult" required="false" is-array="false" collection-type="java.util.List" type="org.tinygroup.bizframedslenterprise.inter.pojo.TSysparam"/>
+    </service-method>
+    <service-method local-name="getSysParamsPager" service-id="getSysParamsPager" method-name="getSysParamsPager" cacheable="false" category="org.tinygroup.bizframedslenterprise.impl.sysparam">
+      <service-parameters>
+        <service-parameter name="tSysparam" type="org.tinygroup.bizframedslenterprise.inter.pojo.TSysparam" required="false" is-array="false"/>
+        <service-parameter name="start" type="int" required="false" is-array="false"/>
+        <service-parameter name="limit" type="int" required="false" is-array="false"/>
+      </service-parameters>
+      <service-result name="getSysParamsPagerResult" required="false" is-array="false" type="org.tinygroup.bizframedslenterprise.inter.util.Pager"/>
+    </service-method>
+  </service-component>
+</service-components>

@@ -1,0 +1,24 @@
+<script>
+	function loadUnassignRole(){
+		$(".permassCol").load("${TINY_CONTEXT_PATH}/getUnssignFunctionRoles.servicepagelet",{functionId:${functionId}});
+	}
+	function loadassignRole(){
+		$(".permunassCol").load("${TINY_CONTEXT_PATH}/getFunctionRoles.servicepagelet",{functionId:${functionId}});
+	}
+$(function(){
+	loadUnassignRole();
+	loadassignRole();
+});
+</script>
+#@tabWithInit("tab_demo")
+#@tabHead()
+		#@tabHeadCol("assign")未分配#end
+		#@tabHeadCol("cancelAssign")已分配#end
+	#end
+	#@tabBodyCol("ptop-5 height-auto permassCol")
+		
+	#end
+	#@tabBodyCol("ptop-5 height-auto permunassCol")
+		
+	#end
+#end

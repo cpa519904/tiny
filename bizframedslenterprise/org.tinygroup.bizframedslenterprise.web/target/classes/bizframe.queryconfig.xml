@@ -1,0 +1,12 @@
+<bean-query-configs>
+   <bean-query-config bean-type="TRole">
+ 	</bean-query-config>
+ 	<bean-query-config bean-type="TDict">
+ 	</bean-query-config>
+ 	<bean-query-config bean-type="TSysparam">
+ 	</bean-query-config>
+  	<bean-query-config bean-type="TFunction">
+ 	</bean-query-config>
+   	<bean-query-config bean-type="TOperationLog">
+ 	</bean-query-config>
+</bean-query-configs>

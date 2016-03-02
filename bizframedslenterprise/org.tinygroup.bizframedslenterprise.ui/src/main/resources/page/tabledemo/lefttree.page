@@ -1,0 +1,32 @@
+#!set(activeTitle="树菜单",activeMenuId="9.3")
+#import("/org/tinygroup/zTree/components/zTree.component")
+#import("/components/org/tinygroup/bizframedslenterprise/ui/form.component")
+#macro ztreeClick()
+	loadLink('#link("/page/tabledemo/righttable.pagelet")', $("#tBox"));
+#end
+
+###searchZtreeInit("treeDemo" "/data/tree/region.js" "#test")
+
+#@h2()${activeTitle}#end
+ #@topSearch() 
+ 	#wDatePicker("日期范围")
+    #simpleText("输入会员名称、电话、邮箱" "" "width:25%")
+	#@selectWBox() 
+		#@select("demo1" "demo1")
+			#@optionSelected("")请选择目录#end
+			#@optionItem("1")菜单一#end
+			#@optionItem("1")菜单二#end
+			#@optionItem("1")菜单三#end
+		#end
+	#end
+ 	#@btnSubmit("icon-search")搜用户#end
+#end
+	#@divDataTablebox()
+	    #@tableHeaderBar()${activeTitle}#end
+		#@leftTreeCol()
+			#@searchZtreeWithInit("treeDemo" "height:454px;" "/data/tree/region.js")
+			#end
+		#end
+    	#@tableBox("tBox")
+    	#end
+	#end

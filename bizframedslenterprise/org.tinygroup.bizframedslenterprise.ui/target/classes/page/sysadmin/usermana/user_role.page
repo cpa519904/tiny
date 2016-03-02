@@ -1,0 +1,216 @@
+#macro authFormSubmitEvent()
+<script>
+    var allRoleIdArray;//所有角色id
+    var initRoleIdArray;//页面载入时选中的角色id
+    function initRoles(){
+        var userId = $("input[name=userId]").val();
+        allRoleIdArray = new Array();
+        initRoleIdArray = new Array();
+
+        $.each($("input[name=roleId]"),function(){
+            allRoleIdArray.push(parseInt(this.value));
+        });
+
+        $.ajax({
+            url:'getUserRoles.servicejson',
+            data:{userId:userId},
+            type:'post',
+            dataType: 'json',
+            success:function(data){
+                $.each(data,function(i,item){
+                    var index = $.inArray(item.roleId,allRoleIdArray);
+                    if(index>=0){
+                        $("input[name=roleId]").eq(index).attr("checked","true");
+                        initRoleIdArray.push(item.roleId);
+                    }
+                });
+            }
+        });
+        
+        var resultaddids = new Array();
+		$("#authRoleDiv :checkbox").click(function(){
+			var cid = parseInt(this.value);
+			if(this.checked){
+				if($.inArray(cid,initRoleIdArray)<0 && $.inArray(cid,resultaddids)<0){//新增
+					var text = $(this).parent().text().trim();
+					var appendtext = '<span class="roleList"><b>'
+					+text+
+					'</b><a class="cancel_btn">取消</a></span>';
+					resultaddids.push(cid);
+					$(".addBox").append(appendtext);
+				}else{
+					
+				}
+			}else{
+				if($.inArray(cid,initRoleIdArray)>=0 && $.inArray(cid,resultaddids)<0){//移除取消的
+				}
+			}
+		});
+    }
+
+    $(function(){
+        $("#authRoleDiv").load("getRoles.servicepage",
+                function(){
+                    initRoles();##初始化角色多选框
+                }
+        );
+    });
+</script>
+#end
+#authFormSubmitEvent()
+##设置表单提交URL
+
+#set(url=call("link","/authRoleInsteadByString.do"))
+
+#@tinyForm("authRoleInsteadByString" "" "" {"class":"form-horizontal"})
+<input name="userId" type="hidden" value="${userId}"/>
+<input name="currentUserId" value="0" class="input-lg " type="hidden">
+    #@div("authRoleDiv")
+    #end
+    #@div("" "distributionStyle negativeTop")<input style="margin-left:12px;margin-top:4px;" type="button" class="btn btn-default btn-small" value="全选" onclick='this.value=check(this.form.roleId)'> #end
+#end
+#p(pClass="lineDashed")
+ #@foldMenu("" "Tinyfoldshow" "l" "width:100%")
+    #@foldItem("待增加")
+    	<div class="roleBox addBox">
+		</div>
+	#end
+    #@foldItem("待删除")
+		<div class="roleBox">
+		</div>
+	 #end
+#end
+
+<script type="text/javascript">
+$(function(){
+	$(".Hui_aside").scrollTop(380);
+	/*折叠*/
+	$.Tinyfold("#Tinyfoldshow .item h4","#Tinyfoldshow .item .info","fast",1,"click");/*5个参数顺序不可打乱，分别是：相应区,隐藏显示的内容,速度,类型,事件*/
+});
+</script>
+<script>
+    $(function () {
+        $("form[name=authRoleInsteadByString]").attr("action", '${url}');
+        $("form[name=authRoleInsteadByString]").Validform({
+            tiptype: 2,
+            usePlugin: {
+                //datepicker:{},//日期控件校验;
+                passwordstrength: {
+                    minLen: 6,//设置密码长度最小值，默认为0;
+                    maxLen: 18,//设置密码长度最大值，默认为30;
+                    trigger: function (obj, error) {
+                        //该表单元素的keyup和blur事件会触发该函数的执行;
+                        //obj:当前表单元素jquery对象;
+                        //error:所设密码是否符合验证要求，验证不能通过error为true，验证通过则为false;
+                        //console.log(error);
+                        if (error) {
+                            obj.parent().find(".Validform_checktip").show();
+                            obj.parent().find(".passwordStrength").hide();
+                        } else {
+                            obj.parent().find(".passwordStrength").show();
+                        }
+                    }
+                }
+            },
+            ajaxPost: true,
+            beforeCheck: function (curform) {
+                //console.log("fdsfd");
+                //在表单提交执行验证之前执行的函数，curform参数是当前表单对象。
+                //这里明确return false的话将不会继续执行验证操作;
+            },
+            beforeSubmit: function (curform) {
+                // console.log("fdsfd2");
+                //return false;
+                //在验证成功后，表单提交前执行的函数，curform参数是当前表单对象。
+                //这里明确return false的话表单将不会提交;
+                var roleIdObj = $("input[name=roleId]:checked");
+                var roleIdArray = new Array();
+                var addArray = new Array();
+                var removeArray = new Array();
+                var  allroleIdArrayChecked = new Array();
+                roleIdObj.each(function(obj){
+                    roleIdArray.push(parseInt(this.value));
+                });
+
+                $.each(allRoleIdArray,function(n,value) {
+                    var isroleIdArrayChecked =  $.inArray(value,roleIdArray);
+                    if(isroleIdArrayChecked>=0){
+                        allroleIdArrayChecked.push(value);
+                    }
+                    var isInitRoleIdArrayChecked = $.inArray(value,initRoleIdArray);
+                    if(isroleIdArrayChecked>=0 && isInitRoleIdArrayChecked<0){
+                        //最终数组中存在而最初的数组中不存在,说明是新增
+                        addArray.push(value);
+                    }else if(isroleIdArrayChecked<0 && isInitRoleIdArrayChecked>=0){
+                        //最终数组中不存在而最初数组中存在,说明是删除
+                        removeArray.push(value);
+                    }
+                });
+
+                var addRoleIds = addArray.join(",");
+                var removeRoleIds = removeArray.join(",");
+                var allroleIdArrayCheckeds = allroleIdArrayChecked.join(",");
+
+                var options = {
+                    url:this.action,
+                    data:{
+                        removeRoleIds:removeRoleIds,
+                        roleIds:allroleIdArrayCheckeds,
+                    },
+                    type:"post",
+                    success:function(data){
+                        if($(curform).parents(".modal")){
+                            $(curform).parents(".modal").find("button[data-dismiss=modal]").eq(0).click();
+                        }
+
+                        alert('操作成功');
+                    ##						ajaxSubmitCommonForm(".search-form");
+                    }
+                };
+                $(curform).ajaxSubmit(options);
+                return false;
+            },
+            callback: function (data) {
+                setTimeout(function () {
+
+                    $.Hidemsg(); //公用方法关闭信息提示框;显示方法是$.Showmsg("message goes here.");
+                    $("form[name=authRoleInsteadByString]").parents(".modal").find(".modal-header .close").trigger("click");
+                }, 1000);
+                //$.Hidemsg();
+                //$("form[name=thisform]").parents(".modal").find(".modal-header .close").trigger("click");
+                /*if (data.status == "y") {
+                    setTimeout(function () {
+
+                        $.Hidemsg(); //公用方法关闭信息提示框;显示方法是$.Showmsg("message goes here.");
+                        $("form[name=thisform]").parents(".modal").find(".modal-header .close").trigger("click");
+                    }, 2000);
+                }*/
+                //返回数据data是json对象，{"info":"demo info","status":"y"}
+                //info: 输出提示信息;
+                //status: 返回提交数据的状态,是否提交成功。如可以用"y"表示提交成功，"n"表示提交失败，在Validform_post.html文件返回数据里自定字符，主要用在callback函数里根据该值执行相应的回调操作;
+                //你也可以在Validform_post.html文件返回更多信息在这里获取，进行相应操作；
+                //ajax遇到服务端错误时也会执行回调，这时的data是{ status:**, statusText:**, readyState:**, responseText:** }；
+
+                //这里执行回调操作;
+                //注意：如果不是ajax方式提交表单，传入callback，这时data参数是当前表单对象，回调函数会在表单验证全部通过后执行，然后判断是否提交表单，如果callback里明确return false，则表单不会提交，如果return true或没有return，则会提交表单。
+            }
+        });
+    });
+
+    var checkflag = "false";
+    function check(field) {
+        if (checkflag == "false") {
+            for (i = 0; i < field.length; i++) {
+                field[i].checked = true;}
+            checkflag = "true";
+            return "取消全选";
+        }
+        else {
+            for (i = 0; i < field.length; i++) {
+                field[i].checked = false; }
+            checkflag = "false";
+            return "全选";
+        }
+    }
+    //  End -->
+</script>

@@ -1,0 +1,28 @@
+<script>
+	$(function(){
+		$("form[name=menurenderForm]").Validform({
+			tiptype:2,
+			beforeSubmit : function(form) {
+			alert(111);
+			loadURL("${TINY_CONTEXT_PATH}/getUserMenuFunctionTree.servicepage?"+$(form).serialize(),$("#result2"));
+			return false;
+			}
+		});
+	});
+</script>
+
+#@tinyForm("menurenderForm")	
+		#@elementItem()
+				#@colLabel()userId：#end
+				#@formControlDiv("col-8")
+						#tinyInput("text" "userId" ""{"placeholder":"userId","datatype":"*","nullmsg":"请输入userId！","class":"input-text"})
+				#end
+				#@validateDiv("col-2")#end
+		#end
+		#@elementItem()
+							#@div(divClass="col-10 col-offset-2 form-inline")
+								#tinyInput("submit" "renderFunction" "渲染菜单" {"class":"btn btn-primary"})
+							#end
+						#end
+#end
+<div id="result2"></div>

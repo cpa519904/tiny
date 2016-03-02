@@ -1,0 +1,26 @@
+<script>
+$(function(){
+	$("#addBtn").click(function(){
+		var options = {
+					url:"checkSubFunction.servicejson",
+					data:{userId:"${userId}",functionId:"${functionCode}"},
+					type:'post',
+					dataType: 'json',
+					success:function(data){
+						if(data){
+							alert("有权限");
+						}else{
+							alert("没有权限");
+						}
+					}
+			}
+		$.ajax(options);
+	});
+}); 
+</script>
+#set(ckResult = checkSubAuthByCode(userId,functionCode))
+#if(ckResult)
+	<input id="addBtn"  type="button" value="${ckResult.functionName}"/>
+#else
+	未渲染该按钮
+#end

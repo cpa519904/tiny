@@ -1,0 +1,12 @@
+#setTinyItemCount(getLogsPagerResult?.totalCount)
+#foreach(log:getLogsPagerResult?.currentList)
+    #@tr()
+		#@td()${logFor.index}#end
+		#@td()${log.userId}#end
+		#@td()${log.operationIp}#end
+		#@td()${log.operationContent}#end
+		#@td()${format(log?.createTime?.toString(),"yyyy-mm-dd HH:mm:ss")}#end
+		
+    #end
+#end
+

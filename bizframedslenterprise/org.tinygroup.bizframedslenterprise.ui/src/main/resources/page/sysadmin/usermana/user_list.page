@@ -1,0 +1,88 @@
+#!set(activeTitle="机构列表",activeMenuId=currentPageId)
+
+##import("/org/tinygroup/table/components/tinytable.component")
+#include("/page/event/common.page")
+#set(addpagePath="/page/sysadmin/usermana/user_add.pagelet?organizationId="+organizationId,addpageModalId="userAddModal",addpageModal="#"+addpageModalId)
+#@tinyTable("userById") ##ID为空则系统自动生成 带入参数则取该参数为ID
+    #@div(divBaseClass="tinyheaderTools form-inline")
+        #setTinyTablePageSize([10,20,50,100,200])
+        #@radiusBtn("btn-danger btn-sm" "icon-trash " "javascript:;" "del-item" "batchDel") 批量删除#end
+        #@aModal(addpageModal "添加" "" "" "btn radius btn-primary btn-sm" addpagePath)
+            #@simpleI("icon-plus")添加#end
+        #end
+    #end
+    #@tinyTableContent(call("link","/getUserPager.servicepage?organizationId="+organizationId)) ##取数据地址 总数据
+        #@thead()
+            #@tr()###th  class 为sorting 表票可排序 为sorting_desc 为当前倒序
+                #@tinyTh({"width":"6"})<input type="checkbox" name="allck" value="">#end
+                #@tinyTh({"class":"","rel":""})序号#end
+                #@tinyTh({"class":"","rel":""})登录名#end
+                #@tinyTh({"class":"","rel":""})姓名#end
+                #@tinyTh({"class":"","rel":""})机构#end
+                #@tinyTh({"class":"","rel":""})状态#end
+                #@tinyTh({"class":"","rel":""})操作#end
+
+            #end
+        #end
+    #end
+#end
+<script type="text/javascript">
+   $(function(){
+       $('#userById').on('click','.del-item',function(e){
+           var that = this;
+           var userid = $(that).attr("item-id");
+           layer.confirm('确认要删除吗？', function (index) {
+               $.ajax({
+                   url: "${TINY_CONTEXT_PATH}/deleteUser.do",
+                   type: 'post',
+                   dataType: 'text',
+                   data: {userIds:userid},
+                   success: function (data) {
+                       layer.msg('已删除!',1);
+                       $("#userById").trigger("initnav");
+                   },
+                   error: function (data) {
+                       layer.msg('删除失败',1);
+                   }
+               });
+           });
+           return false;
+       });
+       function getCheckVal() {
+           var checkarr = [];
+           $('#userById input[name=idCheck]').each(function () {
+               if ($(this).is(':checked')) {
+                   checkarr.push($(this).val());
+               }
+           })
+           return checkarr.join(',');
+       }
+       $("#del-item").click(function(){
+           var userIds = getCheckVal();
+           if($("input[name='idCheck']:checked").size()<=0){
+               layer.alert('至少要选择一条！');
+           }
+           else{
+               layer.confirm('确认要删除吗？',function(index){
+                   $.ajax({
+                       url: "${TINY_CONTEXT_PATH}/deleteUser.do",
+                       type: 'post',
+                       dataType: 'text',
+                       data: {userIds:userIds},
+                       success: function (data) {
+                           layer.msg('已删除!',1);
+                           $("#userById").trigger("initnav");
+                       },
+                       error: function (data) {
+                           layer.msg('删除失败',1);
+                       }
+                   });
+               });
+           }
+       });
+   });
+</script>
+#@simpleModal("userAddModal" "添加用户")#end
+#@simpleModal("userEditModal" "修改机构信息")#end
+#@simpleViewModal("userRoleModal" "分配角色")#end
+

@@ -1,0 +1,77 @@
+#!set(activeTitle="权限检查",activeMenuId=currentPageId)
+<script>
+$(function(){
+	var buttonFlag = 0;
+	$("form[name=menucheckForm]").Validform({
+			tiptype:2,
+			beforeSubmit : function(form) {
+			if(buttonFlag==0){
+				var options = {
+					url:form[0].action,
+					type:"post",
+					beforeSend:function(){
+						$("#result1").html("加载中...");
+					},
+					success:function(data){
+						var hasAuth = "没有权限";
+						if(data){
+							hasAuth = "有权限";
+						}
+						$("#result1").html(hasAuth);
+					},error:function(){
+						alert('操作失败!');
+					}
+				};
+				$(form[0]).ajaxSubmit(options);
+				
+			}else{
+				loadURL("${TINY_CONTEXT_PATH}/demo/authButton.pagelet?"+$(form).serialize(),$("#result2"));
+			}
+			return false;
+			}
+		});
+	$("input[name=ckAuth]").click(function(){
+		buttonFlag = 0;
+		$("form[name=menucheckForm]").attr("action","${TINY_CONTEXT_PATH}/checkSubFunctionByUserId.servicejson");
+		$("form[name=menucheckForm]").submit();
+	}); 
+	
+	$("input[name=renderAuth]").click(function(){
+		buttonFlag = 1;
+		$("form[name=menucheckForm]").submit();
+	}); 
+	
+});
+</script>		
+#@tinyForm("menucheckForm")	
+					#@elementItem()
+						#@colLabel()userId：#end
+						#@formControlDiv("col-8")
+							#tinyInput("text" "userId" ""{"placeholder":"userId","datatype":"*","nullmsg":"请输入userId！","class":"input-text"})
+						#end
+						#@validateDiv("col-2")#end
+					#end
+					#@elementItem()
+						#@colLabel()functionId：#end
+						#@formControlDiv("col-8")
+							#tinyInput("text" "functionId" ""{"placeholder":"functionId","datatype":"*","nullmsg":"请输入functionId！","class":"input-text"})
+						#end
+						#@validateDiv("col-2")#end
+					#end
+						#@elementItem()
+							#@div(divClass="col-10 col-offset-2 form-inline")
+								#tinyInput("button" "ckAuth" "通过服务检测权限" {"class":"btn btn-primary"})
+								
+								#tinyInput("button" "renderAuth" "渲染权限按钮" {"class":"btn btn-primary"})
+							#end
+						#end
+						
+<div>
+结果1：					
+<div id="result1"> 
+</div>
+结果2：
+<div id="result2"> 
+</div>
+</div>
+#end

@@ -1,0 +1,7 @@
+<tables>
+  <table id="6f43b40cc6074226a08ce8a4206cc147" name="" title="" schema="" packageName="">
+    <description></description>
+    <table-field standard-field-id="b5008e495bcf4c00b1ce9fad2a78cdf6" primary="false" unique="false" not-null="false" id="id" auto-increase="false"/>
+    <table-field standard-field-id="b5008e495bcf4c00b1ce9fad2a78cdf6" primary="false" unique="false" not-null="false" id="id" auto-increase="false"/>
+  </table>
+</tables>

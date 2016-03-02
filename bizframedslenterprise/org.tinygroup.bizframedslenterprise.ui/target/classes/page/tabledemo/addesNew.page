@@ -1,0 +1,69 @@
+#!set(activeTitle="添加内容",activeMenuId="9.6")
+#include("/page/event/common.page")
+
+#import("/org/tinygroup/table/components/table.component")
+
+#import("/org/tinygroup/zTree/components/zTree.component")
+#macro ztreeClick()
+	loadLink('#link("/page/tabledemo/righttablesNew.pagelet")', $("#tBox"));
+#end
+
+#@tabWithInit("tab_demo")
+	#@tabHead()
+		#@tabHeadCol()选择列表#end
+		#@tabHeadCol()搜索列表#end
+	#end
+	#@tabBodyCol("ptop-5 height-auto")
+		#@divDataTablebox()
+		#@leftTreeCol()
+			#@searchZtreeWithInit("treeDemo" "height:454px;" "/data/tree/region.js")
+			#end
+		#end
+    	#@tableBox("tBox")
+    	#end
+	#end
+	#end
+	#@tabBodyCol("ptop-5 height-auto")
+		#include("/page/tabledemo/dataTableNew.page")
+	#end
+  #end
+  <div class="table-border">
+  	#@tinyTable("todata")
+	#@thead()
+      #@tr()
+
+        #@th()表头#end
+        #@th()表头#end
+        #@th()表头#end
+        #@th()操作#end
+      #end
+    #end
+    #@tbody()
+      #@tr()
+
+        #@td()类别#end
+        #@td()表格内容#end
+        #@td()表格内容#end
+        #@td()
+			#iconOperation("icon-trash" "删除" "ml-5 delBtn")
+		#end
+      #end
+
+    #end
+#end
+</div>
+  <style>
+  .height-auto{height:188px; overflow-y:auto;position:relative;}
+  .table-border{height:156px; overflow-y:auto;position:relative;}
+  .tinytable{margin-bottom:0;}
+  table.dataTable thead th, table.dataTable thead td{padding:9px 10px}
+  .dataTable thead .text-c th,.dataTable .text-c td{text-align:left}
+  #dataBox .dataTables_wrapper .DT-lf-right .DT-per-page{display:block}
+  .modal-body{padding:4px 5px 0}
+  .table-border .tablebox{margin-bottom: -37px;}
+  .table-border .table-footer{display:none}
+  .tinyheaderTools{height:28px; line-height:28px; margin-bottom:6px;}
+  .tinyheaderTools .input-text{height:28px; line-height:28px;}
+  .tinyheaderTools .right{float:right}
+  .tinyTablebox{ margin-top:5px; margin-left:2px;}
+  </style>

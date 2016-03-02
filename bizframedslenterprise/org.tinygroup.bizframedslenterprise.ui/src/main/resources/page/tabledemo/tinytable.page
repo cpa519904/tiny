@@ -1,0 +1,125 @@
+#!set(activeTitle="新增表格",activeMenuId="9.7")
+#import("/org/tinygroup/table/components/table.component")
+#include("/page/event/common.page")
+<style type="text/css">
+.tinyheaderTools{height:30px; line-height:30px;}
+.tinyheaderTools .right{float:right}
+</style>
+
+<div class="tinyheaderTools">
+	<span class="right"><input type="text" id="searchTable-fromdata" for="fromdata" value="" placeholder="请输入查询" class="input-text radius"/></span>
+	<a class="radius btn-danger btn-sm" id="dataMove"><i class="icon-plus"></i> 增加</a>
+</div>
+
+#@tinyTable("fromdata")
+	#@thead()
+      #@tr()
+		  #@thW("6")<input type="checkbox" name="allck" value="">#end
+        #@th()表头#end
+        #@th()表头#end
+        #@th()表头#end
+        #@th()表头#end
+      #end
+    #end
+    #@tbody()
+      #@tr()
+		  #@td()<input type="checkbox" value="1" name="">#end
+        #@td()类别#end
+        #@td()表格内容#end
+        #@td()表格内容#end
+        #@td()
+			#iconOperation("icon-trash" "删除" "ml-5 delBtn")
+		#end
+      #end
+      #@tr()
+			#@td()<input type="checkbox" value="1" name="">#end
+        #@td()类别2#end
+        #@td()表格内容4#end
+        #@td()表格内容#end
+        #@td()
+			#iconOperation("icon-trash" "删除" "ml-5 delBtn")
+		#end
+      #end
+      #@tr()
+		  #@td()<input type="checkbox" value="1" name="">#end
+        #@td()类别3#end
+        #@td()表格内容#end
+        #@td()表格内容#end
+        #@td()
+			#iconOperation("icon-trash" "删除" "ml-5 delBtn")
+		#end
+      #end
+    #end
+#end
+
+#@tinyTable("todata")
+	#@thead()
+      #@tr()
+
+        #@th()表头#end
+        #@th()表头#end
+        #@th()表头#end
+        #@th()表头#end
+      #end
+    #end
+    #@tbody()
+      #@tr()
+
+        #@td()类别#end
+        #@td()表格内容#end
+        #@td()表格内容#end
+        #@td()
+			#iconOperation("icon-trash" "删除" "ml-5 delBtn")
+		#end
+      #end
+
+    #end
+#end
+<script>
+	$(function(){
+		$("#searchTable-fromdata").on("keyup",function(){
+			var seachVal=$(this).val();
+			$("#"+$(this).attr("for")+" tbody tr").each(function(){
+
+				if(!seachVal||$(this).html().replace(/<[^>]+>/g,"").indexOf(seachVal) > 0){
+					$(this).css("display","");
+				}else{
+					$(this).css("display","none");
+				}
+			});
+		});
+		$('#todata').on('click', '.delBtn',function(e){
+			user_del(this,'1');
+			/*if(confirm("确认删除？")){
+				$(this).parent().parent().remove();
+			}
+			return false;*/
+		});
+		$('#fromdata').on('click', '.delBtn',function(e){
+			user_del(this,'1');
+		});
+		$("#dataMove").on("click",function(){
+			var checkeditem=$("#fromdata input[type=checkbox]:checked");
+			if(checkeditem.size()){
+				checkeditem.each(function(index){
+					var itemArr=[];
+					var tempHTML="";
+					$(this).parent().parent().find("td").each(function(e){
+						itemArr.push(this);
+					})
+					for(var i=1;i<itemArr.length;i++){
+						tempHTML+=itemArr[i].outerHTML;
+					}
+					var trclass=$("#todata tbody tr").size()%2==0?"even":"odd";
+					$("#todata tbody").append('<tr class="'+trclass+'">'+tempHTML+'</tr>');
+					$(this).removeAttr("checked");
+					//$(this).attr("disabled",true);
+				});
+
+			}else{
+				alert("请先选择");
+			}
+		});
+	});
+//-->
+</script>

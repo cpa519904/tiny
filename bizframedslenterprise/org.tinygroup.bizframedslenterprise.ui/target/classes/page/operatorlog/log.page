@@ -1,0 +1,35 @@
+#!set(activeTitle="操作日志",activeMenuId=currentPageId)
+
+#include("/page/event/common.page")
+
+#*#@divDataTablebox()
+	#@tableHeaderBar()操作日志列表#end
+#end*#
+
+#@tinyTable("operatorLogId") ##ID为空则系统自动生成 带入参数则取该参数为ID
+	#@div(divBaseClass="form-inline")
+	#@tinyTableFrom()
+	<div class="well well-sm">
+		#setTinyTablePageSize([10,20,50,100,200])
+		#tinyInput("text" "operationContent" "" {"placeholder":"日志内容","size":"30"})
+##       <input type="submit" class="btn btn-primary btn-sm" value="查询" />
+		 #@btnSubmit("icon-search")&nbsp;查询#end
+	</div>
+	#end
+	#end
+	
+
+	
+	#@tinyTableContent(call("link","/getLogsPager.servicepagelet")) ##取数据地址 总数据
+		#@thead()
+			#@tr()###th  class 为sorting 表票可排序 为sorting_desc 为当前倒序
+				#@tinyTh({"class":"","rel":""})序号#end
+				#@tinyTh({"class":"","rel":"sortname"})用户id#end
+				#@tinyTh({"class":"","rel":"sortname"})ip地址#end
+				#@tinyTh({"class":"","rel":"sortname"})日志内容#end
+				#@tinyTh({"class":"","rel":"sortname"})时间#end
+			#end
+		#end
+	#end
+#end
+

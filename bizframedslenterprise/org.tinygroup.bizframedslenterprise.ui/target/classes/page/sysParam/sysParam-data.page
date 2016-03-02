@@ -1,0 +1,19 @@
+#set(paramDictItemMap = getDictItem("param_type")?["map"])
+#setTinyItemCount(getSysParamsPagerResult?.totalCount)
+#foreach(sysparam:getSysParamsPagerResult?.currentList)
+    #@tr()
+        #@td()<input type="checkbox" value="${sysparam.sysparamId}" name="idCheck">#end
+		#@td()${sysparamFor.index}#end
+##		#@td()${sysParam.getSysparamId()}#end
+		#@td()${sysparam.sysparamName}#end
+		#@td()${sysparam.sysparamValue}#end
+		#@td()${paramDictItemMap?[sysparam.sysparamType]}#end
+		
+		#@td("f-14 user-manage")
+			#@iconOperations("#editModal" "icon-edit" "修改参数" "" "" "/getSysParam.servicepagelet?sysParamId="+sysparam.sysparamId())&nbsp;修改#end
+			<a title="删除" href="javascript:;" onclick="deleteAction({'sysParamIds':'${sysparam.sysparamId}'},'#link('/deleteSysParam.do')','sysParamById')" class="ml-5" style="text-decoration:none"><i
+                class="icon-trash"></i>&nbsp;删除</a>
+		#end
+    #end
+#end
+

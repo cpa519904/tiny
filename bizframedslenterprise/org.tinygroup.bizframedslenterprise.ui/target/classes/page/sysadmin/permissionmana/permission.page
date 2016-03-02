@@ -1,0 +1,45 @@
+#!set(activeTitle="权限管理",activeMenuId=currentPageId)
+#import("/org/tinygroup/zTree/components/zTree.component")
+#macro ztreeClick()
+	var id = treeNode.functionId;
+	if(id=="") {
+		loadURL('#link("/page/sysadmin/permissionmana/permission_list.pagelet")', $("#tableInfo"));
+	}else {
+		loadURL('#link("/page/sysadmin/permissionmana/permission_list.pagelet?parentId=")'+id, $("#tableInfo"));
+	}
+#end
+#@divDataTablebox()
+	#@tableHeaderBar()${activeTitle}#end
+	#@leftTreeCol()
+		#searchZtreeWithInit("treeDemo" "height:454px;" "getSubFunctions.servicejson" "functionName" {"idKey":"functionId","pIdKey":"parentId"})
+	#end
+	#tableBox("tableInfo")
+#end
+
+<script type="text/javascript">
+$(function(){
+	//页面首先加载的那个dom去绑定
+	$('.dataTablebox').on('click','#deleteFunction',function() {
+		deleteFunction();
+	});
+
+	function deleteFunction() {
+		var ids=new Array();
+		if($("input[name='idCheck']:checked").size()<=0){
+				layer.alert('至少要选择一条！');
+		}
+		else {
+			$("input[name='idCheck']:checked").each(
+				function(){
+					ids.push($(this).val());
+				}
+			);
+			deleteAction({'functionIds':ids.join(',')},'deleteFunctions.servicejson','permissionById','treeDemo');
+		}
+		
+		return false;
+	}
+});
+
+
+</script>

@@ -1,0 +1,12 @@
+#setTinyItemCount(20)
+#foreach(item:[1..8])
+    #@tr()
+        #@td()<input type="checkbox" value="1" name="idCheck">#end
+		#@td()${item}#end
+		#@td()xiao#end
+		#@td()恒生#end
+		#@td()类#end
+		#@td()可用#end
+    #end
+#end
+

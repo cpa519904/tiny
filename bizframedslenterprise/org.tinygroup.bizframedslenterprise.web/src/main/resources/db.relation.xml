@@ -1,0 +1,15 @@
+<relation-configs>
+	<relation-config id="14" type="TUser" mode="n:1">
+		       
+		<relations>
+			            
+			<relation-config id="15" type="TOrganization" mode="n:1"
+				main-name="organizationId" key-name="organizationId">
+				            
+			</relation-config>
+			       
+		</relations>
+		    
+	</relation-config>
+	
+</relation-configs>

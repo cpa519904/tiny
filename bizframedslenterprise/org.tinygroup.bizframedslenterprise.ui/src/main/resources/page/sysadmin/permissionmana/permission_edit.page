@@ -1,0 +1,104 @@
+#import("/org/tinygroup/zTree/components/zTree.component")
+#set(typeList= getDictItem("permission_type")?["list"])
+#if(!getFunctionResult)
+	#set(url=call("link","addFunction.servicejson"))
+	#seltreeInit("treeSel2" "getSubFunctions.servicejson" parentId "functionName" {"idKey":"functionId","pIdKey":"parentId"})
+#else
+	#set(url=call("link","updateFunciton.servicejson"))
+	#seltreeInit("treeSel2" "getSubFunctions.servicejson" getFunctionResult?.parentId "functionName" {"idKey":"functionId","pIdKey":"parentId"})
+#end
+
+#@tinyForm("thisform" "" ""  {"class":"test"})
+	<input type="hidden" name="functionId" value="${getFunctionResult?.functionId}"/>
+    #@elementItem()
+        #@colLabel()名称：#end
+        #@formControlDiv("col-8")              
+            <input type="text" name="functionName" value="${getFunctionResult?.functionName}" class="form-control  input-text" placeholder="请输入名称" datatype="/^.{1,15}$/" nullmsg="名称不能为空" errormsg="名称不能超过15位">
+        #end
+        #@validateDiv("col-2")#end
+    #end
+    #@elementItem()
+        #@colLabel()代码：#end
+        #@formControlDiv("col-8")
+        	#set(
+        		tmpid=functionId?"functionId="+functionId:"functionId=",
+        		paramMap={"placeholder":"请输入代码","datatype":"/^.{1,10}$/","ajaxurl":call("link","/checkFunction.do?"+tmpid),"nullmsg":"代码不能为空！","errormsg":"代码不能超过10位","class":"form-control input-text"}
+        	)
+        	#tinyInput("text" "functionCode" getFunctionResult?.functionCode paramMap)
+##            <input type="text" name="functionCode" value="${getFunctionResult?.functionCode}" class="form-control  input-text"  placeholder="请输入代码" datatype="/^.{1,10}$/" nullmsg="代码不能为空" errormsg="代码不能超过10位">
+        #end
+        #@validateDiv("col-2")#end
+    #end
+    #@elementItem()
+        #@colLabel()类型：#end
+        #@formControlDiv("col-8")
+        	<select name="functionType" class="form-control  input-text functionType" value="${getFunctionResult?.functionType}">     
+				#for(type:typeList)
+					<option value="${type?.getValue()}" ${type?.getValue() == getFunctionResult?.functionType? 'selected':''}>${type?.getText()}</option> 
+				#end    
+			</select>
+        #end
+        #@validateDiv("col-2")#end
+    #end
+
+    #@elementItem()
+        #@colLabel()url：#end
+        #@formControlDiv("col-8")
+				<input type="text" name="functionUrl" value="${getFunctionResult?.functionUrl}" class="form-control  input-text functionUrl" placeholder="请输入url" datatype="*" nullmsg="url不能为空">
+        #end
+        #@validateDiv("col-2")#end
+    #end
+    
+    #@elementItem()
+        #@colLabel()所属权限：#end
+        #@formControlDiv("col-9")
+			<div class="selectTree" style="clear:both">
+				<ul class="clearfix">
+					<li class="title col-10"><input id="treeSel2_dropSel" name="orgSel" type="text" readonly value="" style="width:100%;"/>
+					<li class="col-2"><a id="treeSel2_menuBtn" class="menuBtn" href="javascript://">&nbsp;选择</a></li>
+				</ul>
+					
+				<div id="treeSel2_menuContent" class="menuContent" style="display:none;width:83%;clear:both;margin-left:0%">
+					#@selZtree("treeSel2")#end
+				</div>
+			</div>
+		#end
+		#@validateDiv("col-3")#end
+	#end
+#end
+<style>.zTreeDemoBackground ul.ztree{max-height:208px;}</style>
+<script type="text/javascript">
+    $(function () {
+        $("form[name=thisform]").attr("action", '${url}');
+        $("form[name=thisform]").Validform({
+            tiptype: 2,
+            ajaxPost: true,
+            beforeSubmit: function (curform) {
+                var zTree = $.fn.zTree.getZTreeObj("treeSel2");              
+                var parentId = getSelectedNodeByKey(zTree,"functionId");
+
+                var options = {
+					url:curform.action,
+					type:"post",
+					data:{
+						"parentId":parentId
+					},
+					success:function(data){
+						if($(curform).parents(".modal")){
+							$(curform).parents(".modal").find("button[data-dismiss=modal]").eq(0).click();
+						}
+						//刷新tinytable
+						$("#permissionById").trigger("initnav");
+						//刷新树节点
+						$("#treeDemo").trigger("init");			
+						
+					},error:function(){
+						alert('操作失败!');
+					}
+				};
+				$(curform).ajaxSubmit(options);
+                return false;
+            }
+        });
+    });
+</script>

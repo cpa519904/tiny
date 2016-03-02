@@ -1,0 +1,38 @@
+#macro innerTab(innerTabId)
+	<ul#if(innerTabId) id="$!{innerTabId}"#end class="tabOption">
+		#bodyContent
+	</ul>
+	<script type="text/javascript">
+    $(function(){
+            var timeid;
+          $("#tabOption").find("li").each(function(index){
+              var sTab=$(this);
+              sTab.mouseenter(function(){
+                  timeid= setTimeout(function(){
+                      sTab.addClass("tabCurrent").siblings().removeClass("tabCurrent");
+                      sTab.parent().siblings().find("ul:eq(" + index +")").show().siblings().hide() ;
+                 },300);
+              }).mouseleave(function(){
+                     clearTimeout(timeid);
+                })
+          })
+        })
+    </script>
+#end
+
+#macro tabBoxs(tabBoxsId)
+	<div id="$!{tabBoxsId}" class="tabBoxs">
+		#bodyContent
+	</div>
+#end
+
+#macro innerTabBodyItem(innerTabBodyItemStyle)
+	<ul#if(innerTabBodyItemStyle) style="$!{innerTabBodyItemStyle}"#end>
+	        <li>
+	        	#bodyContent
+	        </li>
+	</ul>
+#end
+#macro innerTabItem(innerTabItemClass)
+	<li#if(innerTabItemClass) class="$!{innerTabItemClass}"#end>#bodyContent</li>
+#end

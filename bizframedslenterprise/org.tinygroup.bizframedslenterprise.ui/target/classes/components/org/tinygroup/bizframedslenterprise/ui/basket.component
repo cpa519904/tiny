@@ -1,0 +1,73 @@
+#macro addToBasketEvent(addToBasketEventSelector addToBasketEventFromSelector addToBasketEventToSelector)
+<script type="text/javascript">
+	function ensureRemove(obj){
+		layer.confirm('确认要取消添加吗？',function(index){
+			$(obj).parents("tr").remove();
+			layer.msg('已取消!',1);
+		});
+	}
+	$(function(){
+		$("${addToBasketEventSelector}").on("click",function(){
+			var checkeditem=$("${addToBasketEventFromSelector} input[type=checkbox][class!=allcheck]:checked:visible");
+			if(checkeditem.size()){
+				checkeditem.each(function(index){
+					var itemArr=[];
+					var tempHTML="";
+					$(this).parent().parent().find("td").each(function(e){
+						itemArr.push(this);
+					})
+					for(var i=1;i<itemArr.length;i++){
+						tempHTML+=itemArr[i].outerHTML;
+					}
+					tempHTML+='<td><a href="javascript:void(0);" class="btn btn-warning radius btn-small" onclick="ensureRemove(this,1)">已标记添加</a></td>';
+					var trclass=$("${addToBasketEventToSelector} tbody tr").size()%2==0?"even":"odd";
+					$("${addToBasketEventToSelector} tbody").append('<tr class="'+trclass+'">'+tempHTML+'</tr>');
+					$(this).removeAttr("checked");
+					//$(this).attr("disabled",true);
+				});
+				$("${addToBasketEventFromSelector} .allcheck,:checked").attr("checked",false);
+			}else{
+				layer.alert('至少要选择一条！');
+			}
+		});
+	});
+</script>
+#end
+#macro tbSearch(tbSearchForId)
+	<span class="right"><input type="text" id="searchTable-${tbSearchForId}" for="${tbSearchForId}" value="" placeholder="请输入查询" class="input-text radius"/></span>
+		<script type="text/javascript">
+<!--
+	$(function(){
+		$("#searchTable-${tbSearchForId}").on("keyup",function(){
+			var seachVal=$(this).val();
+			$("#"+$(this).attr("for")+" tbody tr").each(function(){
+				if(!seachVal||$(this).html().replace(/<[^>]+>/g,"").indexOf(seachVal) > 0){
+					$(this).css("display","");
+				}else{
+					$(this).css("display","none");
+				}
+			});
+		});
+	});
+//-->
+</script>
+#end
+
+#macro basketStyle()
+	<style>
+  .height-auto{height:192px; overflow-y:auto;position:relative;}
+  .table-border{height:156px; overflow-y:auto;position:relative;margin-bottom:0}
+  table.dataTable thead th, table.dataTable thead td{padding:9px 10px}
+  .dataTable thead .text-c th,.dataTable .text-c td{text-align:left}
+  #dataBox .dataTables_wrapper .DT-lf-right .DT-per-page{display:block}
+  .modal-body{padding:4px 5px 0}
+  .table-border .tablebox{margin-bottom: -37px;}
+  .table-border .table-footer{display:none}
+  .tinyheaderTools{height:28px; line-height:28px; margin-bottom:6px;}
+  .tinyheaderTools .input-text{height:28px; line-height:28px;}
+  .tinyheaderTools .right{float:right}
+  .tinyTablebox{ margin-top:5px; margin-left:2px;}
+  .tinytable{margin-bottom:0}
+  .tinytable tr th, .tinytable tr td,.tinytable .text-c th, .tinytable .text-c td{text-align:left}
+  </style>
+#end

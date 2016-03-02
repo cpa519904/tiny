@@ -1,0 +1,50 @@
+#set(paramDictItemList = getDictItem("role_type")?["list"])
+#if(!getRoleResult)
+	#set(url="/addRole.do")
+#else
+	#set(url="/updateRole.do")
+#end
+
+#@tinyForm("thisform" TINY_CONTEXT_PATH+url "post" {"class":"text"})
+<input type="hidden" name="roleId" value="${getRoleResult?.roleId}"/>
+
+	#@elementItem()
+		#@colLabel("col-2")名称：#end
+		#@formControlDiv("col-7")
+			#tinyInput("text" "roleName" getRoleResult?.roleName {"placeholder":"参数名称","datatype":"*1-16","nullmsg":"参数名称不能为空！","id":"roleName","class":"input-text"})
+		#end
+		#@validateDiv("col-3")#end
+	#end
+
+	#@elementItem()
+		#@colLabel("col-2")类型：#end
+		#@formControlDiv("col-7")
+			#@tinySelect("roleType" getRoleResult?.roleType {"class":"input-text","rel":"22"})
+				#foreach(type:paramDictItemList)
+					#@tinyOptionItem(type.getValue())${type.getText()}#end
+					
+				#end
+			#end
+		#end
+		#@validateDiv("col-3")#end
+	#end
+	
+#end
+
+<script type="text/javascript">
+    $(function () {
+        $("form[name=thisform]").Validform({
+            tiptype: 2,
+            
+            beforeSubmit: function (curform) {           
+            	$(curform).ajaxSubmit(function(data){
+            			$("table.tinytable").trigger("initnav");  //$("#sysParamById").trigger("initnav");
+            			$(curform).parents(".modal").find(".modal-header .close").trigger("click");            		
+            	});
+				return false;
+            }
+                     
+        });
+    });
+    
+</script>

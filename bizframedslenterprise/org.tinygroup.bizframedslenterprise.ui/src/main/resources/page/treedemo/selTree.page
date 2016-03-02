@@ -1,0 +1,25 @@
+#seltreeInit("treeSel2" "/data/3.js" "44" "proName" {"idKey":"proId","pIdKey":"parentId"})
+<div style="clear:both">
+#@treeCollg4()
+	<div class="selectTree">
+		<ul class="clearfix">
+			<li class="col-2">标题：</li>
+			<li class="title col-6">&nbsp;&nbsp;<input id="treeSel2_dropSel" type="text" readonly value="" style="width:160px;"/>
+			<li class="col-2"><a id="treeSel2_menuBtn" class="menuBtn" href="javascript://">&nbsp;&nbsp;选择</a></li>
+		</ul>
+		
+		<div id="treeSel2_menuContent" class="menuContent" style="display:none;width:42%;top:25px;clear:both;margin-left:19%">
+##			<ul id="treeSel" class="ztree" style=""></ul>
+			#@selZtree("treeSel2")#end
+		</div>
+	</div>
+	<input onclick="getSelectedId()" type='button' value='获取id'/>
+#end
+</div>
+<script>
+	function getSelectedId(){
+		var zTree = $.fn.zTree.getZTreeObj("treeSel2");
+		var snodeid = getSelectedNodeByKey(zTree,"proId");
+		alert(snodeid);
+	}
+</script>

@@ -1,0 +1,24 @@
+<script>
+	function loadUnassignUser(){
+		$(".uassCol").load("${TINY_CONTEXT_PATH}/page/role/role_user_add.pagelet",{roleId:${roleId}});
+	}
+	function loadassignUser(){
+		$(".uunassCol").load("${TINY_CONTEXT_PATH}/page/role/role_user_remove.pagelet",{roleId:${roleId}});
+	}
+$(function(){
+	loadUnassignUser();
+	loadassignUser();
+});
+</script>
+#@tabWithInit("role-user-tab")
+#@tabHead()
+		#@tabHeadCol("assign")未分配#end
+		#@tabHeadCol("cancelAssign")已分配#end
+	#end
+	#@tabBodyCol("ptop-5 height-auto uassCol")
+		
+	#end
+	#@tabBodyCol("ptop-5 height-auto uunassCol")
+		
+	#end
+#end

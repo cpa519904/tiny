@@ -1,0 +1,56 @@
+#set(paramDictItemList = getDictItem("param_type")?["list"])
+#if(!getSysParamResult)
+	#set(url="/addSysParam.do")
+#else
+	#set(url="/updateSysParam.do")
+#end
+
+#@tinyForm("thisform" TINY_CONTEXT_PATH+url "post" {"class":"test"})
+<input type="hidden" name="sysparamId" value="${getSysParamResult?.sysparamId}"/>
+	#@elementItem()
+		#@colLabel("col-2")参数名称：#end
+		#@formControlDiv("col-7")
+			#tinyInput("text" "sysparamName" getSysParamResult?.sysparamName {"placeholder":"参数名称","datatype":"*1-16","nullmsg":"参数名称不能为空！","id":"sysparamName","class":"input-text"})
+		#end
+		#@validateDiv("col-3")#end
+	#end
+	#@elementItem()
+		#@colLabel("col-2")参数值：#end
+		#@formControlDiv("col-7")
+			#tinyInput("text" "sysparamValue" getSysParamResult?.sysparamValue {"placeholder":"参数值","datatype":"*1-16","nullmsg":"参数值不能为空！","id":"sysparamValue","class":"input-text"})
+		#end
+		#@validateDiv("col-3")#end
+	#end
+	
+	#@elementItem()
+		#@colLabel("col-2")参数类型：#end
+		#@formControlDiv("col-7")
+			#@tinySelect("sysparamType" getSysParamResult?.sysparamType {"class":"input-text","rel":"22"})
+				#foreach(type:paramDictItemList)
+					#@tinyOptionItem(type.getValue())${type.getText()}#end
+					
+				#end
+			#end
+		#end
+		#@validateDiv("col-3")#end
+	#end
+	
+#end
+
+<script type="text/javascript">
+    $(function () {
+        $("form[name=thisform]").Validform({
+            tiptype: 2,
+            
+            beforeSubmit: function (curform) {           
+            	$(curform).ajaxSubmit(function(data){
+            			$("table.tinytable").trigger("initnav");  //$("#sysParamById").trigger("initnav");
+            			$(curform).parents(".modal").find(".modal-header .close").trigger("click");            		
+            	});
+				return false;
+            }
+                     
+        });
+    });
+    
+</script>

@@ -1,0 +1,17 @@
+#setTinyItemCount(getDictPagerResult?.totalCount)
+#foreach(item:getDictPagerResult?.currentList)
+    #@tr()
+        #@td()<input type="checkbox" value="${item?.getDictId()}" name="idCheck">#end
+        #@td()${itemFor.index}#end
+        #@td()${item?.getDictValue()}#end
+        #@td()${item?.getDictName()}#end
+        #@td()	
+           	#@aModal("#dictEditModal" "修改字典" "" "" "" "getDict.servicepage?dictId="+item?.getDictId())<i
+                class="icon-edit"></i>&nbsp;修改#end
+            <a title="查看字典项" href="${TINY_CONTEXT_PATH}/page/sysadmin/dictionary/dictitem_list.page?dictId=${item?.getDictId()} &currentPageId=1.2" class="ml-5" style="text-decoration:none"><i
+                class="fa fa-share-square-o"></i>&nbsp;字典项</a>
+            <a title="删除" href="javascript:;" onclick="deleteAction({'dictIds':'${item?.getDictId()}'},'#link('/delDict.do')','dictById')" class="ml-5" style="text-decoration:none"><i
+                class="icon-trash"></i>&nbsp;删除</a>
+        #end
+    #end
+#end

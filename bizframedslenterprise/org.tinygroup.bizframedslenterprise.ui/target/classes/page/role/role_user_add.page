@@ -1,0 +1,73 @@
+#macro ztreeMenuClick()
+	$("#searchDiv input[name=organizationId]").val(nodes[0].organizationId);
+#end
+#seltreeInit("roleUserSel" "/getOrganizations.servicejson" "" "organizationName" {"idKey":"organizationId","pIdKey":"parentId"})
+<style>
+.selZtreeBox{position:absolute;width:83.3%;clear:both}
+.filterBox{float:left;width:27.5%;line-height:34px;}
+.treeHeightBox ul.ztree{height:302px;border:#ddd 1px solid;}
+</style>
+<script>
+	$(function(){
+		$("#assignBtn").click(function(){
+			$("form[name=roleUsersForm]").submit();
+		});
+	});
+	function cancelSelect(){
+		 var zTree = $.fn.zTree.getZTreeObj("roleUserSel");
+		 zTree.cancelSelectedNode();
+		 $("#roleUserSel_dropSel").removeAttr("value");
+##			zTree.attr("value","");
+		 $("input[name=organizationId]").val("");
+	}
+</script>
+#@tinyTable("roleUserAdd") ##ID为空则系统自动生成 带入参数则取该参数为ID
+	#@div(divBaseClass="form-inline")
+		#@tinyTableFrom()
+		<div class="well well-sm" id="searchDiv">
+			#setTinyTablePageSize([5,10,20])
+			<div class="filterBox">
+				#tinyInput("text" "userName" "" {"placeholder":"姓名/登录名","size":"30"})
+				<input type="hidden" name="organizationId" value=""/>
+			</div>	
+	        #@formControlDiv("col-4")
+	        <div class="selectTree" style="clear:both">
+	            <ul class="clearfix" style="line-height:34px;">
+	                <li class="title col-10">
+	                	<input id="roleUserSel_dropSel" type="text" readonly value="" placeholder="所属机构" style="width:100%;padding:6px 8px;height:34px;border-radius:4px"/>
+	                	<span class="emptyButton" onclick="cancelSelect()"><i class="icon-remove"></i></span>
+	                </li>
+	                <li class="col-2"><a id="roleUserSel_menuBtn" class="menuBtn" href="javascript://">&nbsp;选择</a></li>
+	            </ul>
+	
+	            <div id="roleUserSel_menuContent" class="menuContent treeHeightBox" style="display:none;width:83%;clear:both;margin-left:0%">
+	            ##			<ul id="treeSel" class="ztree" style=""></ul>
+							<div class="selZtreeBox">#@selZtree("roleUserSel")#end</div>
+	            </div>
+	        </div>
+	        #end
+	       #@btnSubmit("icon-search")&nbsp;查询#end
+		</div>
+		#end
+		<div style="margin-top: -10px;margin-bottom: 5px;">
+		</div>	
+	#end
+	#@tinyForm("roleUsersForm" call("link","/addRoleUsers.do"))
+    #@tinyTableContent(call("link","/getUnssignRoleUsers.servicepagelet?roleId="+roleId)) ##取数据地址 总数据
+        #@thead()
+            #@tr()###th  class 为sorting 表票可排序 为sorting_desc 为当前倒序
+                #@tinyTh({"width":"6"})<input type="checkbox" name="allck" value="">#end
+                #@tinyTh({"class":"","rel":""})序号#end
+                #@tinyTh({"class":"","rel":""})登录名#end
+                #@tinyTh({"class":"","rel":""})姓名#end
+                #@tinyTh({"class":"","rel":""})机构#end
+                #@tinyTh({"class":"","rel":""})状态#end
+
+            #end
+        #end
+    #end
+    #end
+#end
+<div style="padding-top:10px;padding-left:20px;clear:both">
+		<input type="button" class="btn radius btn-primary" id="assignBtn" value="分配">
+	</div>

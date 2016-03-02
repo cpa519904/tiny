@@ -1,0 +1,14 @@
+#setTinyItemCount(getDictItemPagerResult?.getTotalCount())
+#foreach(item:getDictItemPagerResult?.currentList)
+    #@tr()
+        #@td()<input type="checkbox" value="${item?.getDictitemId()}" name="idCheck">#end
+        #@td()${itemFor.index}#end
+        #@td()${item?.getDictitemValue()}#end
+        #@td()${item?.getDictitemName()}#end
+        #@td()	
+           	#@aModal("#dictitemEditModal" "修改" "540px" "160px" "" "getDictItem.servicepage?dictitemId="+item?.getDictitemId())<i class="icon-edit"></i>&nbsp;修改#end
+            <a title="删除" href="javascript:;" onclick="deleteAction({'dictitemIds':'${item?.getDictitemId()}'}, '#link('/deleteDictItem.do')','dictItemById','');" class="ml-5" style="text-decoration:none"><i
+                class="icon-trash"></i>&nbsp;删除</a>
+        #end
+    #end
+#end

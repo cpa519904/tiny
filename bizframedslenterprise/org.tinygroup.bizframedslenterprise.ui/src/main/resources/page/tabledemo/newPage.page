@@ -1,0 +1,24 @@
+##import("/org/tinygroup/table/components/togglebox.component") 宏文件所在位置
+#!set(activeTitle="ToggleBox",activeMenuId=currentPageId)
+<style>
+.infoContent{margin:18px 4px 10px 5px; padding:6px 10px; border:#eee 1px solid;}
+.infoContent .titleName{margin-top:-16px; margin-bottom:8px;font-weight:bold;font-size:14px;}
+</style>
+
+#@div(divClass="infoContent")
+    <p class="titleName">待增选项</p>
+   	<ul>
+   		<li>
+   			#@div(divClass="roleBox")
+    		#@span(spanClass="roleList")
+				<b>××上网</b>
+				<a class="cancel_btn">取消</a>
+			#end
+			#@span(spanClass="roleList")
+				<b>××上网</b>
+				<a class="cancel_btn">取消</a>
+			#end
+		#end
+   		</li>
+	</ul>
+  #end

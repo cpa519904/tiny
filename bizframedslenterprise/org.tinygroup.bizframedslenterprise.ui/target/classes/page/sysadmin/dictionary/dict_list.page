@@ -1,0 +1,80 @@
+#!set(activeTitle="字典列表",activeMenuId=currentPageId)
+##import("/org/tinygroup/table/components/tinytable.component")
+#include("/page/event/common.page")
+#set(addpagePath="/page/sysadmin/dictionary/dict_edit.pagelet",addpageModalId="dictAddModal",addpageModal="#"+addpageModalId)
+#set(editpagePath="/page/sysadmin/dictionary/dict_edit.pagelet",editpageModalId="dictEditModal",editpageModal="#"+editpageModalId)
+###@divDataTablebox()
+###@tableHeaderBar()${activeTitle}#end
+#@tinyTable("dictById") ##ID为空则系统自动生成 带入参数则取该参数为ID
+	#@div(divBaseClass=" form-inline")
+		#@tinyTableFrom()
+			<div class="well well-sm">
+				#setTinyTablePageSize([10,20,50,100,200])
+				#tinyInput("text" "dictValue" "" {"placeholder":"请输入字典代码","size":"30"})
+				#tinyInput("text" "dictName" "" {"placeholder":"请输入中文名","size":"30"})
+
+		 #@btnSubmit("icon-search")&nbsp;查询#end
+            </div>
+		#end
+		<div style="margin-top: -10px;margin-bottom: 5px;">
+		#@aModal(addpageModal "新增字典" "" "" "btn radius btn-primary btn-sm" addpagePath)
+			#simpleI("icon-plus")新增
+		#end
+		#@radiusBtn("btn-danger btn-sm" "icon-trash" "javascript:void(0)" "deleteDict" "")&nbsp;批量删除#end
+		#@radiusBtn("btn-primary btn-sm" "icon-refresh" "javascript:void(0)" "updateCacheBtn" "")&nbsp;更新字典缓存
+		#end
+			<span class="hintInfo" id="reloadCacheDiv">
+			</span>
+		</div>
+	#end
+	#@tinyTableContent("getDictPager.servicepage") ##取数据地址 总数据
+		#@thead()
+			#@tr()###th  class 为sorting 表票可排序 为sorting_desc 为当前倒序
+				#@tinyTh({"width":"6"})<input type="checkbox" name="allck" value="">#end
+				#@tinyTh({"class":"","rel":""})序号#end
+				#@tinyTh({"class":"","rel":""})字典代码#end
+				#@tinyTh({"class":"","rel":""})中文名#end
+				#@tinyTh({"class":"","rel":""})操作#end
+			#end
+		#end
+	#end
+#end
+###end
+
+#@simpleModal("dictAddModal" "添加字典")#end
+#@simpleModal("dictEditModal" "修改字典")#end
+
+<script>
+	$(function(){
+	//页面首先加载的那个dom去绑定
+		$('#deleteDict').on('click',function() {
+			deleteItems();
+		});
+
+	function deleteItems() {
+		var ids=new Array();
+		if($("input[name='idCheck']:checked").size()<=0){
+				layer.alert('至少要选择一条！');
+		}
+		else {
+			$("input[name='idCheck']:checked").each(
+				function(){
+					ids.push($(this).val());
+				}
+			);
+			deleteAction({'dictIds':ids.join(',')}, '#link('/delDict.do')','dictById','');
+		}
+
+		return false;
+	}
+
+	$("#updateCacheBtn").click(function(){
+		layer.confirm("确定要更新?",function(index){
+			$("#reloadCacheDiv").html("更新中..");
+			var url ='#link('/page/sysadmin/dictionary/dict-update-cache.pagelet')';
+			$("#reloadCacheDiv").load(url);
+			layer.close(index);
+		});
+	});
+});
+</script>

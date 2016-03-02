@@ -1,0 +1,21 @@
+#import("/org/tinygroup/table/components/table.component")
+#@formHorizoontalValidate("" "function_role_form")
+#@tabWithInit("tab_demo")
+	#@tabHead()
+		#@tabHeadCol()选择列表#end
+		#@tabHeadCol()搜索列表#end
+	#end
+	#@tabBodyCol("ptop-5 height-auto")
+		#@divDataTablebox()
+			##tree
+	    	#@tableBox("tBox")
+	    	#end
+		#end
+	#end
+	#@tabBodyCol("ptop-5 height-auto")
+
+		#include("/page/system/role/user/user_list.page")
+	#end
+  #end
+  
+#end

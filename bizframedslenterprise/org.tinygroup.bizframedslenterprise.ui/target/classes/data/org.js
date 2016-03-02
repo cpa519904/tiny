@@ -1,0 +1,10 @@
+[{id:1,open:true,name:"恒生公司",pId:0,},
+    {id:11,open:true,name:"市场部",pId:1,},
+    {id:12,open:true,name:"开发部",pId:1,},
+    {id:111,open:true,name:"销售",pId:11,},
+    {id:112,open:true,name:"行销",pId:11,},
+    {id:113,open:true,name:"统计",pId:11,},
+    {id:211,open:true,name:"测试",pId:12,},
+    {id:222,open:true,name:"开发",pId:12,},
+    {id:223,open:true,name:"维护",pId:12}
+]

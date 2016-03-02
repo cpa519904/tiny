@@ -1,0 +1,27 @@
+#@tinyTableOld("example")
+    #@thead()
+        #@tr("text-c")
+            #@thW("60")序号#end
+            #@thW("236")用户名称#end
+            #@thW("100")创建时间#end
+            #@thW("100")操作#end
+        #end
+    #end
+    #@tbody()
+        #foreach(l:userlist)
+            #@tr("text-c")
+                #@td()${l.userId}#end
+                #@td()${l.username}#end
+               	#@td()${formatDate(l.createtime,"yyyy-MM-dd HH:mm")}#end
+                #@td("f-14 user-manage")
+                    #iconOperation(iconOperationIcon="icon-eye-open" iconOperationTitle="查看" iconOperationCls=
+                        "ml-5" iconOperationLink="/admin/user/form/?id="+l.userId)
+                    #iconOperation(iconOperationIcon="icon-edit" iconOperationTitle="编辑" iconOperationCls=
+                        "ml-5" iconOperationLink="/admin/user/form/?id="+l.userId)
+                    #iconOperation(iconOperationIcon="icon-trash" iconOperationTitle="删除" iconOperationCls=
+                        "ml-5 deleteitem" iconOperationLink="/admin/user/delete/"+l.userId)
+                #end
+            #end
+        #end
+    #end
+#end

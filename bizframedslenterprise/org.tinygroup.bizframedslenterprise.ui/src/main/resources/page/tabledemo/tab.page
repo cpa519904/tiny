@@ -1,0 +1,80 @@
+#import("/org/tinygroup/table/components/table.component")
+#!set(activeTitle="选项卡",activeMenuId="9.4")
+#include("/page/event/common.page")
+#@datatablesInitSimple("#examplex"){"order": [[ 1,"desc" ]],
+				"aLengthMenu":[5]
+			}#end
+
+#@datatablesInitSimple("#examples"){"order": [[ 1,"desc" ]],
+				"aLengthMenu":[5]
+			}#end
+
+#@tabWithInit("tab_demo")
+	#@tabHead()
+		#@tabHeadCol()待选人员#end
+		#@tabHeadCol()已选人员#end
+	#end
+	#@tabBodyCol("ptop-5")
+		<ul class="tabOption">
+	    <li class="tabCurrent">选项卡一</li>
+	    <li>选项卡二</li>
+	</ul>
+	<div class="tabBoxs">
+	    <ul style="display:block;">
+	        <li>想想想想放显示的具体内容啦</li>
+	    </ul>
+	    <ul>
+	        <li>显示想放的具体内容啊</li>
+	
+	    </ul>
+	</div>	
+	#end
+	#@tabBodyCol("ptop-5")
+	#@datatable("examples")
+				#@thead()
+					#@tr("text-c")
+						#@thW("40")序号#end
+						#@thW("96")用户名#end
+						#@thW("50")性别#end
+						#@thW("135")手机#end
+						#@thW("140")地址#end
+						#@thW("115")加入时间#end
+						#@thW("40")状态#end
+					#end
+				#end
+				#@tbody()
+				#set(objs=[1..81])
+				#for(obj:objs)
+					#@tr("text-c")
+						#@td()${objFor.index}#end
+						#@td()李四#end
+						#@td()男#end
+						#@td()18258812768#end
+						#@td()杭州市 滨江区#end
+						#@td("text-l")2015-07-12#end
+						#@td("user-status")<span class="label label-success radius">已启用</span>#end
+					#end
+				#end
+			#end
+		#end
+	#end
+  #end
+  <style>
+  	.dataTables_wrapper .DT-lf-right .DT-per-page{display:block}
+  </style>
+  <script type="text/javascript">
+    $(function(){
+            var timeid;
+          $(".tabOption").find("li").each(function(index){
+              var sTab=$(this);
+              sTab.mouseenter(function(){
+                  timeid= setTimeout(function(){
+                      sTab.addClass("tabCurrent").siblings().removeClass("tabCurrent");
+                      sTab.parent().next().find("ul:eq(" + index +")").show().siblings().hide() ;
+                 },300);
+              }).mouseleave(function(){
+                     clearTimeout(timeid);
+                })
+          })
+        })
+    </script>

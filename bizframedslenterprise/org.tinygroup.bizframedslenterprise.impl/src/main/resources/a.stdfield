@@ -1,0 +1,44 @@
+<standard-fields>
+  <standard-field id="b5008e495bcf4c00b1ce9fad2a78cdf6" name="id" title="id号" business-type-id="2add72deb84a4a7ba81794beb8598797" not-null="false">
+    <description></description>
+  </standard-field>
+  <standard-field id="66ebc5a1f3054dc1922c8b5879bb0a04" name="sequence_id" title="SEQUENCE_ID" business-type-id="2add72deb84a4a7ba81794beb8598797" not-null="false"/>
+  <standard-field id="db34c5d489f74ef39fd5cc704552c353" name="dict_id" title="DICT_ID" business-type-id="2add72deb84a4a7ba81794beb8598797" not-null="false"/>
+  <standard-field id="7b3d7b1d21b444069688fa80fc00b769" name="dict_name" title="DICT_NAME" business-type-id="5255153f8b6e4b32b695f4a392ddb95f" not-null="false"/>
+  <standard-field id="66507a97c3c64585b09cfce789b10cea" name="dict_value" title="DICT_VALUE" business-type-id="9f44c59bffce40f092c085eb1dd49c38" not-null="false"/>
+  <standard-field id="6e6137cd4a0746208534fd3735491e19" name="dict_type" title="DICT_TYPE" business-type-id="531fa667c3184b7aaaf180a397349b5d" not-null="false">
+    <description></description>
+  </standard-field>
+  <standard-field id="e60c0ab5d59d4629afc0d650c7beaa06" name="sort_num" title="SORT_NUM" business-type-id="462a37520ea642acb3e59928ec6b5504" not-null="false"/>
+  <standard-field id="4239ed89d09f4203930d95d235c2c702" name="dictitem_id" title="DICTITEM_ID" business-type-id="2add72deb84a4a7ba81794beb8598797" not-null="false"/>
+  <standard-field id="2131aaea713844db8526e01f7348592a" name="dictitem_name" title="DICTITEM_NAME" business-type-id="5255153f8b6e4b32b695f4a392ddb95f" not-null="false"/>
+  <standard-field id="0742022d61b842f8ae00d23b8d341555" name="dictitem_value" title="DICTITEM_VALUE" business-type-id="9f44c59bffce40f092c085eb1dd49c38" not-null="false"/>
+  <standard-field id="e065bcab4e3b4d8d84c9c11b27423041" name="function_id" title="FUNCTION_ID" business-type-id="2add72deb84a4a7ba81794beb8598797" not-null="false"/>
+  <standard-field id="01320cc4202e48139760fd1817affba3" name="parent_id" title="PARENT_ID" business-type-id="2add72deb84a4a7ba81794beb8598797" not-null="false"/>
+  <standard-field id="9cf968a91c8e48e4ae4f8fa576476125" name="function_name" title="FUNCTION_NAME" business-type-id="26f2d51354cc421182329be95cac77b0" not-null="false"/>
+  <standard-field id="68c4f1379d8347b7a6fce4df1af45acf" name="function_type" title="FUNCTION_TYPE" business-type-id="531fa667c3184b7aaaf180a397349b5d" not-null="false"/>
+  <standard-field id="9aa2efb2b5ae4771969fac35132868a6" name="function_url" title="FUNCTION_URL" business-type-id="31472fc6ed504d8790c5baaf0963c415" not-null="false"/>
+  <standard-field id="160f63656aa541bcb683ca57f8acac9a" name="function_code" title="FUNCTION_CODE" business-type-id="42c77d9e334f4f11a221ce575ac866f7" not-null="false"/>
+  <standard-field id="a004132a4f9649bdad5eb6f34591838b" name="operator_log_id" title="OPERATOR_LOG_ID" business-type-id="2add72deb84a4a7ba81794beb8598797" not-null="false"/>
+  <standard-field id="8257d9d9cbb64f7daef9cd4dbe46606b" name="operation_content" title="OPERATION_CONTENT" business-type-id="c2d5b57dd59f4d7d9c56c2cc70dca90b" not-null="false"/>
+  <standard-field id="65decde29d7f421683b3c1bb67c10370" name="user_id" title="USER_ID" business-type-id="2add72deb84a4a7ba81794beb8598797" not-null="false"/>
+  <standard-field id="a0c66683d43341f29b9cbb4a324bdbfe" name="operation_ip" title="OPERATION_IP" business-type-id="1b182e10013d477fa3fbac5926930b24" not-null="false"/>
+  <standard-field id="9588c65fdd1840c3a2ebe6c054bab49a" name="operation_type" title="OPERATION_TYPE" business-type-id="531fa667c3184b7aaaf180a397349b5d" not-null="false"/>
+  <standard-field id="097403cde2054d35853a803a36457900" name="create_time" title="CREATE_TIME" business-type-id="ff638ffe76e94a1491558cc2ab38aea7" not-null="false"/>
+  <standard-field id="be8a35f0c76540029e51fa4be3c20197" name="organization_name" title="ORGANIZATION_NAME" business-type-id="f7f6229a1f8f4dc785f1cacad78aa22e" not-null="false"/>
+  <standard-field id="b98cac165add451585dedbfbf19a0116" name="organization_id" title="ORGANIZATION_ID" business-type-id="2add72deb84a4a7ba81794beb8598797" not-null="false"/>
+  <standard-field id="0fe76b01444c4b8bb67ebab94fcfed74" name="role_id" title="ROLE_ID" business-type-id="2add72deb84a4a7ba81794beb8598797" not-null="false"/>
+  <standard-field id="537a92f291b642ba873ca57b4742318d" name="role_name" title="ROLE_NAME" business-type-id="e8f8c914d1704d92a4c991bfc950f733" not-null="false"/>
+  <standard-field id="62a9f5813488419297bfcf95b81d5db4" name="role_type" title="ROLE_TYPE" business-type-id="531fa667c3184b7aaaf180a397349b5d" not-null="false"/>
+  <standard-field id="b592129bd28642d8abdafe148d04a7ee" name="role_code" title="ROLE_CODE" business-type-id="902ad4ebda7f465f867b921d016a4c62" not-null="false"/>
+  <standard-field id="39bf19d29e1b4082aa1eb99788e80450" name="sysparam_id" title="SYSPARAM_ID" business-type-id="2add72deb84a4a7ba81794beb8598797" not-null="false"/>
+  <standard-field id="e2400b20342d45dc988ff073b33a5670" name="sysparam_name" title="SYSPARAM_NAME" business-type-id="60d6ee042c4840beb97dd4efb595fdb4" not-null="false"/>
+  <standard-field id="abcf375575694c5c897ec383c723e6e6" name="sysparam_value" title="SYSPARAM_VALUE" business-type-id="105cadd70f8140dcb2e4f77a9d7513bf" not-null="false"/>
+  <standard-field id="a69a210895d64aada4debd56018f2e6f" name="sysparam_type" title="SYSPARAM_TYPE" business-type-id="531fa667c3184b7aaaf180a397349b5d" not-null="false"/>
+  <standard-field id="07e908d4602a48db871be723e6c31b93" name="user_name" title="USER_NAME" business-type-id="a04ad7736bf94eba976aabcb852a15b5" not-null="false"/>
+  <standard-field id="f3664d3827384ef8922cb21b45905c1c" name="user_password" title="USER_PASSWORD" business-type-id="ac8a977a03e745cf8dcd9eef5ad2ab6c" not-null="false"/>
+  <standard-field id="15de41d3f0b943d6925bbb4de83f4e83" name="user_type" title="USER_TYPE" business-type-id="531fa667c3184b7aaaf180a397349b5d" not-null="false"/>
+  <standard-field id="4739b1baffe648a9b2bee8e71736c812" name="user_status" title="USER_STATUS" business-type-id="bbe4c5f2cbd94e2a817adb8701d671ca" not-null="false"/>
+  <standard-field id="b965330c142a4d1fae42f3479b3589e6" name="login_name" title="LOGIN_NAME" business-type-id="5bec4adc7f6c43378be1c7479dded3d5" not-null="false"/>
+  <standard-field id="6256a28fa0a942589490bf2248882dce" name="is_default" title="IS_DEFAULT" business-type-id="2a92e0a231394e1fb758aa77f9a05435" not-null="false"/>
+</standard-fields>

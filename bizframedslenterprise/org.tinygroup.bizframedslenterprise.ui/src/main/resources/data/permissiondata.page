@@ -1,0 +1,20 @@
+#set(typeList= getDictItem("permission_type")?["map"])
+
+#setTinyItemCount(getAllFunctionPagerResult?.totalCount)
+#foreach(item:getAllFunctionPagerResult?.currentList)
+	#set(functionType = typeList?[item.getFunctionType()])
+    #@tr()
+        #@td()<input type="checkbox" value="${item?.functionId}" name="idCheck">#end
+        #@td()${itemFor.index}#end
+        #@td()${item?.functionName}#end
+        #@td()${item?.functionCode}#end
+        #@td()${functionType}#end
+        #@td()${item?.functionUrl}#end
+        #@td()
+           	#@aModal("#permissionEditModal" "修改" "" "" "" "getFunction.servicepage?functionId="+item?.functionId)<i class="icon-edit"></i>&nbsp;修改#end
+            #@aModal("#permissionAssignModal" "分配角色" "" "" "ml-5" "/page/sysadmin/permissionmana/permission_assign.pagelet?functionId="+item?.getFunctionId())<i class="icon-user-md"></i>&nbsp;分配角色#end
+            <a title="删除" href="javascript:void(0)" onClick="return deleteAction({'functionIds':'${item?.functionId}'},'deleteFunctions.servicejson','permissionById','treeDemo')" class="ml-5" style="text-decoration:none"><i
+                class="icon-trash"></i>&nbsp;删除</a>
+        #end
+    #end
+#end

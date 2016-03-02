@@ -1,0 +1,61 @@
+<service-components>
+  <service-component type="org.tinygroup.bizframedslenterprise.impl.organization.OrganizationServiceImpl" bean="organizationService">
+    <service-method local-name="addOrganization" service-id="addOrganization" method-name="addOrganization" cacheable="false" category="org.tinygroup.bizframedslenterprise.impl.organization">
+      <service-parameters>
+        <service-parameter name="tOrganization" type="org.tinygroup.bizframedslenterprise.inter.pojo.TOrganization" required="false" is-array="false"/>
+      </service-parameters>
+      <service-result name="addOrganizationResult" required="false" is-array="false" type="org.tinygroup.bizframedslenterprise.inter.pojo.TOrganization"/>
+    </service-method>
+    <service-method local-name="updateOrganization" service-id="updateOrganization" method-name="updateOrganization" cacheable="false" category="org.tinygroup.bizframedslenterprise.impl.organization">
+      <service-parameters>
+        <service-parameter name="tOrganization" type="org.tinygroup.bizframedslenterprise.inter.pojo.TOrganization" required="false" is-array="false"/>
+      </service-parameters>
+      <service-result name="updateOrganizationResult" required="false" is-array="false" type="void"/>
+    </service-method>
+    <service-method local-name="deleteOrganization" service-id="deleteOrganization" method-name="deleteOrganization" cacheable="false" category="org.tinygroup.bizframedslenterprise.impl.organization">
+      <service-parameters>
+        <service-parameter name="organizationId" type="int" required="false" is-array="false"/>
+      </service-parameters>
+      <service-result name="deleteOrganizationResult" required="false" is-array="false" type="void"/>
+    </service-method>
+    <service-method local-name="deleteOrganizations" service-id="deleteOrganizations" method-name="deleteOrganizations" cacheable="false" category="org.tinygroup.bizframedslenterprise.impl.organization">
+      <service-parameters>
+        <service-parameter name="organizationIds" type="java.lang.String" required="false" is-array="false"/>
+      </service-parameters>
+      <service-result name="deleteOrganizationsResult" required="false" is-array="false" type="void"/>
+    </service-method>
+    <service-method local-name="getOrganization" service-id="getOrganization" method-name="getOrganization" cacheable="false" category="org.tinygroup.bizframedslenterprise.impl.organization">
+      <service-parameters>
+        <service-parameter name="organizationId" type="int" required="false" is-array="false"/>
+      </service-parameters>
+      <service-result name="getOrganizationResult" required="false" is-array="false" type="org.tinygroup.bizframedslenterprise.inter.pojo.TOrganization"/>
+    </service-method>
+    <service-method local-name="getSubOrganizations" service-id="getSubOrganizations" method-name="getSubOrganizations" cacheable="false" category="org.tinygroup.bizframedslenterprise.impl.organization">
+      <service-parameters>
+        <service-parameter name="organizationId" type="int" required="false" is-array="false"/>
+      </service-parameters>
+      <service-result name="getSubOrganizationsResult" required="false" is-array="false" collection-type="java.util.List" type="org.tinygroup.bizframedslenterprise.inter.pojo.TOrganization"/>
+    </service-method>
+    <service-method local-name="getOrganizations" service-id="getOrganizations" method-name="getOrganizations" cacheable="false" category="org.tinygroup.bizframedslenterprise.impl.organization">
+      <service-parameters>
+        <service-parameter name="tOrganization" type="org.tinygroup.bizframedslenterprise.inter.pojo.TOrganization" required="false" is-array="false"/>
+      </service-parameters>
+      <service-result name="getOrganizationsResult" required="false" is-array="false" collection-type="java.util.List" type="org.tinygroup.bizframedslenterprise.inter.pojo.TOrganization"/>
+    </service-method>
+    <service-method local-name="getOrganizationPager" service-id="getOrganizationPager" method-name="getOrganizationPager" cacheable="false" category="org.tinygroup.bizframedslenterprise.impl.organization">
+      <service-parameters>
+        <service-parameter name="tOrganization" type="org.tinygroup.bizframedslenterprise.inter.pojo.TOrganization" required="false" is-array="false"/>
+        <service-parameter name="start" type="int" required="false" is-array="false"/>
+        <service-parameter name="limit" type="int" required="false" is-array="false"/>
+      </service-parameters>
+      <service-result name="getOrganizationPagerResult" required="false" is-array="false" type="org.tinygroup.bizframedslenterprise.inter.util.Pager"/>
+    </service-method>
+    <service-method local-name="getRootOrganizationsPager" service-id="getRootOrganizationsPager" method-name="getRootOrganizationsPager" cacheable="false" category="org.tinygroup.bizframedslenterprise.impl.organization">
+      <service-parameters>
+        <service-parameter name="start" type="int" required="false" is-array="false"/>
+        <service-parameter name="limit" type="int" required="false" is-array="false"/>
+      </service-parameters>
+      <service-result name="getRootOrganizationsPagerResult" required="false" is-array="false" type="org.tinygroup.bizframedslenterprise.inter.util.Pager"/>
+    </service-method>
+  </service-component>
+</service-components>

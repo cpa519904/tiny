@@ -1,0 +1,20 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    
+	<parent>
+        <groupId>org.tinygroup</groupId>
+        <artifactId>bizframe</artifactId>
+        <version>1.2.0</version>
+	</parent>
+	<modelVersion>4.0.0</modelVersion>
+    <artifactId>bizframedslenterprise</artifactId>
+    <packaging>pom</packaging>
+    <modules>
+        <module>org.tinygroup.bizframedslenterprise.impl</module>
+		<module>org.tinygroup.bizframedslenterprise.inter</module>
+        <module>org.tinygroup.bizframedslenterprise</module>
+		<module>org.tinygroup.bizframedslenterprise.ui</module>
+		<module>org.tinygroup.bizframedslenterprise.function</module>
+        <module>org.tinygroup.bizframedslenterprise.web</module>
+    </modules>
+</project>

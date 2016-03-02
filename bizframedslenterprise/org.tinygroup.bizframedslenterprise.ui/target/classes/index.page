@@ -1,0 +1,16 @@
+#*<style>
+.jobpic{text-align:center;}
+.jobpic img{width:700px;max-width:100%;height:auto;margin:5px 30px 30px 0;
+width:expression(document.body.clientWidth>300?"300px":"auto");overflow:hidden;}
+</style>
+<div class="jobpic">
+	欢迎来到权限管理系统
+</div>*#
+<style>
+.jobpic{text-align:center;}
+.jobpic img{width:448px;max-width:100%;height:auto;margin:12px 30px 30px -5%;
+width:expression(document.body.clientWidth>300?"300px":"auto");overflow:hidden;}
+</style>
+<div class="jobpic">
+<img src="${TINY_CONTEXT_PATH}/img/jobpic.jpg" alt="福利关系图">
+</div>

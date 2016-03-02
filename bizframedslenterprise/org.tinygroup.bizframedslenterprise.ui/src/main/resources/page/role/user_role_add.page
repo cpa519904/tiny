@@ -1,0 +1,61 @@
+<script>
+	$(function(){
+		$.each($("#authRoleDiv :checkbox"),function(i,item){
+			allroleids.push(item.value);
+		});
+		$("form[name=authRoleInsteadByString]").submit(function() {
+			if($(this).find("input[name=roleId]:checked").size()==0){
+				layer.alert('至少要选择一条！');
+				return false;
+			}
+			var options = {
+				url:this.action,
+				type:"post",
+				success:function(data){
+					loadUnassignRole();
+					loadassignRole();
+				},
+				error:function(){
+					alert('操作失败!');
+				}
+			};
+			$(this).ajaxSubmit(options);
+			return false;
+		});
+		$("input[name=roleAddAll]").click(function(){
+			if(this.checked){
+				$(".authRoleDiv :checkbox").prop("checked","checked");
+				
+			}else{
+				$(".authRoleDiv :checkbox").removeAttr("checked");
+			}
+		})
+		$(".authRoleDiv :checkbox").click(function(){
+			if($("input[name=roleAddAll]").get(0).checked && !this.checked){
+				$("input[name=roleAddAll]").removeAttr("checked");
+			}
+		});
+	})
+</script>
+#@tinyForm("authRoleInsteadByString" call("link","/addUserRoles.do") "" {"class":"form-horizontal"})
+<input name="userId" type="hidden" value="${userId}"/>
+<input name="currentUserId" value="0" class="input-lg " type="hidden">
+   <div class="authRoleDiv">
+			#for(role:getUnassignedUserRolesResult)
+				<span class="distributionStyle">
+					#if(role?.isDefault ==1)
+						<input name="roleId" value="${role?.roleId}" type="checkbox" disabled="true">
+					#else
+						<input name="roleId" value="${role?.roleId}" type="checkbox" >
+					#end
+						${role?.roleName}
+				</span>
+			#else
+				没有需要分配的角色
+			#end
+	</div>
+	<div style="padding-top:10px;padding-left:20px;clear:both">
+		<input name="roleAddAll" value="${role?.roleId}" type="checkbox" >全选
+		<input type="submit" class="btn radius btn-primary" value="分配">
+	</div>
+#end

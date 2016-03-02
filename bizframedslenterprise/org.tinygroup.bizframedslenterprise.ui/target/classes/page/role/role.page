@@ -1,0 +1,82 @@
+#!set(activeTitle="角色",activeMenuId=currentPageId)
+
+#include("/page/event/common.page")
+
+#set(editpagePath="/page/role/role-edit.pagelet",editpageModalId="userEditModal",editpageModal="#"+editpageModalId)
+#set(authoritypagePath="/page/role/role-auth-edit-new.pagelet",authoritypageModalId="powerModal",authoritypageModal="#"+authoritypageModalId)
+#set(userpagePath="/page/role/role-user-edit.pagelet",userpageModalId="userEditModal",userpageModal="#"+userpageModalId)
+#*	#@divDataTablebox()
+	    #@tableHeaderBar()角色列表#end
+	#end*#
+
+#@tinyTable("roleById") ##ID为空则系统自动生成 带入参数则取该参数为ID
+	
+	#@div(divBaseClass="form-inline")
+		#@tinyTableFrom()
+		<div class="well well-sm">
+			#setTinyTablePageSize([10,20,50,100,200])
+			#tinyInput("text" "roleName" "" {"placeholder":"名称","size":"30"})
+##	       <input type="submit" class="btn btn-primary btn-sm" value="查询" />
+	       #@btnSubmit("icon-search")&nbsp;查询#end
+		</div>
+		#end
+		<div style="margin-top: -10px;margin-bottom: 5px;">
+			#@radiusBtn("btn-danger btn-sm" "icon-trash" "javascript:void(0)" "deleterole" "")&nbsp;批量删除#end
+		#@aModal(editpageModal "新增角色" "" "" "btn radius btn-primary btn-sm" editpagePath)
+			#simpleI("icon-plus")新增
+			<span class="hintInfo" id="reloadCacheDiv">
+			</span>
+		#end
+		</div>	
+	#end
+	
+
+	
+	#@tinyTableContent(TINY_CONTEXT_PATH+"/getRolePager.servicepagelet") ##取数据地址 总数据
+		#@thead()
+			#@tr()###th  class 为sorting 表票可排序 为sorting_desc 为当前倒序
+				#@tinyTh({"width":"6"})<input type="checkbox" name="allck" value="">#end
+				#@tinyTh({"class":"","rel":""})序号#end
+				#@tinyTh({"class":"","rel":""})名称#end
+				#@tinyTh({"class":"","rel":""})类型#end
+				#@tinyTh({"class":"","rel":""})操作#end
+			#end
+
+		#end
+	#end
+#end
+#simpleModal(editpageModalId)
+#@simpleModal("editpageModal" "用户添加")#end
+#@simpleModal("editModal" "用户修改")#end
+#@simpleViewModal("powerModal" "角色添加权限")#end
+#@simpleModal("userAllotModal" "用户权限分配")#end
+
+
+<script>
+	$(function(){
+	//页面首先加载的那个dom去绑定
+		$('#deleterole').on('click',function() {
+			deleteItems();
+		});
+
+	function deleteItems() {
+		var ids=new Array();
+		if($("input[name='idCheck']:checked").size()<=0){
+				layer.alert('至少要选择一条！');
+		}
+		else {
+			$("input[name='idCheck']:checked").each(
+				function(){
+					ids.push($(this).val());
+				}
+			);
+			deleteAction({'roleIds':ids.join(',')}, '#link('/removeRole.do')','roleById','');
+		}
+		
+		return false;
+	}
+});
+</script>
+
+
+

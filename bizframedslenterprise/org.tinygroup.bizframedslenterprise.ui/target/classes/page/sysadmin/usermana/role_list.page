@@ -1,0 +1,28 @@
+#import("/org/tinygroup/table/components/table.component")
+#include("/page/event/common.page")
+#addToBasketEvent("#dataMove" "#fromdata" "#todata")
+<div class="tinyTablebox">
+	<div class="tinyheaderTools">
+		#tbSearch("fromdata")
+		<a class="radius btn-danger btn-sm" id="dataMove"><i class="icon-plus"></i> 增加</a>
+	</div>
+	<table cellpadding="0" cellspacing="0" id="fromdata" class="tinytable table">
+		#@thead()
+				#@tr("text-c")
+					#@thW("6")<input type="checkbox" name="idCheck" class="allcheck" value="">#end
+					#@thW("96")名称#end
+					#@thW("50")类型#end
+				#end
+			#end
+	    #@tbody()
+			#set(objs=[1..3])
+			#for(obj:objs)
+				#@tr("text-c")
+					#@td()<input type="checkbox" value="1" name="idCheck">#end
+					#@td()名称${objFor.index}#end
+					#@td()类型${objFor.index}#end
+				#end
+			#end
+		#end
+	</table>
+</div>

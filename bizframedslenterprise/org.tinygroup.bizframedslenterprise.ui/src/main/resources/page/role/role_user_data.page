@@ -1,0 +1,43 @@
+#setTinyItemCount(getUnssignRoleUsersResult.totalCount)
+#set(userTypeMap = getDictItem("user_type")?["map"])
+#set(userStatusMap = getDictItem("user_status")?["map"])
+
+	<input type="hidden" name="roleId" value="${roleId}"/>
+	#foreach(user:getUnssignRoleUsersResult.currentList)
+	    #set(m=1)
+	    #@tr()
+	        #@td()<input type="checkbox" value="${user.userId}" name="userId">#end
+	        #@td()${userFor.index}#end
+	        #@td()${user.loginName}#end
+	        #@td()${user.userName}#end
+	        #@td()${user.organizationName}#end
+	        #if(user.userStatus)
+	            #@td()${userStatusMap?[user?.userStatus]}#end
+	        #else
+	            #@td()#end
+	        #end
+	    #end
+	#end
+<script>
+$(function(){
+	$("form[name=roleUsersForm]").submit(function(){
+			if($(this).find("input[name=userId]:checked").size()==0){
+				layer.alert('至少要选择一条！');
+				return false;
+			}
+			var options = {
+				url:this.action,
+				type:"post",
+				success:function(data){
+					loadUnassignUser();
+					loadassignUser();
+				},
+				error:function(){
+					alert('操作失败!');
+				}
+			};
+			$(this).ajaxSubmit(options);
+			return false;
+		});
+});
+</script>

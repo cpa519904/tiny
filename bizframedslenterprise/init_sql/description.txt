@@ -1,0 +1,4 @@
+脚本导入顺序：
+1.authority_management.sql   -----------------这是表结构脚本
+2.初始数据文件：data文件夹下的sql文件。先导入t_dict.sql，再导入t_dictitem.sql
+

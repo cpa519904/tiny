@@ -1,0 +1,283 @@
+    #set(pagePostionTitle='<li><a href="'+TINY_CONTEXT_PATH+'">首页</a></li>')<!DOCTYPE html>
+    <!--[if IE 7 ]>		 <html class="no-js ie ie7 lte7 lte8 lte9" lang="zh-cmn-Hans-CN"> <![endif]-->
+    <!--[if IE 8 ]>		 <html class="no-js ie ie8 lte8 lte9" lang="zh-cmn-Hans-CN"> <![endif]-->
+    <!--[if IE 9 ]>		 <html class="no-js ie ie9 lte9" lang="zh-cmn-Hans-CN"> <![endif]-->
+    <!--[if (gt IE 9)|!(IE)]><!-->
+    <html class="no-js" lang="zh-cmn-Hans-CN"> <!--<![endif]-->
+    <html lang="zh-cmn-Hans-CN">
+    <head>
+        <meta charset="utf-8"/>
+        <meta name="renderer" content="webkit|ie-comp|ie-stand">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+        <meta name="viewport"
+              content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+        <meta http-equiv="Cache-Control" content="no-siteapp"/>
+        <!--<meta name="apple-mobile-web-app-capable" content="yes" />--><!-- home screen app 全屏 -->
+        <!--<meta name="apple-mobile-web-app-status-bar-style" content="black" />--><!-- 状态栏 -->
+        <title>
+            #if(activeTitle)${activeTitle}#{else}权限框架#end
+        </title>
+        <meta name="keywords" content="TinyUi 是基于bootscrap的前端UI组件框架。">
+        <meta name="description"
+              content="java,j2ee,j2ee.top, tinygroup,tinygroup.org,eclipse,插件,idea,TinyFramework,悠然,悠悠然然,Tiny,Framework,CEP,通用事件处理,ui引擎,ui engine,模块化,业务单元,文档生成,xml parser,html parser,xml,html,parser,spider,网络爬虫,flow,流程,业务流,页面流,Java,SOA,框架,组件,分层,水平扩展,分区,分表,db router,db cluster,framework,框架,分布式计算,VFS,Web">
+        <script>
+            var contextPath = "${TINY_CONTEXT_PATH}";
+            var CKEDITOR_BASEPATH = contextPath + '/';
+            var pathname = location.pathname;
+            var relativeurl = pathname.substring(CKEDITOR_BASEPATH.length);
+        </script>
+        <!--[if lt ie 9]>
+        <script>
+            document.createElement("article");
+            document.createElement("section");
+            document.createElement("aside");
+            document.createElement("footer");
+            document.createElement("header");
+            document.createElement("nav");
+            document.createElement("button");
+        </script>
+        <![endif]-->
+        <link rel="shortcut icon" href="/tinyuiweb/img/tiny32.png">
+        #if(DEBUG_MODE && DEBUG_MODE=="true")
+            #foreach(component in uiengine.getHealthUiComponents())
+
+                #if(component.cssResource)
+                    #set(resources=component.cssResource.split(","))
+                    #foreach(path in resources)
+                        #set(path=path.trim())
+                        #set(newPath=path.replaceAll("[$][{]TINY_THEME[}]","${TINY_THEME}"))
+                        <link href="${TINY_CONTEXT_PATH}${newPath}" rel="stylesheet"/>
+                    #end
+                #end
+                #if(component.jsResource)
+                    #set(resources=component.jsResource.split(","))
+                    #foreach(path in resources)
+                        #set(path=path.trim())
+                        <script src="${TINY_CONTEXT_PATH}${path}"></script>
+                    #end
+                #end
+                #if(component.jsCodelet)
+                    <script>
+	$!{component.jsCodelet}
+	</script>
+                #end
+                #if(component.cssCodelet)
+                    <style>
+	$!{component.cssCodelet}
+	</style>
+                #end
+            #end
+        #else
+            <!--[if lt ie 9]>
+                #foreach(component in uiengine.getHealthUiComponents())
+                    #if(component.cssResource)
+                        #set(resources=component.cssResource.split(","))
+                        #foreach(path in resources)
+                            #set(path=path.trim())
+                            #set(newPath=path.replaceAll("[$][{]TINY_THEME[}]","${TINY_THEME}"))
+                        <link href="${TINY_CONTEXT_PATH}${newPath}" rel="stylesheet"/>
+                        #end
+                    #end
+                    #if(component.cssCodelet)
+                    <style>
+                        $
+                        !
+                        {
+                            component . cssCodelet
+                        }
+                    </style>
+                    #end
+                #end
+            <![endif]-->
+            <!--[if (gt IE 9)|!(IE)]><!-->
+            <link href="${TINY_CONTEXT_PATH}/uiengine.uicss" rel="stylesheet"/>
+            <!--<![endif]-->
+            <script src="${TINY_CONTEXT_PATH}/uiengine.uijs"></script>
+        #end
+        <style>
+        .tinyheaderTools {height: auto;}.modal-body form{padding-bottom:10px;} #main-menu .mmc-dropdown-open-ul, #main-menu .navigation{padding-top:40px}.table.dataTable thead th{border-bottom:none;}
+        </style>
+    </head>
+    <body class="theme-default main-menu-animated">
+
+    <script>var init = [];
+    var tinywebroot = '${TINY_CONTEXT_PATH}'</script>
+    <!-- Demo script -->
+    <script src="${TINY_CONTEXT_PATH}/js/setting.js"></script> <!-- / Demo script -->
+        #@mainWrapper()
+            #@mainNavbar("/img/main-navbar-logo.png" "Tinyframework")
+                #@rightNavBar()
+                <li class="fullscreen">
+                    <a href="javascript:void(0);" onclick="launchFullScreen(document.documentElement);" title="全屏"><i
+                            class="fa fa-fullscreen"></i></a>
+                </li>
+                <li class="dropdown">
+                    <a href="javascript:void(0);" class="dropdown-toggle user-menu" data-toggle="dropdown">
+                        <img src="${TINY_CONTEXT_PATH}/demo/avatars/1.jpg" alt="">
+                        <span>密缘之友</span>
+                    </a>
+                    <ul class="dropdown-menu">
+                    #*<li><a href="javascript:void(0);"><span class="label label-warning pull-right">新的</span>资料文件</a>
+                    </li>
+                    <li><a href="javascript:void(0);"><span class="badge badge-primary pull-right">新的</span>个人中心</a>
+                    </li>
+                    <li><a href="javascript:void(0);"><i class="dropdown-icon fa fa-cog"></i>&nbsp;&nbsp;设置</a></li>
+                    <li class="divider"></li>*#
+                        <li><a href="javascript:void(0)"><i
+                                class="dropdown-icon fa fa-power-off"></i>&nbsp;&nbsp;退出</a></li>
+                    </ul>
+                </li>
+                #end
+            #end
+
+        #*#include("page/xuxd.pagelet")*#
+        #*  #@mainMenu()
+              #@navigationMenu()
+                  #foreach(menu_item:menu)
+                      #@navDropDownMenu(menu_item.id menu_item.detail menu_item.pic)
+                          #foreach(item:list)
+                              #if(menu_item.id == item.pid )
+                                  #TnavItem(item.id item.detail item.url item.pic)
+                              #end
+                          #end
+                      #end
+                  #end
+
+              #end <!-- navigation end -->
+          #end*#
+            #@mainMenu()
+
+            	#@navigationMenu()
+				#@navDropDownMenu("1" "系统管理" "icon-desktop" )
+					#TnavItem("1.1" "系统参数" "/page/sysParam/sysParam.page" "fa-key")
+					#TnavItem("1.2" "数据字典" "/page/sysadmin/dictionary/dict_list.page" "icon-list-alt")
+					#TnavItem("1.3" "操作日志" "/page/operatorlog/log.page" "icon-paste")
+				#end
+				#@navDropDownMenu("2" "用户权限" "icon-user" )
+					#TnavItem("2.1" "组织机构" "/page/sysadmin/orgmana/org.page" "fa-cogs")
+					#TnavItem("2.2" "用户管理" "/page/sysadmin/usermana/user.page" "fa-user")
+					#TnavItem("2.3" "权限管理" "/page/sysadmin/permissionmana/permission.page" "fa-cog")
+					#TnavItem("2.4" "角色管理" "/page/role/role.page" "icon-list-ul")
+				#end
+				#@navDropDownMenu("3" "示例" "fa-sitemap" )
+					#TnavItem("3.1" "按钮权限控制" "/demo/menucheck.page")
+					#TnavItem("3.2" "按钮权限控制(功能码)" "/demo/menuCodecheck.page")
+##					#TnavItem("3.3" "菜单展示" "/demo/leftmenu.page" "fa-user")
+				#end
+				#if(DEBUG_MODE && DEBUG_MODE=="true")
+	                    #@navDropDownMenu("4" "demo" "fa-desktop" )
+	                        #TnavItem("4.1" "tree格" "/page/treedemo/tree.page" "fa-th")
+	                        #TnavItem("4.2" "异步树" "/page/treedemo/async_tree.page" "fa-th")
+	                        #TnavItem("4.3" "表格" "/page/tabledemo/table_list.page" "fa-th")
+	                        #TnavItem("4.4" "左侧树" "/page/tabledemo/lefttree.page" "fa-th")
+	                        #TnavItem("4.5" "tab选项卡" "/page/tabledemo/tab.page" "fa-th")
+	                        #TnavItem("4.6" "新增select" "/page/tabledemo/mulselect.page" "fa-th")
+	                        #TnavItem("4.7" "个人资料" "/page/tabledemo/personalData.page" "fa-th")
+	                        #TnavItem("4.8" "修改资料" "/page/tabledemo/editorData.page" "fa-th")
+	                        #TnavItem("4.9" "新增tinytable" "/page/tabledemo/tinytables.page" "fa-th")
+	                        #TnavItem("4.10" "table全html方式" "/page/tabledemo/tinytblspecial.page" "fa-th")
+	                        #TnavItem("4.11" "待选项" "/page/tabledemo/newPage.page" "fa-th")
+	                    #end
+                    #end
+				#end
+##                #@navigationMenu()
+##                    #TnavItem("2.1" "角色管理" "/page/role/role.page"  "fa-bookmark-o")
+##                    #TnavItem("2.2" "系统参数" "/page/sysParam/sysParam.page" "fa-key")
+##                    #TnavItem("2.3" "机构管理" "/page/sysadmin/orgmana/org.page" "fa-cogs")
+##                    #TnavItem("2.4" "用户管理" "/page/sysadmin/usermana/user.page" "fa-user")
+##                    #TnavItem("2.5" "权限管理" "/page/sysadmin/permissionmana/permission.page" "fa-cog")
+##                    #TnavItem("2.6" "数据字典" "/page/sysadmin/dictionary/dict_list.page" "icon-list-alt")
+##                    #TnavItem("2.7" "操作日志" "/page/operatorlog/log.page" "icon-paste")
+###*                    #@navDropDownMenu("2.8" "示例" "fa-desktop" )
+##                        #TnavItem("2.8.1" "按钮权限控制" "/page/tabledemo/editorData.page" "fa-th")
+##                        #TnavItem("2.8.2" "菜单展示" "/page/tabledemo/tinytables.page" "fa-th")
+##                    #end*#
+##                     #if(DEBUG_MODE && DEBUG_MODE=="true")
+##	                    #@navDropDownMenu("1" "demo" "fa-desktop" )
+##	                        #TnavItem("1.1" "tree格" "/page/treedemo/tree.page" "fa-th")
+##	                        #TnavItem("1.2" "异步树" "/page/treedemo/async_tree.page" "fa-th")
+##	                        #TnavItem("1.3" "表格" "/page/tabledemo/table_list.page" "fa-th")
+##	                        #TnavItem("1.4" "左侧树" "/page/tabledemo/lefttree.page" "fa-th")
+##	                        #TnavItem("1.5" "tab选项卡" "/page/tabledemo/tab.page" "fa-th")
+##	                        #TnavItem("1.6" "新增select" "/page/tabledemo/mulselect.page" "fa-th")
+##	                        #TnavItem("1.7" "个人资料" "/page/tabledemo/personalData.page" "fa-th")
+##	                        #TnavItem("1.8" "修改资料" "/page/tabledemo/editorData.page" "fa-th")
+##	                        #TnavItem("1.9" "新增tinytable" "/page/tabledemo/tinytables.page" "fa-th")
+##	                        #TnavItem("1.10" "table全html方式" "/page/tabledemo/tinytblspecial.page" "fa-th")
+##	                    #end
+##                    #end
+##
+##                #end <!-- navigation end -->
+            #end
+        <div class="content-wrapper-bg"></div>
+            #@div("content-wrapper")
+
+                #@contentWrapper()
+                    ${pagePostionTitle}
+                #end
+            <!-- 主体 start -->
+                #@rowFrame()
+                <div id="tinypagecontent" style="min-height:490px">${pageContent}</div>
+                #end
+            <div id="tinyfooter">
+                <div class="tinyfooterrap">
+			<span class="right">
+					浙ICP备14043110号-1
+			</span>
+                    TinyGroup官方网站 &copy; 2013-2015
+                </div>
+            </div>
+            #end
+        #end
+
+    <script type="text/javascript">
+        init.push(function () {
+            // Javascript code here
+            //setPostiionNav();
+        })
+        //window.TinyAdmin.start(init);
+        function setPostiionNav() {
+            var currenttxt = $().html();
+            $(document).attr();
+            if (currenttxt == undefined) {
+                $('.postion-nav .active').css(
+
+
+                )
+            }
+        }
+        function deleteAction(data, url, tinyTableId, treeId) {
+            layer.confirm('确认删除?', function () {
+                $.ajax({
+                    url: url,
+                    data: data,
+                    dataType: 'text',
+                    type: 'post',
+                    success: function (data) {
+                        layer.msg("删除成功!", 1);
+                        //刷新tinytable
+                        if (tinyTableId) {
+                            $("#" + tinyTableId).trigger("initnav");
+                        }
+
+                        //刷新树节点
+                        if (treeId) {
+                            $("#" + treeId).trigger("init");
+                        }
+                    },
+                    error: function () {
+                        layer.msg("删除失败!");
+                    }
+                });
+            });
+            return false;
+        }
+    </script>
+
+    <script type="text/javascript">
+        function reset() {
+            $("input").val("");
+        }
+    </script>
+    </body>
+    </html>

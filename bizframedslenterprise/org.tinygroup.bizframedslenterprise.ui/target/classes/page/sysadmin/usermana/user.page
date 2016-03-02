@@ -1,0 +1,18 @@
+#!set(activeTitle="用户管理",activeMenuId=currentPageId)
+#import("/org/tinygroup/zTree/components/zTree.component")
+#import("components/org/tinygroup/bizframedslenterprise/ui/form.component")
+
+#macro ztreeClick()
+	var id = treeNode.organizationId;
+	loadURL('#link("/page/sysadmin/usermana/user_list.pagelet?organizationId=")'+id, $("#tableInfo"));
+#end
+###searchZtreeInit("treeDemo" "/data/tree/region.js" "#test")
+#@divDataTablebox()
+	#@tableHeaderBar()${activeTitle}#end
+	#@leftTreeCol("200px")
+		#@searchZtreeWithInit("treeDemo" "height:454px;"  "/getOrganizations.servicejson" "organizationName" {"idKey":"organizationId","pIdKey":"parentId"})
+		#end
+	#end
+	#@tableBox("tableInfo")
+    #end
+#end

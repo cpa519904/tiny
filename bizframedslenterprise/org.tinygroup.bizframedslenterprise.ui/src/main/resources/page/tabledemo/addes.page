@@ -1,0 +1,66 @@
+#!set(activeTitle="添加内容",activeMenuId="9.6")
+#include("/page/event/common.page")
+
+#@datatablesInitSimple("#examplex"){"order": [[ 1,"desc" ]],
+				"aLengthMenu":[5]
+			}#end
+#@datatablesInitSimple("#examples"){"order": [[ 1,"desc" ]],
+				"aLengthMenu":[5]
+			}#end
+#import("/org/tinygroup/table/components/table.component")
+
+#import("/org/tinygroup/zTree/components/zTree.component")
+#macro ztreeClick()
+	loadLink('#link("/page/tabledemo/righttables.pagelet")', $("#tBox"));
+#end
+
+
+#@tabWithInit("tab_demo")
+	#@tabHead()
+		#@tabHeadCol()选择列表#end
+		#@tabHeadCol()搜索列表#end
+	#end
+	#@tabBodyCol("ptop-5 height-auto")
+		#@divDataTablebox()
+		#@leftTreeCol()
+			#@searchZtreeWithInit("treeDemo" "height:454px;" "/data/tree/region.js")
+			#end
+		#end
+    	#@tableBox("tBox")
+    	#end
+	#end
+	#end
+	#@tabBodyCol("ptop-5 height-auto")
+
+		#include("/page/tabledemo/dataTable.page")
+	#end
+  #end
+  <div class="table-border">
+  	#@tableBox("dataBox")
+		#@datatable("exampleBox")
+				#@thead()
+					#@tr("text-c")
+						#@thW("45")序号#end
+						#@thW("96")用户名#end
+						#@thW("50")性别#end
+						#@thW("135")手机#end
+						#@thW("180")邮箱#end
+						#@thW("140")地址#end
+						#@thW("115")加入时间#end
+						#@thW("120")操作#end
+					#end
+				#end
+				#@tbody()
+				#end
+			#end
+	#end
+  </div>
+  <style>
+  .height-auto{height:188px; overflow-y:scroll;position:relative;}
+  .table-border{height:156px; overflow-y:scroll;position:relative;}
+  table.dataTable thead th, table.dataTable thead td{padding:9px 10px}
+  .dataTable thead .text-c th,.dataTable .text-c td{text-align:left}
+  #dataBox .dataTables_wrapper .DT-lf-right .DT-per-page{display:block}
+  .modal-body{padding:4px 5px 0}
+  .table-border .tablebox{margin-bottom: -37px;}
+  </style>

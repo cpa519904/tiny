@@ -1,0 +1,29 @@
+<service-view-mappings>
+	<service-view-mapping service-id="getUserPager" path="/page/sysadmin/usermana/userdata.pagelet" type="forward"></service-view-mapping>
+	<service-view-mapping service-id="getUser" path="/page/sysadmin/usermana/user_edit.pagelet" type="forward"></service-view-mapping>
+	<service-view-mapping service-id="getUsersByRoleAndOrganizationId" path="/page/role/role_user_data.page" type="forward"></service-view-mapping>
+	<service-view-mapping service-id="getSysParamsPager" path="/page/sysParam/sysParam-data.page" type="forward"></service-view-mapping>
+	<service-view-mapping service-id="getSysParam" path="/page/sysParam/sysParam-edit.page" type="forward"></service-view-mapping>
+	<service-view-mapping service-id="getRolePager" path="/page/role/role-data.page" type="forward"></service-view-mapping>
+	<service-view-mapping service-id="getRole" path="/page/role/role-edit.page" type="forward"></service-view-mapping>
+	<service-view-mapping service-id="getRoles" path="/page/sysadmin/role_all.pagelet" type="forward"></service-view-mapping>
+	<service-view-mapping service-id="getOrganizationPager" path="/page/sysadmin/orgmana/orgdata.pagelet" type="forward"></service-view-mapping>
+	<service-view-mapping service-id="getRootOrganizationsPager" path="/ajax/organization/organization-list.pagelet" type="forward"></service-view-mapping>
+	<service-view-mapping service-id="getOrganization" path="/page/sysadmin/orgmana/org_edit.pagelet" type="forward"></service-view-mapping>
+	<service-view-mapping service-id="getAllFunctionPager" path="/data/permissiondata.pagelet" type="forward"></service-view-mapping>
+	<service-view-mapping service-id="getRootFunctionsPager" path="/data/permissiondata.pagelet" type="forward"></service-view-mapping>
+	<service-view-mapping service-id="getFunction" path="/page/sysadmin/permissionmana/permission_edit.pagelet" type="forward"></service-view-mapping>
+	<service-view-mapping service-id="getDictPager" path="/data/dictdata.pagelet" type="forward"></service-view-mapping>
+	<service-view-mapping  service-id="getDictItemPager" path="/data/dictitemdata.pagelet" type="forward"> </service-view-mapping>
+	<service-view-mapping service-id="getDict" path="/page/sysadmin/dictionary/dict_edit.pagelet" type="forward"></service-view-mapping>
+	<service-view-mapping service-id="getDictItems" path="/data/dictitemdata.pagelet" type="forward"></service-view-mapping>
+	<service-view-mapping service-id="getDictItem" path="/page/sysadmin/dictionary/dictitem_edit.pagelet" type="forward"></service-view-mapping>
+	<service-view-mapping service-id="getLogsPager" path="/page/operatorlog/log-data.page" type="forward"></service-view-mapping>
+	<service-view-mapping service-id="getUserMenuFunctionTree" path="/page/menu/user-menus.page" type="forward"></service-view-mapping>
+	<service-view-mapping service-id="getUnassignedUserRoles" path="/page/role/user_role_add.page" type="forward"></service-view-mapping>
+	<service-view-mapping service-id="getUserRoles" path="/page/role/user_role_remove.page" type="forward"></service-view-mapping>
+	<service-view-mapping service-id="getRoleUsers" path="/page/role/role_user_rm_data.page" type="forward"></service-view-mapping>
+	<service-view-mapping service-id="getUnssignRoleUsers" path="/page/role/role_user_data.page" type="forward"></service-view-mapping>
+	<service-view-mapping service-id="getFunctionRoles" path="/page/sysadmin/permissionmana/role_remove.page" type="forward"></service-view-mapping>
+	<service-view-mapping service-id="getUnssignFunctionRoles" path="/page/sysadmin/permissionmana/role_add.page" type="forward"></service-view-mapping>
+</service-view-mappings> 

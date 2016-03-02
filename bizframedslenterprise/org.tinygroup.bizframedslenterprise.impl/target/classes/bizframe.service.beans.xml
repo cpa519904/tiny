@@ -1,0 +1,51 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans  
+    http://www.springframework.org/schema/beans/spring-beans-2.5.xsd  
+    http://www.springframework.org/schema/context  
+    http://www.springframework.org/schema/context/spring-context-2.5.xsd"
+	default-autowire="byName" default-lazy-init="true">
+
+	<bean id="userService" name="userService" scope="prototype"
+		class="org.tinygroup.bizframedslenterprise.impl.user.UserServiceImpl">
+		<property name="tUserDao" ref="tUserDao"></property>
+		<property name="tFunctionDao" ref="tFunctionDao"></property>
+		<property name="tOrganizationDao" ref="tOrganizationDao"></property>
+		<property name="tUserTRoleDao" ref="tUserTRoleDao"></property>
+		<property name="encryptionProcessor" ref="encryptionProcessor"></property>
+	</bean>
+	<bean id="sysParamService" name="sysParamService" scope="prototype"
+		class="org.tinygroup.bizframedslenterprise.impl.sysparam.SysParamServiceImpl">
+		<property name="tSysparamDao" ref="tSysparamDao" />
+	</bean>
+	<bean id="roleService" name="roleService" scope="prototype"
+		class="org.tinygroup.bizframedslenterprise.impl.role.RoleServiceImpl">
+		<property name="tRoleDao" ref="tRoleDao" />
+		<property name="tRoleTFunctionDao" ref="tRoleTFunctionDao"/>
+	</bean>
+	<bean id="organizationService" name="organizationService" scope="prototype"
+		class="org.tinygroup.bizframedslenterprise.impl.organization.OrganizationServiceImpl">
+		<property name="tOrganizationDao" ref="tOrganizationDao" />
+	</bean>
+	<bean id="functionService" name="functionService" scope="prototype"
+		class="org.tinygroup.bizframedslenterprise.impl.function.FunctionServiceImpl">
+		<property name="tFunctionDao" ref="tFunctionDao" />
+	</bean>
+
+	<bean id="dictService" name="dictService" scope="prototype"
+		class="org.tinygroup.bizframedslenterprise.impl.dict.DictServiceImpl">
+		<property name="tDictDao" ref="tDictDao" />
+		<property name="tDictitemDao" ref="tDictitemDao" />
+	</bean>
+
+
+	<bean id="dictDataLoader" class="org.tinygroup.bizframedslenterprise.impl.dict.DictDataLoaderImpl"
+		scope="singleton">
+		<property name="logAdapter" ref="logAdapterProcessor"></property>
+		<property name="tDictDao" ref="tDictDao" />
+		<property name="tDictitemDao" ref="tDictitemDao" />
+	</bean>
+
+	<bean id="logAdapterService" class="org.tinygroup.bizframedslenterprise.impl.log.LogAdapterServiceImpl">
+	</bean>
+</beans>

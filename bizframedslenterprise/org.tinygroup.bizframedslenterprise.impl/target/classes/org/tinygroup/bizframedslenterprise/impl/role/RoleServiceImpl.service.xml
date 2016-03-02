@@ -1,0 +1,150 @@
+<service-components>
+  <service-component type="org.tinygroup.bizframedslenterprise.impl.role.RoleServiceImpl" bean="roleService">
+    <service-method local-name="addRole" service-id="addRole" method-name="addRole" cacheable="false" category="org.tinygroup.bizframedslenterprise.impl.role">
+      <service-parameters>
+        <service-parameter name="tRole" type="org.tinygroup.bizframedslenterprise.inter.pojo.TRole" required="false" is-array="false"/>
+      </service-parameters>
+      <service-result name="addRoleResult" required="false" is-array="false" type="org.tinygroup.bizframedslenterprise.inter.pojo.TRole"/>
+    </service-method>
+    <service-method local-name="getRole" service-id="getRole" method-name="getRole" cacheable="false" category="org.tinygroup.bizframedslenterprise.impl.role">
+      <service-parameters>
+        <service-parameter name="roleId" type="java.lang.String" required="false" is-array="false"/>
+      </service-parameters>
+      <service-result name="getRoleResult" required="false" is-array="false" type="org.tinygroup.bizframedslenterprise.inter.pojo.TRole"/>
+    </service-method>
+    <service-method local-name="updateRole" service-id="updateRole" method-name="updateRole" cacheable="false" category="org.tinygroup.bizframedslenterprise.impl.role">
+      <service-parameters>
+        <service-parameter name="tRole" type="org.tinygroup.bizframedslenterprise.inter.pojo.TRole" required="false" is-array="false"/>
+      </service-parameters>
+      <service-result name="updateRoleResult" required="false" is-array="false" type="void"/>
+    </service-method>
+    <service-method local-name="removeRole" service-id="removeRole" method-name="removeRole" cacheable="false" category="org.tinygroup.bizframedslenterprise.impl.role">
+      <service-parameters>
+        <service-parameter name="roleId" type="java.lang.String" required="false" is-array="false"/>
+      </service-parameters>
+      <service-result name="removeRoleResult" required="false" is-array="false" type="void"/>
+    </service-method>
+    <service-method local-name="removeRoles" service-id="removeRoles" method-name="removeRoles" cacheable="false" category="org.tinygroup.bizframedslenterprise.impl.role">
+      <service-parameters>
+        <service-parameter name="roleIds" type="java.lang.String" required="false" is-array="false"/>
+      </service-parameters>
+      <service-result name="removeRolesResult" required="false" is-array="false" type="void"/>
+    </service-method>
+    <service-method local-name="getRoles" service-id="getRoles" method-name="getRoles" cacheable="false" category="org.tinygroup.bizframedslenterprise.impl.role">
+      <service-parameters>
+        <service-parameter name="tRole" type="org.tinygroup.bizframedslenterprise.inter.pojo.TRole" required="false" is-array="false"/>
+      </service-parameters>
+      <service-result name="getRolesResult" required="false" is-array="false" collection-type="java.util.List" type="org.tinygroup.bizframedslenterprise.inter.pojo.TRole"/>
+    </service-method>
+    <service-method local-name="getRolePager" service-id="getRolePager" method-name="getRolePager" cacheable="false" category="org.tinygroup.bizframedslenterprise.impl.role">
+      <service-parameters>
+        <service-parameter name="tRole" type="org.tinygroup.bizframedslenterprise.inter.pojo.TRole" required="false" is-array="false"/>
+        <service-parameter name="start" type="int" required="false" is-array="false"/>
+        <service-parameter name="limit" type="int" required="false" is-array="false"/>
+      </service-parameters>
+      <service-result name="getRolePagerResult" required="false" is-array="false" type="org.tinygroup.bizframedslenterprise.inter.util.Pager"/>
+    </service-method>
+    <service-method local-name="getRoleFunctions" service-id="getRoleFunctions" method-name="getRoleFunctions" cacheable="false" category="org.tinygroup.bizframedslenterprise.impl.role">
+      <service-parameters>
+        <service-parameter name="roleId" type="int" required="false" is-array="false"/>
+      </service-parameters>
+      <service-result name="getRoleFunctionsResult" required="false" is-array="false" collection-type="java.util.List" type="org.tinygroup.bizframedslenterprise.inter.pojo.TFunction"/>
+    </service-method>
+    <service-method local-name="authorizeFunction" service-id="authorizeFunction" method-name="authorizeFunction" cacheable="false" category="org.tinygroup.bizframedslenterprise.impl.role">
+      <service-parameters>
+        <service-parameter name="roleId" type="int" required="false" is-array="false"/>
+        <service-parameter name="functionIds" type="int" required="false" is-array="true"/>
+      </service-parameters>
+      <service-result name="authorizeFunctionResult" required="false" is-array="false" type="void"/>
+    </service-method>
+    <service-method local-name="removeAuthorizeFunction" service-id="removeAuthorizeFunction" method-name="removeAuthorizeFunction" cacheable="false" category="org.tinygroup.bizframedslenterprise.impl.role">
+      <service-parameters>
+        <service-parameter name="roleId" type="int" required="false" is-array="false"/>
+        <service-parameter name="functionIds" type="int" required="false" is-array="true"/>
+      </service-parameters>
+      <service-result name="removeAuthorizeFunctionResult" required="false" is-array="false" type="void"/>
+    </service-method>
+    <service-method local-name="authorizeFunctionByString" service-id="authorizeFunctionByString" method-name="authorizeFunctionByString" cacheable="false" category="org.tinygroup.bizframedslenterprise.impl.role">
+      <service-parameters>
+        <service-parameter name="roleId" type="int" required="false" is-array="false"/>
+        <service-parameter name="functionIds" type="java.lang.String" required="false" is-array="false"/>
+      </service-parameters>
+      <service-result name="authorizeFunctionByStringResult" required="false" is-array="false" type="void"/>
+    </service-method>
+    <service-method local-name="removeAuthorizeFunctionByString" service-id="removeAuthorizeFunctionByString" method-name="removeAuthorizeFunctionByString" cacheable="false" category="org.tinygroup.bizframedslenterprise.impl.role">
+      <service-parameters>
+        <service-parameter name="roleId" type="int" required="false" is-array="false"/>
+        <service-parameter name="functionIds" type="java.lang.String" required="false" is-array="false"/>
+      </service-parameters>
+      <service-result name="removeAuthorizeFunctionByStringResult" required="false" is-array="false" type="void"/>
+    </service-method>
+    <service-method local-name="authorizeFunctionsToRoles" service-id="authorizeFunctionsToRoles" method-name="authorizeFunctionsToRoles" cacheable="false" category="org.tinygroup.bizframedslenterprise.impl.role">
+      <service-parameters>
+        <service-parameter name="roleIds" type="java.lang.String" required="false" is-array="false"/>
+        <service-parameter name="functionIds" type="java.lang.String" required="false" is-array="false"/>
+      </service-parameters>
+      <service-result name="authorizeFunctionsToRolesResult" required="false" is-array="false" type="void"/>
+    </service-method>
+    <service-method local-name="removeFunctionsFromRoles" service-id="removeFunctionsFromRoles" method-name="removeFunctionsFromRoles" cacheable="false" category="org.tinygroup.bizframedslenterprise.impl.role">
+      <service-parameters>
+        <service-parameter name="roleIds" type="java.lang.String" required="false" is-array="false"/>
+        <service-parameter name="functionIds" type="java.lang.String" required="false" is-array="false"/>
+      </service-parameters>
+      <service-result name="removeFunctionsFromRolesResult" required="false" is-array="false" type="void"/>
+    </service-method>
+    <service-method local-name="updateAuthorizeFunctionRoles" service-id="updateAuthorizeFunctionRoles" method-name="updateAuthorizeFunctionRoles" cacheable="false" category="org.tinygroup.bizframedslenterprise.impl.role">
+      <service-parameters>
+        <service-parameter name="functionId" type="java.lang.Integer" required="false" is-array="false"/>
+        <service-parameter name="authorizeRoleIds" type="java.lang.String" required="false" is-array="false"/>
+        <service-parameter name="removeRoleIds" type="java.lang.String" required="false" is-array="false"/>
+      </service-parameters>
+      <service-result name="updateAuthorizeFunctionRolesResult" required="false" is-array="false" type="void"/>
+    </service-method>
+    <service-method local-name="updateAuthorizeRoleFunctions" service-id="updateAuthorizeRoleFunctions" method-name="updateAuthorizeRoleFunctions" cacheable="false" category="org.tinygroup.bizframedslenterprise.impl.role">
+      <service-parameters>
+        <service-parameter name="roleId" type="int" required="false" is-array="false"/>
+        <service-parameter name="authorizeFunctionIds" type="java.lang.String" required="false" is-array="false"/>
+        <service-parameter name="removeFunctionIds" type="java.lang.String" required="false" is-array="false"/>
+      </service-parameters>
+      <service-result name="updateAuthorizeRoleFunctionsResult" required="false" is-array="false" type="void"/>
+    </service-method>
+    <service-method local-name="getUsersByRoleId" service-id="getUsersByRoleId" method-name="getUsersByRoleId" cacheable="false" category="org.tinygroup.bizframedslenterprise.impl.role">
+      <service-parameters>
+        <service-parameter name="roleId" type="int" required="false" is-array="false"/>
+      </service-parameters>
+      <service-result name="getUsersByRoleIdResult" required="false" is-array="true" type="org.tinygroup.bizframedslenterprise.inter.User"/>
+    </service-method>
+    <service-method local-name="getRoleUsers" service-id="getRoleUsers" method-name="getRoleUsers" cacheable="false" category="org.tinygroup.bizframedslenterprise.impl.role">
+      <service-parameters>
+        <service-parameter name="start" type="int" required="false" is-array="false"/>
+        <service-parameter name="limit" type="int" required="false" is-array="false"/>
+        <service-parameter name="roleId" type="java.lang.Integer" required="false" is-array="false"/>
+        <service-parameter name="tUser" type="org.tinygroup.bizframedslenterprise.inter.pojo.TUser" required="false" is-array="false"/>
+      </service-parameters>
+      <service-result name="getRoleUsersResult" required="false" is-array="false" type="org.tinygroup.bizframedslenterprise.inter.util.Pager"/>
+    </service-method>
+    <service-method local-name="getUnssignRoleUsers" service-id="getUnssignRoleUsers" method-name="getUnssignRoleUsers" cacheable="false" category="org.tinygroup.bizframedslenterprise.impl.role">
+      <service-parameters>
+        <service-parameter name="start" type="int" required="false" is-array="false"/>
+        <service-parameter name="limit" type="int" required="false" is-array="false"/>
+        <service-parameter name="roleId" type="java.lang.Integer" required="false" is-array="false"/>
+        <service-parameter name="tUser" type="org.tinygroup.bizframedslenterprise.inter.pojo.TUser" required="false" is-array="false"/>
+      </service-parameters>
+      <service-result name="getUnssignRoleUsersResult" required="false" is-array="false" type="org.tinygroup.bizframedslenterprise.inter.util.Pager"/>
+    </service-method>
+    <service-method local-name="addRoleUsers" service-id="addRoleUsers" method-name="addRoleUsers" cacheable="false" category="org.tinygroup.bizframedslenterprise.impl.role">
+      <service-parameters>
+        <service-parameter name="roleId" type="int" required="false" is-array="false"/>
+        <service-parameter name="userId" type="java.lang.Integer" required="false" is-array="true"/>
+      </service-parameters>
+      <service-result name="addRoleUsersResult" required="false" is-array="false" type="void"/>
+    </service-method>
+    <service-method local-name="removeRoleUsers" service-id="removeRoleUsers" method-name="removeRoleUsers" cacheable="false" category="org.tinygroup.bizframedslenterprise.impl.role">
+      <service-parameters>
+        <service-parameter name="roleId" type="int" required="false" is-array="false"/>
+        <service-parameter name="userId" type="java.lang.Integer" required="false" is-array="true"/>
+      </service-parameters>
+      <service-result name="removeRoleUsersResult" required="false" is-array="false" type="void"/>
+    </service-method>
+  </service-component>
+</service-components>

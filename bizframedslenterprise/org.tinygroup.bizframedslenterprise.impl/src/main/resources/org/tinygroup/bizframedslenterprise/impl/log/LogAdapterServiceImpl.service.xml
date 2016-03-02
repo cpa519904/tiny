@@ -1,0 +1,12 @@
+<service-components>
+  <service-component type="org.tinygroup.bizframedslenterprise.impl.log.LogAdapterServiceImpl" bean="logAdapterService">
+    <service-method local-name="getLogsPager" service-id="getLogsPager" method-name="getLogsPager" cacheable="false" category="org.tinygroup.bizframedslenterprise.impl.log">
+      <service-parameters>
+        <service-parameter name="tOperationLog" type="org.tinygroup.bizframedslenterprise.inter.pojo.TOperationLog" required="false" is-array="false"/>
+        <service-parameter name="start" type="int" required="false" is-array="false"/>
+        <service-parameter name="limit" type="int" required="false" is-array="false"/>
+      </service-parameters>
+      <service-result name="getLogsPagerResult" required="false" is-array="false" type="org.tinygroup.bizframedslenterprise.inter.util.Pager"/>
+    </service-method>
+  </service-component>
+</service-components>

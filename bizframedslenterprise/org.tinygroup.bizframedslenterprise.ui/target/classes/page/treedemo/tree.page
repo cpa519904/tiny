@@ -1,0 +1,304 @@
+#!set(activeTitle="zTree列表",activeMenuId=currentPageId)
+#macro commonZtreeInit(commonZtreeInitId commonZtreeInitUrl commonZtreeInitCheck commonZtreeInitSelector commonZtreeInitTxtName commonZtreeInitSimpleData)
+	<script type="text/javascript">
+	(function () { 
+        var setting = {
+        	#if(commonZtreeInitCheck)
+            	check: ${commonZtreeInitCheck},
+            #end
+            data: {
+            	view: {
+            		addHoverDom: addHoverDom,
+					removeHoverDom: removeHoverDom,
+	                showLine: true,
+	                selectedMulti: false,
+	                dblClickExpand: false
+	            },
+				edit: {
+					enable: true,
+					editNameSelectAll: true,
+					showRemoveBtn: showRemoveBtn,
+					showRenameBtn: showRenameBtn
+				},
+				key: {
+					#if(commonZtreeInitTxtName)
+						name: "${commonZtreeInitTxtName}"
+					#end
+				},
+				simpleData: {
+					enable: true
+					#for(oneData:commonZtreeInitSimpleData),${oneData?.key}: "${oneData?.value}"#end
+					,rootPId: 0
+				}
+            },
+            callback: {
+                onClick: onClick,
+                onCheck: onCheck,
+                beforeDrag: beforeDrag,
+				beforeEditName: beforeEditName,
+				beforeRemove: beforeRemove,
+				beforeRename: beforeRename,
+				onRemove: onRemove,
+				onRename: onRename
+            }
+        };
+
+        function onClick(e, treeId, treeNode) {
+
+            var zTree = $.fn.zTree.getZTreeObj("$!{commonZtreeInitId}");
+            zTree.checkNode(treeNode, !treeNode.checked, null, true);
+            #ztreeClick()
+            return false;
+        }
+
+        function onCheck(e, treeId, treeNode) {
+            var zTree = $.fn.zTree.getZTreeObj("$!{commonZtreeInitId}"),
+			nodes = zTree.getCheckedNodes(true),
+			v = "";
+            for (var i = 0, l = nodes.length; i < l; i++) {
+                v += nodes[i].name + ",";
+            }
+            if (v.length > 0) v = v.substring(0, v.length - 1);
+            var cityObj = $("#citySel");
+            cityObj.attr("value", v);
+        }
+		#ztreeMenuEvent(commonZtreeInitId)
+		$("#$!{commonZtreeInitId}").on("init",function(){
+        	 $.ajax({
+				url: "#link(commonZtreeInitUrl)",
+				headers: {
+                 Accept: "text/plain,*/*;charset=utf-8"
+                },
+				dataType:"text",
+				success:function(data){
+					var jsonData = eval(data);
+					#dealData()
+					var zTree =$.fn.zTree.init($("#$!{commonZtreeInitId}"), setting, jsonData);
+					#ztreeLoadSuccess()
+#*					var tnodes = zTree.getNodes();
+					if(tnodes.length>0){
+						zTree.selectNode(tnodes[0]);
+						zTree.setting.callback.onClick(null, zTree.setting.treeId, tnodes[0]);//调用事件件
+					}*#
+					zTree.expandAll(true);//展开所有节点
+					if($("#$!{commonZtreeInitId}").outerWidth()>$("#${searchTextId}").width()){
+						$("#${searchTextId}").css("width",$("#$!{commonZtreeInitId}").outerWidth());
+					}
+	      		},
+	      		error: function(XMLHttpRequest, textStatus, errorThrown) {
+                        console.log(XMLHttpRequest);
+                        console.log(textStatus);
+                        console.log(errorThrown);
+                    }
+	      	});
+            $("$!{commonZtreeInitSelector}").keyup(function () {
+                ///显示需要的
+                var tt = this.value;
+                $("#$!{commonZtreeInitId}").find("span").attr("style", "");
+                var dx = $("#$!{commonZtreeInitId}").find("span");
+                var zts = 0;
+                $.each(dx, function (name, obj) {
+                    if (obj.textContent.trim().indexOf(tt) >= 0 && obj.textContent != "" && tt != "") {
+                        obj.style.backgroundColor = "#f6d7b1";
+                        zts = 1;
+                    }
+                })
+                ///显示所有的
+                var zTree = $.fn.zTree.getZTreeObj("$!{commonZtreeInitId}");
+                var nodes = zTree.getNodes();
+
+                $.each(nodes, function (m, n) {
+                    xsall(zTree, n);
+
+                })
+
+                ///为空清空
+                if (tt != "" && zts == 0)
+                { document.getElementById("ts").innerHTML = "没发现有用信息"; }
+                else {
+                    document.getElementById("ts").innerHTML = "";
+                }
+                if (tt == "")
+                    return;
+                $.each(nodes, function (x, y) {
+                    ycall(zTree, y);
+                })
+                //zTree.hideNode(nodes[4].children[1]);
+                //alert(nodes[4].children[1].name);
+                //return;
+                ///显示有的隐藏没有的
+                $.each(nodes, function (aa, bb) {
+                    bfxs(zTree, bb, tt);
+                })
+
+            })
+        });
+        ///显示有的
+			$(function(){
+				$("#$!{commonZtreeInitId}").trigger("init");
+			})
+		var log, className = "dark";
+		function beforeDrag(treeId, treeNodes) {
+			return false;
+		}
+		function beforeEditName(treeId, treeNode) {
+			className = (className === "dark" ? "":"dark");
+			showLog("[ "+getTime()+" beforeEditName ]&nbsp;&nbsp;&nbsp;&nbsp; " + treeNode.name);
+			var zTree = $.fn.zTree.getZTreeObj("$!{commonZtreeInitId}");
+			zTree.selectNode(treeNode);
+			return confirm("进入节点 -- " + treeNode.name + " 的编辑状态吗？");
+		}
+		function beforeRemove(treeId, treeNode) {
+			className = (className === "dark" ? "":"dark");
+			showLog("[ "+getTime()+" beforeRemove ]&nbsp;&nbsp;&nbsp;&nbsp; " + treeNode.name);
+			var zTree = $.fn.zTree.getZTreeObj("$!{commonZtreeInitId}");
+			zTree.selectNode(treeNode);
+			return confirm("确认删除 节点 -- " + treeNode.name + " 吗？");
+		}
+		function onRemove(e, treeId, treeNode) {
+			showLog("[ "+getTime()+" onRemove ]&nbsp;&nbsp;&nbsp;&nbsp; " + treeNode.name);
+		}
+		function beforeRename(treeId, treeNode, newName, isCancel) {
+			className = (className === "dark" ? "":"dark");
+			showLog((isCancel ? "<span style='color:red'>":"") + "[ "+getTime()+" beforeRename ]&nbsp;&nbsp;&nbsp;&nbsp; " + treeNode.name + (isCancel ? "</span>":""));
+			if (newName.length == 0) {
+				alert("节点名称不能为空.");
+				var zTree = $.fn.zTree.getZTreeObj("$!{commonZtreeInitId}");
+				setTimeout(function(){zTree.editName(treeNode)}, 10);
+				return false;
+			}
+			return true;
+		}
+		function onRename(e, treeId, treeNode, isCancel) {
+			showLog((isCancel ? "<span style='color:red'>":"") + "[ "+getTime()+" onRename ]&nbsp;&nbsp;&nbsp;&nbsp; " + treeNode.name + (isCancel ? "</span>":""));
+		}
+		function showRemoveBtn(treeId, treeNode) {
+			return !treeNode.isFirstNode;
+		}
+		function showRenameBtn(treeId, treeNode) {
+			return !treeNode.isLastNode;
+		}
+		function showLog(str) {
+			if (!log) log = $("#log");
+			log.append("<li class='"+className+"'>"+str+"</li>");
+			if(log.children("li").length > 8) {
+				log.get(0).removeChild(log.children("li")[0]);
+			}
+		}
+		function getTime() {
+			var now= new Date(),
+			h=now.getHours(),
+			m=now.getMinutes(),
+			s=now.getSeconds(),
+			ms=now.getMilliseconds();
+			return (h+":"+m+":"+s+ " " +ms);
+		}
+
+		var newCount = 1;
+		function addHoverDom(treeId, treeNode) {
+			var sObj = $("#" + treeNode.tId + "_span");
+			if (treeNode.editNameFlag || $("#addBtn_"+treeNode.tId).length>0) return;
+			var addStr = "<span class='button add' id='addBtn_" + treeNode.tId
+				+ "' title='add node' onfocus='this.blur();'></span>";
+			sObj.after(addStr);
+			var btn = $("#addBtn_"+treeNode.tId);
+			if (btn) btn.bind("click", function(){
+				var zTree = $.fn.zTree.getZTreeObj("$!{commonZtreeInitId}");
+				zTree.addNodes(treeNode, {id:(100 + newCount), pId:treeNode.id, name:"new node" + (newCount++)});
+				return false;
+			});
+		};
+		function removeHoverDom(treeId, treeNode) {
+			$("#addBtn_"+treeNode.tId).unbind().remove();
+		};
+		function selectAll() {
+			var zTree = $.fn.zTree.getZTreeObj("$!{commonZtreeInitId}");
+			zTree.setting.edit.editNameSelectAll =  $("#selectAll").attr("checked");
+		}
+        function bfxs(zTree, nodes, tt) {
+            if (nodes.children == null) {//无子节点
+
+                if (nodes[zTree.setting.data.key.name].indexOf(tt) >= 0) {//无子节点，但是包含tt
+                    fjdxs(zTree, nodes);
+                }
+            }
+            else {//有子节点
+                if (nodes[zTree.setting.data.key.name].indexOf(tt) >= 0)//有而且包含
+                {
+                    fjdxs(zTree, nodes);
+                    xsall(zTree, nodes);
+                }
+                else {//有但不包含
+                    $.each(nodes.children, function (aa, bb) {
+
+                        bfxs(zTree, bb, tt);
+                    })
+                }
+            }
+
+        }
+        ///显示所有父节点
+        function fjdxs(zTree, nodes) {
+            if (nodes.getParentNode() == null) {
+                zTree.showNode(nodes);
+            }
+            else {
+                zTree.showNode(nodes);
+                fjdxs(zTree, nodes.getParentNode());
+            }
+        }
+        ///全显
+        function xsall(ztree, nodes) {
+            ztree.showNode(nodes);
+            if (nodes.children != null) {
+                $.each(nodes.children, function (x, y) {
+                    xsall(ztree, y);
+                })
+
+            }
+        }
+        ///么有子节点的直接隐藏
+        function ycall(ztree, nodes) {
+            ztree.hideNode(nodes);
+            if (nodes.children != null) {
+                $.each(nodes.children, function (x, y) {
+                    ycall(ztree, y);
+                })
+
+            }
+
+        }
+        })(); 
+    </script>
+#end
+#import("/org/tinygroup/zTree/components/zTree.component")
+#macro ztreeLoadSuccess()
+	var tnodes = zTree.getNodes();
+	if(tnodes.length>0){
+			zTree.selectNode(tnodes[0]);
+			zTree.setting.callback.onClick(null, zTree.setting.treeId, tnodes[0]);//调用事件
+	}
+#end
+#@h2()zTree列表#end
+#@exampleView()
+#ztreeInit("treeDemo1" "/org/tinygroup/zTree/data/1.js")
+
+#@treeCollg4()
+	#zTree("treeDemo1")
+#end
+
+#@treeCollg4()
+	#searchZtreeWithInit("treeDemo" "height:454px;" "/org/tinygroup/zTree/data/2.js")
+#end
+
+#include("/page/treedemo/checkTree.page")
+<p class="clearfix"></p>
+
+#include("/page/treedemo/selTree.page")
+<p class="clearfix"></p>
+#end
+
+
+#@treeCollg4()
+	#searchZtreeWithInit("treeDemox" "height:454px;" "/org/tinygroup/zTree/data/2.js")
+#end
